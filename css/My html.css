@@ -1,43 +1,112 @@
-h1 {
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
 }
-.time span {
-    height: 40px;
-    text-align: center;
-    padding: 20px 100px;
+
+body {
+    background-color: #f3f5f7;
 }
-.time {
-    text-align: center;
-}
-.time a {
+
+a {
     text-decoration: none;
-    color: black;
 }
-.time a:hover {
-    color: blue;
+
+.w {
+    width: 1300px;
+    margin: auto;
+    background-color: white;
 }
-.nav span {
-    display: block;
-    height: 49px;
-    width: 214px;
-    background-color: #a8a6a6;
-    line-height: 49px;
- 
-    font-size: large;
+
+.IT-Advice {
+    height: 6000px;
+    margin-top: 50px;
+    border-radius: 20px;
+    /* background-color: pink; */
 }
-.nav a {
-    text-decoration: none;
-    color: white;
-    padding-left: 14px;
+
+.Advice {
+    height: 100%;
+    width: 1260px;
+    /* background-color: rgb(136, 204, 28); */
+    margin: 0 auto;
 }
-.nav a:hover {
-    color: black;
-    display: block;
-    height: 49px;
+
+.header {
+    width: 100%;
+    height: 76px;
+    line-height: 76px;
+    border-bottom: 4px solid skyblue;
+}
+
+.header p {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.Employment-recommendation {
+    margin-top: 10px;
+    width: 100%;
+    height: 380px;
+    background-color: rgb(235, 232, 232);
+    border-radius: 20px;
+}
+
+.jiuye {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    /* background-color: purple; */
+    border-radius: 20px;
+}
+
+.jiuye .p-jiuye {
+    padding-left: 20px;
+}
+
+.Employment-recommendation .content {
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+}
+
+.mod1 {
+    float: left;
+    width: 350px;
+    height: 240px;
+    margin-right: 50px;
+    line-height: 30px;
+    /* background-color: purple; */
+}
+
+.mod2 {
+    float: left;
     width: 200px;
-    background-color: darkcyan;
+    height: 240px;
+    line-height: 30px;
+    /* background-color: purple; */
 }
-.nav {
-    background-image: url(/images/海洋背景图.jpg);
-    background-position: center;
+
+.target-classification {
+    margin-top: 10px;
+    width: 100%;
+    height: 260px;
+    background-color: rgb(235, 232, 232);
+    border-radius: 20px;
+}
+
+.mubiao {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    /* background-color: purple; */
+    border-radius: 20px;
+}
+
+.p-mubiao {
+    padding-left: 20px;
+}
+
+.target-classification .content {
+    padding-left: 40px;
+    line-height: 30px;
 }
