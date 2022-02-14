@@ -38,6 +38,6 @@ h1 {
     background-color: darkcyan;
 }
 .nav {
-    background-image: url(海洋背景图.jpg);
+    background-image: url(/images/海洋背景图.jpg);
     background-position: center;
 }
