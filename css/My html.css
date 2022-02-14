@@ -1,0 +1,43 @@
+h1 {
+    text-align: center;
+}
+.time span {
+    height: 40px;
+    text-align: center;
+    padding: 20px 100px;
+}
+.time {
+    text-align: center;
+}
+.time a {
+    text-decoration: none;
+    color: black;
+}
+.time a:hover {
+    color: blue;
+}
+.nav span {
+    display: block;
+    height: 49px;
+    width: 214px;
+    background-color: #a8a6a6;
+    line-height: 49px;
+ 
+    font-size: large;
+}
+.nav a {
+    text-decoration: none;
+    color: white;
+    padding-left: 14px;
+}
+.nav a:hover {
+    color: black;
+    display: block;
+    height: 49px;
+    width: 200px;
+    background-color: darkcyan;
+}
+.nav {
+    background-image: url(海洋背景图.jpg);
+    background-position: center;
+}
