@@ -16,6 +16,7 @@ a {
     width: 1300px;
     margin: auto;
     background-color: white;
+    box-shadow: 8px 8px 10px rgb(0, 0, 0, 0.1);
 }
 
 .IT-Advice {
