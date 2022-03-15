@@ -213,7 +213,7 @@ a {
     width: 1300px;
     /* height: 4000px; */
     margin-top: 50px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     border-radius: 20px;
     box-shadow: 8px 8px 10px rgb(0, 0, 0, 0.1);
     /* background-color: aquamarine; */
@@ -221,7 +221,7 @@ a {
 
 .Surpass .box {
     width: 1260px;
-    height: 420px;
+    height: 530px;
     margin: auto 20px;
     /* background-color: blueviolet; */
 }
@@ -251,4 +251,15 @@ a {
     text-decoration: none;
     display: block;
     
+}
+.s-header  {
+    width: 1260px;
+    height: 76px;
+    /* background-color: yellow; */
+    margin: 0 auto;
+    margin-bottom: 25px;
+    font-size: 40px;
+    font-weight: 700;
+    border-bottom: 4px solid skyblue;
+    line-height: 76px;   
 }
