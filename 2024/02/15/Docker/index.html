@@ -27,7 +27,7 @@
 <meta property="og:description" content="The notes token when learning how to use docker.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-15T06:22:52.000Z">
-<meta property="article:modified_time" content="2024-02-15T07:18:25.340Z">
+<meta property="article:modified_time" content="2024-07-09T02:12:22.661Z">
 <meta property="article:author" content="tammer">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker"><span class="nav-number">1.</span> <span class="nav-text">Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8docker"><span class="nav-number">1.1.</span> <span class="nav-text">为什么使用docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">和虚拟机的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.2.1.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.</span> <span class="nav-text">基本原理和概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%93%E5%BA%93"><span class="nav-number">1.3.3.</span> <span class="nav-text">仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.</span> <span class="nav-text">体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%8C%96%E5%92%8CDockerfile"><span class="nav-number">1.5.</span> <span class="nav-text">容器化和Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.6.</span> <span class="nav-text">常用的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="nav-number">1.6.1.</span> <span class="nav-text">镜像的构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E8%BF%90%E8%A1%8C"><span class="nav-number">1.6.2.</span> <span class="nav-text">镜像的运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%95%9C%E5%83%8F%E5%BA%93"><span class="nav-number">1.6.3.</span> <span class="nav-text">查看镜像库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%BD%91%E7%AB%99"><span class="nav-number">1.7.</span> <span class="nav-text">推荐网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-desktop"><span class="nav-number">1.8.</span> <span class="nav-text">docker-desktop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">1.9.</span> <span class="nav-text">Docker Compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3"><span class="nav-number">1.10.</span> <span class="nav-text">常见问题的解决</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker"><span class="nav-number">1.</span> <span class="nav-text">Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows%E9%85%8D%E7%BD%AEDocker%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">Windows配置Docker环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E7%94%A8Hyper-v"><span class="nav-number">1.1.1.</span> <span class="nav-text">启用Hyper-v</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL%E5%8F%8ALinux%E5%88%86%E5%8F%91%E7%89%88%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.2.</span> <span class="nav-text">WSL及Linux分发版安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9WSL%E4%B8%AD%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">修改WSL中系统的安装位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DockerDesktop"><span class="nav-number">1.1.4.</span> <span class="nav-text">DockerDesktop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9DockerDesktop%E7%9A%84%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">更改DockerDesktop的安装目录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8docker"><span class="nav-number">1.2.</span> <span class="nav-text">为什么使用docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.</span> <span class="nav-text">和虚拟机的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.3.1.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.</span> <span class="nav-text">基本原理和概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%93%E5%BA%93"><span class="nav-number">1.4.3.</span> <span class="nav-text">仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.</span> <span class="nav-text">体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%8C%96%E5%92%8CDockerfile"><span class="nav-number">1.6.</span> <span class="nav-text">容器化和Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.7.</span> <span class="nav-text">常用的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="nav-number">1.7.1.</span> <span class="nav-text">镜像的构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E8%BF%90%E8%A1%8C"><span class="nav-number">1.7.2.</span> <span class="nav-text">镜像的运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%95%9C%E5%83%8F%E5%BA%93"><span class="nav-number">1.7.3.</span> <span class="nav-text">查看镜像库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%BD%91%E7%AB%99"><span class="nav-number">1.8.</span> <span class="nav-text">推荐网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-desktop"><span class="nav-number">1.9.</span> <span class="nav-text">docker-desktop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">1.10.</span> <span class="nav-text">Docker Compose</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -199,9 +199,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-02-15 14:22:52 / 修改时间：15:18:25" itemprop="dateCreated datePublished" datetime="2024-02-15T14:22:52+08:00">2024-02-15</time>
+      <time title="创建时间：2024-02-15 14:22:52" itemprop="dateCreated datePublished" datetime="2024-02-15T14:22:52+08:00">2024-02-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-09 10:12:22" itemprop="dateModified" datetime="2024-07-09T10:12:22+08:00">2024-07-09</time>
     </span>
 
   
@@ -211,14 +217,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>495</span>
+      <span>753</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -229,7 +235,34 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p><a target="_blank" rel="noopener" href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">🎉 Docker 简介和安装 - Docker 快速入门 - 易文档 (easydoc.net)</a></p>
+    <div class="post-body" itemprop="articleBody"><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Windows配置Docker环境"><a href="#Windows配置Docker环境" class="headerlink" title="Windows配置Docker环境"></a>Windows配置Docker环境</h2><h3 id="启用Hyper-v"><a href="#启用Hyper-v" class="headerlink" title="启用Hyper-v"></a>启用Hyper-v</h3><ul>
+<li>控制面板</li>
+<li>程序</li>
+<li>启动或关闭windows功能</li>
+<li>Hyper-v</li>
+</ul>
+<h3 id="WSL及Linux分发版安装"><a href="#WSL及Linux分发版安装" class="headerlink" title="WSL及Linux分发版安装"></a>WSL及Linux分发版安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wsl --install </span><br><span class="line">wsl --list --online <span class="comment">// 查看可用的Linux发行版列表</span></span><br><span class="line">wsl --install -d <span class="title class_">Ubuntu</span>-<span class="number">22.04</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改WSL中系统的安装位置"><a href="#修改WSL中系统的安装位置" class="headerlink" title="修改WSL中系统的安装位置"></a>修改WSL中系统的安装位置</h3><ul>
+<li><p>查看所有分发版本<code>wsl -l --all -v</code></p>
+</li>
+<li><p>导出分发版为tar文件到D盘<code>wsl --export Ubuntu-22.04 D:\Environment\ubuntu22.04.tar</code></p>
+</li>
+<li><p>注销当前分发版<code>wsl --unregister Ubuntu-22.04</code></p>
+</li>
+<li><p>重新导入并安装分发版在D盘</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --<span class="keyword">import</span> <span class="title class_">Ubuntu</span>-<span class="number">22.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\<span class="title class_">Ubuntu22</span><span class="number">.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\ubuntu22<span class="number">.04</span>.<span class="property">tar</span> --version <span class="number">2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置默认登录用户<code>ubuntu2204 config --default-user root</code></p>
+</li>
+<li><p>删除tar文件<code>del D:\ubuntu22.04.tar</code></p>
+</li>
+</ul>
+<h3 id="DockerDesktop"><a href="#DockerDesktop" class="headerlink" title="DockerDesktop"></a>DockerDesktop</h3><p>官网下载安装<code>DockerDesktop</code>，最大的问题就是默认安装在c盘，十分占用c盘的空间</p>
+<h4 id="更改DockerDesktop的安装目录"><a href="#更改DockerDesktop的安装目录" class="headerlink" title="更改DockerDesktop的安装目录"></a>更改DockerDesktop的安装目录</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /c mklink /j <span class="string">&quot;C:\Program Files\Docker&quot;</span> <span class="string">&quot;D:\SoftWare\DockerDesktop&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>实测创建连接的方法不可行，能安装上但是<code>Docker Engine</code>无法启动，会报错<code>Docker Desktop - WSL distro terminated abruptly</code>，看来只能装到C盘，先卸载，再删除链接目录<code>rmdir D:\Software\DockerDesktop</code></p>
+<p><a target="_blank" rel="noopener" href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">🎉 Docker 简介和安装 - Docker 快速入门 - 易文档 (easydoc.net)</a></p>
 <h2 id="为什么使用docker"><a href="#为什么使用docker" class="headerlink" title="为什么使用docker"></a>为什么使用docker</h2><p>方便测试和生产环境部署，省去很多环境配置的时间</p>
 <h2 id="和虚拟机的区别"><a href="#和虚拟机的区别" class="headerlink" title="和虚拟机的区别"></a>和虚拟机的区别</h2><h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>每台虚拟机需要占用大量的资源，启动时间长。因为需要完整的操作系统，cpu占用等。</p>
 <h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>docker只是container的一种的实现，是一种容器化的解决方案和平台。</p>
@@ -259,7 +292,7 @@
 <li>使用YAML文件来配置应用程序的服务</li>
 <li>一条命令就可以创建并启动所有服务</li>
 </ul>
-<h2 id="常见问题的解决"><a href="#常见问题的解决" class="headerlink" title="常见问题的解决"></a>常见问题的解决</h2>
+
     </div>
 
     
