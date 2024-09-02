@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="我忘记一切悲剧，所见皆是奇迹">
 <meta property="og:type" content="website">
@@ -78,6 +78,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -86,11 +87,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -184,7 +211,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2024/05/07/zinx-go/" itemprop="url">
+        <a class="post-title-link" href="/posts/b5221bcc.html" itemprop="url">
           <span itemprop="name">zinx-go</span>
         </a>
       </div>
@@ -204,7 +231,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2024/04/24/%E3%80%8A%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA%E3%80%8B/" itemprop="url">
+        <a class="post-title-link" href="/posts/ab39eefc.html" itemprop="url">
           <span itemprop="name">《追风筝的人》</span>
         </a>
       </div>
@@ -224,7 +251,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2024/04/10/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/" itemprop="url">
+        <a class="post-title-link" href="/posts/842c0a9a.html" itemprop="url">
           <span itemprop="name">《杀死一只知更鸟》</span>
         </a>
       </div>
@@ -244,7 +271,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2024/02/15/Docker/" itemprop="url">
+        <a class="post-title-link" href="/posts/f5f9fa9b.html" itemprop="url">
           <span itemprop="name">Docker</span>
         </a>
       </div>
@@ -264,7 +291,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2024/02/08/gpt/" itemprop="url">
+        <a class="post-title-link" href="/posts/ca8ec864.html" itemprop="url">
           <span itemprop="name">gpt</span>
         </a>
       </div>
@@ -284,7 +311,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2024/02/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url">
+        <a class="post-title-link" href="/posts/35c4e025.html" itemprop="url">
           <span itemprop="name">算法基础知识</span>
         </a>
       </div>
@@ -307,7 +334,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2023/11/07/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%EF%BC%88%E5%AE%9D%E5%A1%94%EF%BC%89/" itemprop="url">
+        <a class="post-title-link" href="/posts/48fc7caa.html" itemprop="url">
           <span itemprop="name">云服务器的基本配置（宝塔）</span>
         </a>
       </div>
@@ -327,7 +354,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2023/10/30/%E3%80%8A%E8%A7%A3%E5%BF%A7%E6%9D%82%E8%B4%A7%E9%93%BA%E3%80%8B/" itemprop="url">
+        <a class="post-title-link" href="/posts/79b1aa9b.html" itemprop="url">
           <span itemprop="name">《解忧杂货铺》</span>
         </a>
       </div>
@@ -347,7 +374,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2023/10/30/%E3%80%8A%E6%81%B6%E6%84%8F%E3%80%8B/" itemprop="url">
+        <a class="post-title-link" href="/posts/8c0c5825.html" itemprop="url">
           <span itemprop="name">《恶意》</span>
         </a>
       </div>
@@ -367,7 +394,7 @@
       </div>
 
       <div class="post-title">
-        <a class="post-title-link" href="/2023/10/24/%E3%80%8A%E6%8C%AA%E5%A8%81%E7%9A%84%E6%A3%AE%E6%9E%97%E3%80%8B/" itemprop="url">
+        <a class="post-title-link" href="/posts/f9101cf7.html" itemprop="url">
           <span itemprop="name">《挪威的森林》</span>
         </a>
       </div>
@@ -449,7 +476,6 @@
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
   </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -458,9 +484,11 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
 
 
 
