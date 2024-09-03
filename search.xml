@@ -1043,15 +1043,16 @@
 
 <p>关于配置选项的更多信息可参考<a href="https://utteranc.es/">官方网站</a>.</p>
 <blockquote>
-<p>现在我的hexo版本和next版本都是最新的，next已经内置了utterances</p>
+<p>现在我的hexo版本和next版本都是最新的，发现next已经内置了utterances</p>
 </blockquote>
-<p>所以只需要完成最后一步</p>
+<p>所以只需要完成最后一步：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">utterances:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">Dra-Tammer/blog_comments_db</span> <span class="comment"># Github repository owner and name</span></span><br><span class="line">  <span class="comment"># Available values: pathname | url | title | og:title</span></span><br><span class="line">  <span class="attr">issue_term:</span> <span class="string">pathname</span></span><br><span class="line">  <span class="comment"># Available values: github-light | github-dark | preferred-color-scheme | github-dark-orange | icy-dark | dark-blue | photon-dark | boxy-light</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">github-dark</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="应用配置"><a href="#应用配置" class="headerlink" title="应用配置"></a>应用配置</h2><p>hexo三连</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 
-<h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><h3 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h3><p>本地部署，查看评论功能的时候登录会显示404，不知道如何解决，但是将代码push上去之后，访问github page就没有问题，确实加载的时候有点慢</p>
+<h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><h3 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h3><p>本地部署，查看评论功能的时候登录会显示404，不知道如何解决，但是将代码push上去之后，访问github page就没有问题，确实加载的时候有点慢。</p>
+<p>之后sign with github又能正常使用了</p>
 ]]></content>
       <categories>
         <category>技术 配置</category>
