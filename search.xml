@@ -1029,6 +1029,10 @@
 <p><a href="https://utteranc.es/">https://utteranc.es/</a></p>
 </blockquote>
 <h2 id="创建存储评论的仓库"><a href="#创建存储评论的仓库" class="headerlink" title="创建存储评论的仓库"></a>创建存储评论的仓库</h2><p>新建一个仓库<code>blog_comments_db</code>用来存储评论</p>
+<ul>
+<li>保证仓库是公开仓库，否则读者没有办法看到这些评论</li>
+<li>保证utterances app已经被安装</li>
+</ul>
 <h2 id="安装Github-Apps"><a href="#安装Github-Apps" class="headerlink" title="安装Github Apps"></a>安装Github Apps</h2><p><code>https://github.com/apps/utterances</code></p>
 <p><code>install</code>-&gt;<code>Only select repositories</code>-&gt;<code>blog_comment_db</code></p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="创建utterances-swig"><a href="#创建utterances-swig" class="headerlink" title="创建utterances.swig"></a>创建<code>utterances.swig</code></h3><p>在<code>layout/_third-party/comments</code>里创建<code>utterances.swig</code>，内容如下</p>
@@ -1053,6 +1057,7 @@
 
 <h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><h3 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h3><p>本地部署，查看评论功能的时候登录会显示404，不知道如何解决，但是将代码push上去之后，访问github page就没有问题，确实加载的时候有点慢。</p>
 <p>之后sign with github又能正常使用了</p>
+<h3 id="部分页面不能评论"><a href="#部分页面不能评论" class="headerlink" title="部分页面不能评论"></a>部分页面不能评论</h3><p>配置之后发现tags, categories, about页面都有评论，想要不能评论</p>
 ]]></content>
       <categories>
         <category>技术</category>
