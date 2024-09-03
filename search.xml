@@ -370,6 +370,7 @@
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>笔记</category>
       </categories>
       <tags>
         <tag>note</tag>
@@ -439,8 +440,14 @@
 <li>一条命令就可以创建并启动所有服务</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>技术</category>
+        <category>docker</category>
+        <category>部署</category>
+      </categories>
       <tags>
         <tag>技术</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -812,9 +819,11 @@
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>Matlab</category>
       </categories>
       <tags>
         <tag>note</tag>
+        <tag>Matlab</tag>
       </tags>
   </entry>
   <entry>
@@ -1092,6 +1101,10 @@
         <category>Oral English</category>
         <category>Distance Class</category>
       </categories>
+      <tags>
+        <tag>口语</tag>
+        <tag>笔记</tag>
+      </tags>
   </entry>
   <entry>
     <title>gpt</title>
@@ -1154,7 +1167,9 @@
         <category>技术</category>
       </categories>
       <tags>
-        <tag>技术 人工智能</tag>
+        <tag>技术</tag>
+        <tag>人工智能</tag>
+        <tag>gpt</tag>
       </tags>
   </entry>
   <entry>
@@ -1316,9 +1331,13 @@
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>笔记</category>
+        <category>go</category>
       </categories>
       <tags>
         <tag>note</tag>
+        <tag>技术</tag>
+        <tag>go</tag>
       </tags>
   </entry>
   <entry>
@@ -1508,9 +1527,12 @@
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>go</category>
       </categories>
       <tags>
         <tag>技术</tag>
+        <tag>go</tag>
+        <tag>项目</tag>
       </tags>
   </entry>
   <entry>
@@ -1556,10 +1578,12 @@
 <h3 id="2023-09-15"><a href="#2023-09-15" class="headerlink" title="2023-09-15"></a>2023-09-15</h3><p>人想要离苦得乐，就必须了解自己所有的主观感受都只是一瞬间的波动，而且别再追求某种感受。如此一来，虽然感受疼痛，但不再感到悲惨；虽然愉悦，但不再干扰心灵的平静。于是，心灵变得一片澄明，自在。</p>
 ]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
@@ -1579,10 +1603,12 @@
 <p>纯粹的爱情，绝妙的诡计，无懈可击的推理，惊人的伏笔，不易猜透的悬念，理智与情感交织碰撞。谎言里交织着人性的善与恶，真相里闪烁着灵魂的喜与悲，诡计里包含着深深的爱与痛楚，包含着难以言表的心情。</p>
 ]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
@@ -1593,10 +1619,12 @@
 <p><code>东野圭吾</code></p>
 ]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
@@ -1626,10 +1654,12 @@
 <p>大学的生活真的很孤独，这种孤独不是身边没有一起游戏的朋友，而是各自要走的路都不一样，成长的路上没有交心的朋友作伴，唯有孤独前行。面对孤独，处理好了就是进步，处理不好就是堕落，但是更多的是原地踏步，有时候感觉平静稳定的生活是真的很好。</p>
 ]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
@@ -1664,10 +1694,12 @@
 <p>好，再会！</p>
 ]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
@@ -1714,10 +1746,12 @@
 <p>先成人，后成才。</p>
 ]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
@@ -1725,16 +1759,26 @@
     <url>/posts/ba52eee0.html</url>
     <content><![CDATA[<h1 id="《白夜行》"><a href="#《白夜行》" class="headerlink" title="《白夜行》"></a>《白夜行》</h1>]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
     <title>《解忧杂货铺》</title>
     <url>/posts/79b1aa9b.html</url>
     <content><![CDATA[]]></content>
+      <categories>
+        <category>读书</category>
+        <category>读后感</category>
+      </categories>
+      <tags>
+        <tag>读书</tag>
+        <tag>读后感</tag>
+      </tags>
   </entry>
   <entry>
     <title>《追风筝的人》</title>
@@ -1744,10 +1788,11 @@
 <p><code>卡勒德·胡塞尼</code></p>
 ]]></content>
       <categories>
-        <category>Reading Books</category>
+        <category>读书</category>
+        <category>读后感</category>
       </categories>
       <tags>
-        <tag>reading</tag>
+        <tag>读书</tag>
       </tags>
   </entry>
   <entry>
@@ -1828,9 +1873,13 @@
 <h3 id="如何查看打印的日志"><a href="#如何查看打印的日志" class="headerlink" title="如何查看打印的日志"></a>如何查看打印的日志</h3>]]></content>
       <categories>
         <category>技术</category>
+        <category>部署</category>
       </categories>
       <tags>
         <tag>技术</tag>
+        <tag>配置</tag>
+        <tag>云服务器</tag>
+        <tag>部署</tag>
       </tags>
   </entry>
   <entry>
@@ -1854,10 +1903,11 @@
 </ol>
 ]]></content>
       <categories>
-        <category>algorithm</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>算法经验</tag>
+        <tag>算法</tag>
+        <tag>数据范围</tag>
       </tags>
   </entry>
   <entry>
@@ -1873,10 +1923,11 @@
 </ol>
 ]]></content>
       <categories>
-        <category>algorithm</category>
+        <category>算法</category>
+        <category>笔记</category>
       </categories>
       <tags>
-        <tag>算法经验</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>
