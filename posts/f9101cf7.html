@@ -391,8 +391,9 @@
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 
-<!--《添加网站运行时间  <br/>-->
-    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="timeDate">载入天数...</span>
+    // <span id="times">载入时分秒...</span>
     <script>
     var now = new Date();
 
@@ -418,8 +419,8 @@
         if (String(snum).length == 1) {
             snum = "0" + snum;
         }
-        document.getElementById("timeDate").innerHTML = " | 本站已安全运行 " + dnum + " 天 ";
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = " | 本站已安全运行 " + dnum + " 天 " + document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        // document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
     setInterval("createtime()", 250);
     </script>
