@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Docker</title>
+    <url>/posts/f5f9fa9b.html</url>
+    <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Windows配置Docker环境"><a href="#Windows配置Docker环境" class="headerlink" title="Windows配置Docker环境"></a>Windows配置Docker环境</h2><h3 id="启用Hyper-v"><a href="#启用Hyper-v" class="headerlink" title="启用Hyper-v"></a>启用Hyper-v</h3><ul>
+<li>控制面板</li>
+<li>程序</li>
+<li>启动或关闭windows功能</li>
+<li>Hyper-v</li>
+</ul>
+<h3 id="WSL及Linux分发版安装"><a href="#WSL及Linux分发版安装" class="headerlink" title="WSL及Linux分发版安装"></a>WSL及Linux分发版安装</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --install </span><br><span class="line">wsl --list --online <span class="comment">// 查看可用的Linux发行版列表</span></span><br><span class="line">wsl --install -d <span class="title class_">Ubuntu</span>-<span class="number">22.04</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改WSL中系统的安装位置"><a href="#修改WSL中系统的安装位置" class="headerlink" title="修改WSL中系统的安装位置"></a>修改WSL中系统的安装位置</h3><ul>
+<li><p>查看所有分发版本<code>wsl -l --all -v</code></p>
+</li>
+<li><p>导出分发版为tar文件到D盘<code>wsl --export Ubuntu-22.04 D:\Environment\ubuntu22.04.tar</code></p>
+</li>
+<li><p>注销当前分发版<code>wsl --unregister Ubuntu-22.04</code></p>
+</li>
+<li><p>重新导入并安装分发版在D盘</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --<span class="keyword">import</span> <span class="title class_">Ubuntu</span>-<span class="number">22.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\<span class="title class_">Ubuntu22</span><span class="number">.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\ubuntu22<span class="number">.04</span>.<span class="property">tar</span> --version <span class="number">2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置默认登录用户<code>ubuntu2204 config --default-user root</code></p>
+</li>
+<li><p>删除tar文件<code>del D:\ubuntu22.04.tar</code></p>
+</li>
+</ul>
+<h3 id="DockerDesktop"><a href="#DockerDesktop" class="headerlink" title="DockerDesktop"></a>DockerDesktop</h3><p>官网下载安装<code>DockerDesktop</code>，最大的问题就是默认安装在c盘，十分占用c盘的空间</p>
+<h4 id="更改DockerDesktop的安装目录"><a href="#更改DockerDesktop的安装目录" class="headerlink" title="更改DockerDesktop的安装目录"></a>更改DockerDesktop的安装目录</h4><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">cmd /c mklink /j <span class="string">&quot;C:\Program Files\Docker&quot;</span> <span class="string">&quot;D:\SoftWare\DockerDesktop&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>实测创建连接的方法不可行，能安装上但是<code>Docker Engine</code>无法启动，会报错<code>Docker Desktop - WSL distro terminated abruptly</code>，看来只能装到C盘，先卸载，再删除链接目录<code>rmdir D:\Software\DockerDesktop</code></p>
+<blockquote>
+<p>todo: 镜像安装的文件夹，没法修改，导致下载会都下载到C盘很难受</p>
+</blockquote>
+<p><a href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">🎉 Docker 简介和安装 - Docker 快速入门 - 易文档 (easydoc.net)</a></p>
+<h2 id="为什么使用docker"><a href="#为什么使用docker" class="headerlink" title="为什么使用docker"></a>为什么使用docker</h2><p>方便测试和生产环境部署，省去很多环境配置的时间</p>
+<h2 id="和虚拟机的区别"><a href="#和虚拟机的区别" class="headerlink" title="和虚拟机的区别"></a>和虚拟机的区别</h2><h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>每台虚拟机需要占用大量的资源，启动时间长。因为需要完整的操作系统，cpu占用等。</p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>docker只是container的一种的实现，是一种容器化的解决方案和平台。</p>
+<p>容器不需要在虚拟化的环境中运行一个操作系统，而是使用宿主机的操作系统，启动速度非常快。需要的资源更少，充分利用物理服务器的资源。</p>
+<h2 id="基本原理和概念"><a href="#基本原理和概念" class="headerlink" title="基本原理和概念"></a>基本原理和概念</h2><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>镜像是一个只读的模板，它可以用来创建容器。</p>
+<h3 id="容器-1"><a href="#容器-1" class="headerlink" title="容器"></a>容器</h3><p>容器是docker的运行实例，他提供了一个独立的可移植的环境。可以在这个环境中运行应用程序。镜像和容器的关系就像java中类和实例的关系一样。</p>
+<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>存储docker镜像的地方，最流行也是常用的仓库就是dockerhub，公共的docker仓库。</p>
+<h2 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h2><p>Client-Server架构模式，</p>
+<h2 id="容器化和Dockerfile"><a href="#容器化和Dockerfile" class="headerlink" title="容器化和Dockerfile"></a>容器化和Dockerfile</h2><ol>
+<li>创建一个Dockerfile</li>
+<li>使用Dockerfile构建镜像</li>
+<li>使用镜像创建和运行容器</li>
+</ol>
+<blockquote>
+<p>如果想要在浏览器之外的环境运行javascipt的代码，就要安装node.js，通过<code>node index.js</code>运行index文件的代码</p>
+</blockquote>
+<h2 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a>常用的命令</h2><h3 id="镜像的构建"><a href="#镜像的构建" class="headerlink" title="镜像的构建"></a>镜像的构建</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">docker build <span class="literal">-t</span> hello<span class="literal">-docker</span> .</span><br></pre></td></tr></table></figure>
+
+<h3 id="镜像的运行"><a href="#镜像的运行" class="headerlink" title="镜像的运行"></a>镜像的运行</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run hello-docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看镜像库"><a href="#查看镜像库" class="headerlink" title="查看镜像库"></a>查看镜像库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h2 id="推荐网站"><a href="#推荐网站" class="headerlink" title="推荐网站"></a>推荐网站</h2><p>play-with-docker 尝试docker的各种功能</p>
+<h2 id="docker-desktop"><a href="#docker-desktop" class="headerlink" title="docker-desktop"></a>docker-desktop</h2><p>docker数据是非持久化的，需要持久化就使用Volumes功能。</p>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><ul>
+<li>用于定义和运行多容器Docker应用程序的工具</li>
+<li>使用YAML文件来配置应用程序的服务</li>
+<li>一条命令就可以创建并启动所有服务</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>docker</category>
+        <category>部署</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cpp-lea</title>
     <url>/posts/2bd5d61f.html</url>
     <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -377,151 +451,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker</title>
-    <url>/posts/f5f9fa9b.html</url>
-    <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Windows配置Docker环境"><a href="#Windows配置Docker环境" class="headerlink" title="Windows配置Docker环境"></a>Windows配置Docker环境</h2><h3 id="启用Hyper-v"><a href="#启用Hyper-v" class="headerlink" title="启用Hyper-v"></a>启用Hyper-v</h3><ul>
-<li>控制面板</li>
-<li>程序</li>
-<li>启动或关闭windows功能</li>
-<li>Hyper-v</li>
-</ul>
-<h3 id="WSL及Linux分发版安装"><a href="#WSL及Linux分发版安装" class="headerlink" title="WSL及Linux分发版安装"></a>WSL及Linux分发版安装</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --install </span><br><span class="line">wsl --list --online <span class="comment">// 查看可用的Linux发行版列表</span></span><br><span class="line">wsl --install -d <span class="title class_">Ubuntu</span>-<span class="number">22.04</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="修改WSL中系统的安装位置"><a href="#修改WSL中系统的安装位置" class="headerlink" title="修改WSL中系统的安装位置"></a>修改WSL中系统的安装位置</h3><ul>
-<li><p>查看所有分发版本<code>wsl -l --all -v</code></p>
-</li>
-<li><p>导出分发版为tar文件到D盘<code>wsl --export Ubuntu-22.04 D:\Environment\ubuntu22.04.tar</code></p>
-</li>
-<li><p>注销当前分发版<code>wsl --unregister Ubuntu-22.04</code></p>
-</li>
-<li><p>重新导入并安装分发版在D盘</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --<span class="keyword">import</span> <span class="title class_">Ubuntu</span>-<span class="number">22.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\<span class="title class_">Ubuntu22</span><span class="number">.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\ubuntu22<span class="number">.04</span>.<span class="property">tar</span> --version <span class="number">2</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置默认登录用户<code>ubuntu2204 config --default-user root</code></p>
-</li>
-<li><p>删除tar文件<code>del D:\ubuntu22.04.tar</code></p>
-</li>
-</ul>
-<h3 id="DockerDesktop"><a href="#DockerDesktop" class="headerlink" title="DockerDesktop"></a>DockerDesktop</h3><p>官网下载安装<code>DockerDesktop</code>，最大的问题就是默认安装在c盘，十分占用c盘的空间</p>
-<h4 id="更改DockerDesktop的安装目录"><a href="#更改DockerDesktop的安装目录" class="headerlink" title="更改DockerDesktop的安装目录"></a>更改DockerDesktop的安装目录</h4><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">cmd /c mklink /j <span class="string">&quot;C:\Program Files\Docker&quot;</span> <span class="string">&quot;D:\SoftWare\DockerDesktop&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>实测创建连接的方法不可行，能安装上但是<code>Docker Engine</code>无法启动，会报错<code>Docker Desktop - WSL distro terminated abruptly</code>，看来只能装到C盘，先卸载，再删除链接目录<code>rmdir D:\Software\DockerDesktop</code></p>
-<blockquote>
-<p>todo: 镜像安装的文件夹，没法修改，导致下载会都下载到C盘很难受</p>
-</blockquote>
-<p><a href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">🎉 Docker 简介和安装 - Docker 快速入门 - 易文档 (easydoc.net)</a></p>
-<h2 id="为什么使用docker"><a href="#为什么使用docker" class="headerlink" title="为什么使用docker"></a>为什么使用docker</h2><p>方便测试和生产环境部署，省去很多环境配置的时间</p>
-<h2 id="和虚拟机的区别"><a href="#和虚拟机的区别" class="headerlink" title="和虚拟机的区别"></a>和虚拟机的区别</h2><h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>每台虚拟机需要占用大量的资源，启动时间长。因为需要完整的操作系统，cpu占用等。</p>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>docker只是container的一种的实现，是一种容器化的解决方案和平台。</p>
-<p>容器不需要在虚拟化的环境中运行一个操作系统，而是使用宿主机的操作系统，启动速度非常快。需要的资源更少，充分利用物理服务器的资源。</p>
-<h2 id="基本原理和概念"><a href="#基本原理和概念" class="headerlink" title="基本原理和概念"></a>基本原理和概念</h2><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>镜像是一个只读的模板，它可以用来创建容器。</p>
-<h3 id="容器-1"><a href="#容器-1" class="headerlink" title="容器"></a>容器</h3><p>容器是docker的运行实例，他提供了一个独立的可移植的环境。可以在这个环境中运行应用程序。镜像和容器的关系就像java中类和实例的关系一样。</p>
-<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>存储docker镜像的地方，最流行也是常用的仓库就是dockerhub，公共的docker仓库。</p>
-<h2 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h2><p>Client-Server架构模式，</p>
-<h2 id="容器化和Dockerfile"><a href="#容器化和Dockerfile" class="headerlink" title="容器化和Dockerfile"></a>容器化和Dockerfile</h2><ol>
-<li>创建一个Dockerfile</li>
-<li>使用Dockerfile构建镜像</li>
-<li>使用镜像创建和运行容器</li>
-</ol>
-<blockquote>
-<p>如果想要在浏览器之外的环境运行javascipt的代码，就要安装node.js，通过<code>node index.js</code>运行index文件的代码</p>
-</blockquote>
-<h2 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a>常用的命令</h2><h3 id="镜像的构建"><a href="#镜像的构建" class="headerlink" title="镜像的构建"></a>镜像的构建</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">docker build <span class="literal">-t</span> hello<span class="literal">-docker</span> .</span><br></pre></td></tr></table></figure>
-
-<h3 id="镜像的运行"><a href="#镜像的运行" class="headerlink" title="镜像的运行"></a>镜像的运行</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run hello-docker</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看镜像库"><a href="#查看镜像库" class="headerlink" title="查看镜像库"></a>查看镜像库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-
-<h2 id="推荐网站"><a href="#推荐网站" class="headerlink" title="推荐网站"></a>推荐网站</h2><p>play-with-docker 尝试docker的各种功能</p>
-<h2 id="docker-desktop"><a href="#docker-desktop" class="headerlink" title="docker-desktop"></a>docker-desktop</h2><p>docker数据是非持久化的，需要持久化就使用Volumes功能。</p>
-<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><ul>
-<li>用于定义和运行多容器Docker应用程序的工具</li>
-<li>使用YAML文件来配置应用程序的服务</li>
-<li>一条命令就可以创建并启动所有服务</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>docker</category>
-        <category>部署</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Free-Talk-1</title>
-    <url>/posts/f098273e.html</url>
-    <content><![CDATA[<h3 id="Free-Talk"><a href="#Free-Talk" class="headerlink" title="Free Talk"></a>Free Talk</h3><h4 id="1-The-favors-the-people-might-have"><a href="#1-The-favors-the-people-might-have" class="headerlink" title="1.The favors the people might have."></a>1.The favors the people might have.</h4><h4 id="思考的角度："><a href="#思考的角度：" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>思考的角度：具体的事情：带个饭什么的 照顾宠物。关于suggestion。重要的事情，别人会询问建议 假期到哪旅游，工作，房子，去哪玩，找什么性格的朋友，</p>
-<h4 id="参考句型："><a href="#参考句型：" class="headerlink" title="参考句型："></a>参考句型：</h4><p>I was wondering if you could look after my pet ?</p>
-<p>Give the message to somebody</p>
-<p>where she could go</p>
-<h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>Someone will ask you to borrow something ,lend something ,figure out something difficult for us .</p>
-<p>When we are in a new place we hadn’t arrived before ,we need someone to ask for directions.</p>
-<p>When we cannot figure out something difficult for a long time ,maybe a math or physics problem, we need someone to give us some tips .</p>
-<p>When we need money urgently , we need someone who could lend us money.</p>
-<p>When we forget to take our stationery ,such as pens rulers erasers and so on ,we could ask someone for help .</p>
-<p>When we’re emotional ,we could find someone to talk to ,after that ,maybe we’re going to be relieved .</p>
-<h4 id="2-What-are-three-favors-that-you-dislike-being-asked"><a href="#2-What-are-three-favors-that-you-dislike-being-asked" class="headerlink" title="2.What are three favors that you dislike being asked?"></a>2.What are three favors that you dislike being asked?</h4><h4 id="思考的角度：-1"><a href="#思考的角度：-1" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>买东西，查资料， 违背道德与法律的事因为别人的懒惰而要求的帮忙不会去帮，借东西不还的， 会让你产生情绪，厌倦，学会表达主观情绪</p>
-<h4 id="参考句型：-1"><a href="#参考句型：-1" class="headerlink" title="参考句型："></a>参考句型：</h4><p>bring food .</p>
-<p>download something I have absolutely no need for</p>
-<p>I hate it when someone ask me to buy something to eat .</p>
-<p>I hate it when someone …………</p>
-<p>I let me down (upset)</p>
-<p>It drivers me crazy when</p>
-<p>You know I really hate one of those guys ,</p>
-<h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>I wouldn’t like someone to ask me for money because I’m really poor .</p>
-<p>I wouldn’t like someone to ask me for directions because I have a bad sense of direction.</p>
-<p>I wouldn’t like someone to ask me for emotional advice between boy and girl ,because I truly need a hand too !</p>
-<h4 id="3-Should-you-always-say-‘yes’-to-a-friend"><a href="#3-Should-you-always-say-‘yes’-to-a-friend" class="headerlink" title="3.Should you always say ‘yes’ to a friend?"></a>3.Should you always say ‘yes’ to a friend?</h4><h4 id="What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about"><a href="#What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about" class="headerlink" title="What would you do if your friend asked you a favor you didn’t feel good about?"></a>What would you do if your friend asked you a favor you didn’t feel good about?</h4><h4 id="思考的角度：-2"><a href="#思考的角度：-2" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>如果我不帮她没有人会帮 首先要正面回答这个问题， ,我不帮的话，我会把话讲明，解释自己的难处，我也像帮忙，但是其他人会做的更好，看你自己是个什么样的人 拒绝别人会很难受，给出具体的小的解释，如果他会容易生气，我不想和他交往，给出自己具体的 可以举一个例子，</p>
-<h4 id="参考句型：-2"><a href="#参考句型：-2" class="headerlink" title="参考句型："></a>参考句型：</h4><p>Take care of yourself at first ,then you could have the power to help others</p>
-<p>I always say yes</p>
-<p>I don’t think I’m one of this kind of people</p>
-<p>As for me ,as the saying goes ,you know what I mean yeah ?</p>
-<h4 id="Pre："><a href="#Pre：" class="headerlink" title="Pre："></a>Pre：</h4><p>It depends on the situation ,if a friend in great need asks me for help ,I will lend a hand immediately and do what I can do , no matter how difficult the things they’re facing .</p>
-<p>Because we’re brothers ,their problems are my problems .</p>
-<p>To help others is to help ourselves, for the good we do will be returned to us.</p>
-<p>I will lend a hand if the thing is helpful for them .</p>
-<p>As the old saying says :” If a person only thinks of himself ,then in his life ,sad things must be more than the happy things .”</p>
-<p>Conversely ,if I offer a hand ,I will get something cheerful and satisfied, even if the favor was what I didn’t feel good about .</p>
-<h4 id="4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？"><a href="#4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？" class="headerlink" title="4. How do you feel when people do not return things they borrowed from you？"></a>4. How do you feel when people do not return things they borrowed from you？</h4><h4 id="思考的角度：-3"><a href="#思考的角度：-3" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>很久不还东西，当我急用的时候才发现自己已经借出去了。 表达自己的情绪，可以使用一些更加高级的表达.freetalk自述高阶版 可以写下来，语言是重复出来的，</p>
-<h4 id="参考句型：-3"><a href="#参考句型：-3" class="headerlink" title="参考句型："></a>参考句型：</h4><p>It drives me crazy ,</p>
-<p>I don’t want to make friends with such a person</p>
-<p>he’s such a pain !</p>
-<h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>I will feel not good ,no matter who they’re ,friends or strangers .</p>
-<p>In my opinion, it’s necessary for us to return things we borrowed from someone in time .</p>
-<p>On the one hand ,these things didn’t belong to us ,they’re others’ property . We have no power to take them for ourselves .</p>
-<p>On the other hand , it indicates that other people think us dependable if they lent us something ,and we should not play with their trust in us .</p>
-<p>What’s more , it will drives me crazy if I can’t find something when I need it urgently just because someone have borrowed it and haven’t returned it to me in time .</p>
-<h4 id="When-was-the-last-time-you-owed-someone-an-apology"><a href="#When-was-the-last-time-you-owed-someone-an-apology" class="headerlink" title="When was the last time you owed someone an apology?"></a>When was the last time you owed someone an apology?</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>The last time I owed someone an apology was in the junior year in high school after I had a big quarrel with my best friend Wu .</p>
-<p>That was in the evening after we have a supper together .</p>
-<p>As we were walking to the classroom for the free period ,</p>
-<p>we made jokes with each other .</p>
-<p>But suddenly his face changed greatly , and he blamed me for what I said . he thought it inappropriate .</p>
-<p>But I didn’t think so ,from my perspective ,it’s not a big deal.</p>
-<p>So we had a big fight and didn’t take the initiative to find each other at all.</p>
-<p>In retrospect, if I had offered to apologize, I might not have lost a friend .</p>
-<p>What a pity !</p>
-<h4 id="Something-Else"><a href="#Something-Else" class="headerlink" title="Something Else"></a>Something Else</h4><p>Believe or not .I don’t think I am this kind of person .I’m just the regular kind of guy .Actually I don’t think that’s very responsible to your friends .And it’s not good in a way to become more independent .</p>
-<p>As the saying goes .Take your own decisions on your own matter .I will respond directly .I can’t do this things for you .Because I’m busy on things like studying .If she gets angry easily ,I don’t think this relationship is very reliable ,and I don’t want to talk to you this kind of person at all anymore .</p>
-<p>How do you feel when people do not return things they borrowed from you ?</p>
-<p>It really drives me crazy when somebody do not return things they have borrowed from me .</p>
-<p>Have you met that half the time when this kind of person says he’s going to return you things in time when they borrowed it from you but he never actually does it .It drives me crazy .Such a pain .</p>
-<p>朋友让帮忙买东西，网上查资料，借东西不还，帮忙买吃的</p>
-<p>It really upsets me .</p>
-<p>I hate it .</p>
-<p>The thing that bothers me the most .</p>
-]]></content>
-      <categories>
-        <category>Oral English</category>
-        <category>Distance Class</category>
-      </categories>
-      <tags>
-        <tag>free talk</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Free-Talk-2</title>
     <url>/posts/69917684.html</url>
     <content><![CDATA[<h4 id="1-Did-you-live-or-would-you-like-to-live-in-a-foreign-country-How-did-you-feel-or-would-you-feel-about-moving-there"><a href="#1-Did-you-live-or-would-you-like-to-live-in-a-foreign-country-How-did-you-feel-or-would-you-feel-about-moving-there" class="headerlink" title="1. Did you live(or would you like to live) in a foreign country? How did you feel(or would you feel )about moving there?"></a>1. Did you live(or would you like to live) in a foreign country? How did you feel(or would you feel )about moving there?</h4><h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>I love to have a try , I have never been some places before .</p>
@@ -596,6 +525,77 @@
         <category>Oral English</category>
         <category>Distance Class</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Free-Talk-1</title>
+    <url>/posts/f098273e.html</url>
+    <content><![CDATA[<h3 id="Free-Talk"><a href="#Free-Talk" class="headerlink" title="Free Talk"></a>Free Talk</h3><h4 id="1-The-favors-the-people-might-have"><a href="#1-The-favors-the-people-might-have" class="headerlink" title="1.The favors the people might have."></a>1.The favors the people might have.</h4><h4 id="思考的角度："><a href="#思考的角度：" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>思考的角度：具体的事情：带个饭什么的 照顾宠物。关于suggestion。重要的事情，别人会询问建议 假期到哪旅游，工作，房子，去哪玩，找什么性格的朋友，</p>
+<h4 id="参考句型："><a href="#参考句型：" class="headerlink" title="参考句型："></a>参考句型：</h4><p>I was wondering if you could look after my pet ?</p>
+<p>Give the message to somebody</p>
+<p>where she could go</p>
+<h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>Someone will ask you to borrow something ,lend something ,figure out something difficult for us .</p>
+<p>When we are in a new place we hadn’t arrived before ,we need someone to ask for directions.</p>
+<p>When we cannot figure out something difficult for a long time ,maybe a math or physics problem, we need someone to give us some tips .</p>
+<p>When we need money urgently , we need someone who could lend us money.</p>
+<p>When we forget to take our stationery ,such as pens rulers erasers and so on ,we could ask someone for help .</p>
+<p>When we’re emotional ,we could find someone to talk to ,after that ,maybe we’re going to be relieved .</p>
+<h4 id="2-What-are-three-favors-that-you-dislike-being-asked"><a href="#2-What-are-three-favors-that-you-dislike-being-asked" class="headerlink" title="2.What are three favors that you dislike being asked?"></a>2.What are three favors that you dislike being asked?</h4><h4 id="思考的角度：-1"><a href="#思考的角度：-1" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>买东西，查资料， 违背道德与法律的事因为别人的懒惰而要求的帮忙不会去帮，借东西不还的， 会让你产生情绪，厌倦，学会表达主观情绪</p>
+<h4 id="参考句型：-1"><a href="#参考句型：-1" class="headerlink" title="参考句型："></a>参考句型：</h4><p>bring food .</p>
+<p>download something I have absolutely no need for</p>
+<p>I hate it when someone ask me to buy something to eat .</p>
+<p>I hate it when someone …………</p>
+<p>I let me down (upset)</p>
+<p>It drivers me crazy when</p>
+<p>You know I really hate one of those guys ,</p>
+<h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>I wouldn’t like someone to ask me for money because I’m really poor .</p>
+<p>I wouldn’t like someone to ask me for directions because I have a bad sense of direction.</p>
+<p>I wouldn’t like someone to ask me for emotional advice between boy and girl ,because I truly need a hand too !</p>
+<h4 id="3-Should-you-always-say-‘yes’-to-a-friend"><a href="#3-Should-you-always-say-‘yes’-to-a-friend" class="headerlink" title="3.Should you always say ‘yes’ to a friend?"></a>3.Should you always say ‘yes’ to a friend?</h4><h4 id="What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about"><a href="#What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about" class="headerlink" title="What would you do if your friend asked you a favor you didn’t feel good about?"></a>What would you do if your friend asked you a favor you didn’t feel good about?</h4><h4 id="思考的角度：-2"><a href="#思考的角度：-2" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>如果我不帮她没有人会帮 首先要正面回答这个问题， ,我不帮的话，我会把话讲明，解释自己的难处，我也像帮忙，但是其他人会做的更好，看你自己是个什么样的人 拒绝别人会很难受，给出具体的小的解释，如果他会容易生气，我不想和他交往，给出自己具体的 可以举一个例子，</p>
+<h4 id="参考句型：-2"><a href="#参考句型：-2" class="headerlink" title="参考句型："></a>参考句型：</h4><p>Take care of yourself at first ,then you could have the power to help others</p>
+<p>I always say yes</p>
+<p>I don’t think I’m one of this kind of people</p>
+<p>As for me ,as the saying goes ,you know what I mean yeah ?</p>
+<h4 id="Pre："><a href="#Pre：" class="headerlink" title="Pre："></a>Pre：</h4><p>It depends on the situation ,if a friend in great need asks me for help ,I will lend a hand immediately and do what I can do , no matter how difficult the things they’re facing .</p>
+<p>Because we’re brothers ,their problems are my problems .</p>
+<p>To help others is to help ourselves, for the good we do will be returned to us.</p>
+<p>I will lend a hand if the thing is helpful for them .</p>
+<p>As the old saying says :” If a person only thinks of himself ,then in his life ,sad things must be more than the happy things .”</p>
+<p>Conversely ,if I offer a hand ,I will get something cheerful and satisfied, even if the favor was what I didn’t feel good about .</p>
+<h4 id="4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？"><a href="#4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？" class="headerlink" title="4. How do you feel when people do not return things they borrowed from you？"></a>4. How do you feel when people do not return things they borrowed from you？</h4><h4 id="思考的角度：-3"><a href="#思考的角度：-3" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>很久不还东西，当我急用的时候才发现自己已经借出去了。 表达自己的情绪，可以使用一些更加高级的表达.freetalk自述高阶版 可以写下来，语言是重复出来的，</p>
+<h4 id="参考句型：-3"><a href="#参考句型：-3" class="headerlink" title="参考句型："></a>参考句型：</h4><p>It drives me crazy ,</p>
+<p>I don’t want to make friends with such a person</p>
+<p>he’s such a pain !</p>
+<h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>I will feel not good ,no matter who they’re ,friends or strangers .</p>
+<p>In my opinion, it’s necessary for us to return things we borrowed from someone in time .</p>
+<p>On the one hand ,these things didn’t belong to us ,they’re others’ property . We have no power to take them for ourselves .</p>
+<p>On the other hand , it indicates that other people think us dependable if they lent us something ,and we should not play with their trust in us .</p>
+<p>What’s more , it will drives me crazy if I can’t find something when I need it urgently just because someone have borrowed it and haven’t returned it to me in time .</p>
+<h4 id="When-was-the-last-time-you-owed-someone-an-apology"><a href="#When-was-the-last-time-you-owed-someone-an-apology" class="headerlink" title="When was the last time you owed someone an apology?"></a>When was the last time you owed someone an apology?</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>The last time I owed someone an apology was in the junior year in high school after I had a big quarrel with my best friend Wu .</p>
+<p>That was in the evening after we have a supper together .</p>
+<p>As we were walking to the classroom for the free period ,</p>
+<p>we made jokes with each other .</p>
+<p>But suddenly his face changed greatly , and he blamed me for what I said . he thought it inappropriate .</p>
+<p>But I didn’t think so ,from my perspective ,it’s not a big deal.</p>
+<p>So we had a big fight and didn’t take the initiative to find each other at all.</p>
+<p>In retrospect, if I had offered to apologize, I might not have lost a friend .</p>
+<p>What a pity !</p>
+<h4 id="Something-Else"><a href="#Something-Else" class="headerlink" title="Something Else"></a>Something Else</h4><p>Believe or not .I don’t think I am this kind of person .I’m just the regular kind of guy .Actually I don’t think that’s very responsible to your friends .And it’s not good in a way to become more independent .</p>
+<p>As the saying goes .Take your own decisions on your own matter .I will respond directly .I can’t do this things for you .Because I’m busy on things like studying .If she gets angry easily ,I don’t think this relationship is very reliable ,and I don’t want to talk to you this kind of person at all anymore .</p>
+<p>How do you feel when people do not return things they borrowed from you ?</p>
+<p>It really drives me crazy when somebody do not return things they have borrowed from me .</p>
+<p>Have you met that half the time when this kind of person says he’s going to return you things in time when they borrowed it from you but he never actually does it .It drives me crazy .Such a pain .</p>
+<p>朋友让帮忙买东西，网上查资料，借东西不还，帮忙买吃的</p>
+<p>It really upsets me .</p>
+<p>I hate it .</p>
+<p>The thing that bothers me the most .</p>
+]]></content>
+      <categories>
+        <category>Oral English</category>
+        <category>Distance Class</category>
+      </categories>
+      <tags>
+        <tag>free talk</tag>
+      </tags>
   </entry>
   <entry>
     <title>Internet_Problem</title>
@@ -1335,8 +1335,8 @@
         <category>go</category>
       </categories>
       <tags>
-        <tag>note</tag>
         <tag>技术</tag>
+        <tag>note</tag>
         <tag>go</tag>
       </tags>
   </entry>
@@ -1768,19 +1768,6 @@
       </tags>
   </entry>
   <entry>
-    <title>《解忧杂货铺》</title>
-    <url>/posts/79b1aa9b.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>读书</category>
-        <category>读后感</category>
-      </categories>
-      <tags>
-        <tag>读书</tag>
-        <tag>读后感</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《追风筝的人》</title>
     <url>/posts/ab39eefc.html</url>
     <content><![CDATA[<h1 id="追风筝的人"><a href="#追风筝的人" class="headerlink" title="追风筝的人"></a>追风筝的人</h1><p><code>start from 2024-04-12</code></p>
@@ -1793,6 +1780,19 @@
       </categories>
       <tags>
         <tag>读书</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《解忧杂货铺》</title>
+    <url>/posts/79b1aa9b.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>读书</category>
+        <category>读后感</category>
+      </categories>
+      <tags>
+        <tag>读书</tag>
+        <tag>读后感</tag>
       </tags>
   </entry>
   <entry>
