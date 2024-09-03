@@ -1,203 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker</title>
-    <url>/posts/f5f9fa9b.html</url>
-    <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Windows配置Docker环境"><a href="#Windows配置Docker环境" class="headerlink" title="Windows配置Docker环境"></a>Windows配置Docker环境</h2><h3 id="启用Hyper-v"><a href="#启用Hyper-v" class="headerlink" title="启用Hyper-v"></a>启用Hyper-v</h3><ul>
-<li>控制面板</li>
-<li>程序</li>
-<li>启动或关闭windows功能</li>
-<li>Hyper-v</li>
-</ul>
-<h3 id="WSL及Linux分发版安装"><a href="#WSL及Linux分发版安装" class="headerlink" title="WSL及Linux分发版安装"></a>WSL及Linux分发版安装</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --install </span><br><span class="line">wsl --list --online <span class="comment">// 查看可用的Linux发行版列表</span></span><br><span class="line">wsl --install -d <span class="title class_">Ubuntu</span>-<span class="number">22.04</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="修改WSL中系统的安装位置"><a href="#修改WSL中系统的安装位置" class="headerlink" title="修改WSL中系统的安装位置"></a>修改WSL中系统的安装位置</h3><ul>
-<li><p>查看所有分发版本<code>wsl -l --all -v</code></p>
-</li>
-<li><p>导出分发版为tar文件到D盘<code>wsl --export Ubuntu-22.04 D:\Environment\ubuntu22.04.tar</code></p>
-</li>
-<li><p>注销当前分发版<code>wsl --unregister Ubuntu-22.04</code></p>
-</li>
-<li><p>重新导入并安装分发版在D盘</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --<span class="keyword">import</span> <span class="title class_">Ubuntu</span>-<span class="number">22.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\<span class="title class_">Ubuntu22</span><span class="number">.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\ubuntu22<span class="number">.04</span>.<span class="property">tar</span> --version <span class="number">2</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置默认登录用户<code>ubuntu2204 config --default-user root</code></p>
-</li>
-<li><p>删除tar文件<code>del D:\ubuntu22.04.tar</code></p>
-</li>
-</ul>
-<h3 id="DockerDesktop"><a href="#DockerDesktop" class="headerlink" title="DockerDesktop"></a>DockerDesktop</h3><p>官网下载安装<code>DockerDesktop</code>，最大的问题就是默认安装在c盘，十分占用c盘的空间</p>
-<h4 id="更改DockerDesktop的安装目录"><a href="#更改DockerDesktop的安装目录" class="headerlink" title="更改DockerDesktop的安装目录"></a>更改DockerDesktop的安装目录</h4><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">cmd /c mklink /j <span class="string">&quot;C:\Program Files\Docker&quot;</span> <span class="string">&quot;D:\SoftWare\DockerDesktop&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>实测创建连接的方法不可行，能安装上但是<code>Docker Engine</code>无法启动，会报错<code>Docker Desktop - WSL distro terminated abruptly</code>，看来只能装到C盘，先卸载，再删除链接目录<code>rmdir D:\Software\DockerDesktop</code></p>
-<blockquote>
-<p>todo: 镜像安装的文件夹，没法修改，导致下载会都下载到C盘很难受</p>
-</blockquote>
-<p><a href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">🎉 Docker 简介和安装 - Docker 快速入门 - 易文档 (easydoc.net)</a></p>
-<h2 id="为什么使用docker"><a href="#为什么使用docker" class="headerlink" title="为什么使用docker"></a>为什么使用docker</h2><p>方便测试和生产环境部署，省去很多环境配置的时间</p>
-<h2 id="和虚拟机的区别"><a href="#和虚拟机的区别" class="headerlink" title="和虚拟机的区别"></a>和虚拟机的区别</h2><h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>每台虚拟机需要占用大量的资源，启动时间长。因为需要完整的操作系统，cpu占用等。</p>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>docker只是container的一种的实现，是一种容器化的解决方案和平台。</p>
-<p>容器不需要在虚拟化的环境中运行一个操作系统，而是使用宿主机的操作系统，启动速度非常快。需要的资源更少，充分利用物理服务器的资源。</p>
-<h2 id="基本原理和概念"><a href="#基本原理和概念" class="headerlink" title="基本原理和概念"></a>基本原理和概念</h2><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>镜像是一个只读的模板，它可以用来创建容器。</p>
-<h3 id="容器-1"><a href="#容器-1" class="headerlink" title="容器"></a>容器</h3><p>容器是docker的运行实例，他提供了一个独立的可移植的环境。可以在这个环境中运行应用程序。镜像和容器的关系就像java中类和实例的关系一样。</p>
-<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>存储docker镜像的地方，最流行也是常用的仓库就是dockerhub，公共的docker仓库。</p>
-<h2 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h2><p>Client-Server架构模式，</p>
-<h2 id="容器化和Dockerfile"><a href="#容器化和Dockerfile" class="headerlink" title="容器化和Dockerfile"></a>容器化和Dockerfile</h2><ol>
-<li>创建一个Dockerfile</li>
-<li>使用Dockerfile构建镜像</li>
-<li>使用镜像创建和运行容器</li>
-</ol>
-<blockquote>
-<p>如果想要在浏览器之外的环境运行javascipt的代码，就要安装node.js，通过<code>node index.js</code>运行index文件的代码</p>
-</blockquote>
-<h2 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a>常用的命令</h2><h3 id="镜像的构建"><a href="#镜像的构建" class="headerlink" title="镜像的构建"></a>镜像的构建</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">docker build <span class="literal">-t</span> hello<span class="literal">-docker</span> .</span><br></pre></td></tr></table></figure>
-
-<h3 id="镜像的运行"><a href="#镜像的运行" class="headerlink" title="镜像的运行"></a>镜像的运行</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run hello-docker</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看镜像库"><a href="#查看镜像库" class="headerlink" title="查看镜像库"></a>查看镜像库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-
-<h2 id="推荐网站"><a href="#推荐网站" class="headerlink" title="推荐网站"></a>推荐网站</h2><p>play-with-docker 尝试docker的各种功能</p>
-<h2 id="docker-desktop"><a href="#docker-desktop" class="headerlink" title="docker-desktop"></a>docker-desktop</h2><p>docker数据是非持久化的，需要持久化就使用Volumes功能。</p>
-<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><ul>
-<li>用于定义和运行多容器Docker应用程序的工具</li>
-<li>使用YAML文件来配置应用程序的服务</li>
-<li>一条命令就可以创建并启动所有服务</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Free-Talk-1</title>
-    <url>/posts/f098273e.html</url>
-    <content><![CDATA[<h3 id="Free-Talk"><a href="#Free-Talk" class="headerlink" title="Free Talk"></a>Free Talk</h3><h4 id="1-The-favors-the-people-might-have"><a href="#1-The-favors-the-people-might-have" class="headerlink" title="1.The favors the people might have."></a>1.The favors the people might have.</h4><h4 id="思考的角度："><a href="#思考的角度：" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>思考的角度：具体的事情：带个饭什么的 照顾宠物。关于suggestion。重要的事情，别人会询问建议 假期到哪旅游，工作，房子，去哪玩，找什么性格的朋友，</p>
-<h4 id="参考句型："><a href="#参考句型：" class="headerlink" title="参考句型："></a>参考句型：</h4><p>I was wondering if you could look after my pet ?</p>
-<p>Give the message to somebody</p>
-<p>where she could go</p>
-<h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>Someone will ask you to borrow something ,lend something ,figure out something difficult for us .</p>
-<p>When we are in a new place we hadn’t arrived before ,we need someone to ask for directions.</p>
-<p>When we cannot figure out something difficult for a long time ,maybe a math or physics problem, we need someone to give us some tips .</p>
-<p>When we need money urgently , we need someone who could lend us money.</p>
-<p>When we forget to take our stationery ,such as pens rulers erasers and so on ,we could ask someone for help .</p>
-<p>When we’re emotional ,we could find someone to talk to ,after that ,maybe we’re going to be relieved .</p>
-<h4 id="2-What-are-three-favors-that-you-dislike-being-asked"><a href="#2-What-are-three-favors-that-you-dislike-being-asked" class="headerlink" title="2.What are three favors that you dislike being asked?"></a>2.What are three favors that you dislike being asked?</h4><h4 id="思考的角度：-1"><a href="#思考的角度：-1" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>买东西，查资料， 违背道德与法律的事因为别人的懒惰而要求的帮忙不会去帮，借东西不还的， 会让你产生情绪，厌倦，学会表达主观情绪</p>
-<h4 id="参考句型：-1"><a href="#参考句型：-1" class="headerlink" title="参考句型："></a>参考句型：</h4><p>bring food .</p>
-<p>download something I have absolutely no need for</p>
-<p>I hate it when someone ask me to buy something to eat .</p>
-<p>I hate it when someone …………</p>
-<p>I let me down (upset)</p>
-<p>It drivers me crazy when</p>
-<p>You know I really hate one of those guys ,</p>
-<h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>I wouldn’t like someone to ask me for money because I’m really poor .</p>
-<p>I wouldn’t like someone to ask me for directions because I have a bad sense of direction.</p>
-<p>I wouldn’t like someone to ask me for emotional advice between boy and girl ,because I truly need a hand too !</p>
-<h4 id="3-Should-you-always-say-‘yes’-to-a-friend"><a href="#3-Should-you-always-say-‘yes’-to-a-friend" class="headerlink" title="3.Should you always say ‘yes’ to a friend?"></a>3.Should you always say ‘yes’ to a friend?</h4><h4 id="What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about"><a href="#What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about" class="headerlink" title="What would you do if your friend asked you a favor you didn’t feel good about?"></a>What would you do if your friend asked you a favor you didn’t feel good about?</h4><h4 id="思考的角度：-2"><a href="#思考的角度：-2" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>如果我不帮她没有人会帮 首先要正面回答这个问题， ,我不帮的话，我会把话讲明，解释自己的难处，我也像帮忙，但是其他人会做的更好，看你自己是个什么样的人 拒绝别人会很难受，给出具体的小的解释，如果他会容易生气，我不想和他交往，给出自己具体的 可以举一个例子，</p>
-<h4 id="参考句型：-2"><a href="#参考句型：-2" class="headerlink" title="参考句型："></a>参考句型：</h4><p>Take care of yourself at first ,then you could have the power to help others</p>
-<p>I always say yes</p>
-<p>I don’t think I’m one of this kind of people</p>
-<p>As for me ,as the saying goes ,you know what I mean yeah ?</p>
-<h4 id="Pre："><a href="#Pre：" class="headerlink" title="Pre："></a>Pre：</h4><p>It depends on the situation ,if a friend in great need asks me for help ,I will lend a hand immediately and do what I can do , no matter how difficult the things they’re facing .</p>
-<p>Because we’re brothers ,their problems are my problems .</p>
-<p>To help others is to help ourselves, for the good we do will be returned to us.</p>
-<p>I will lend a hand if the thing is helpful for them .</p>
-<p>As the old saying says :” If a person only thinks of himself ,then in his life ,sad things must be more than the happy things .”</p>
-<p>Conversely ,if I offer a hand ,I will get something cheerful and satisfied, even if the favor was what I didn’t feel good about .</p>
-<h4 id="4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？"><a href="#4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？" class="headerlink" title="4. How do you feel when people do not return things they borrowed from you？"></a>4. How do you feel when people do not return things they borrowed from you？</h4><h4 id="思考的角度：-3"><a href="#思考的角度：-3" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>很久不还东西，当我急用的时候才发现自己已经借出去了。 表达自己的情绪，可以使用一些更加高级的表达.freetalk自述高阶版 可以写下来，语言是重复出来的，</p>
-<h4 id="参考句型：-3"><a href="#参考句型：-3" class="headerlink" title="参考句型："></a>参考句型：</h4><p>It drives me crazy ,</p>
-<p>I don’t want to make friends with such a person</p>
-<p>he’s such a pain !</p>
-<h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>I will feel not good ,no matter who they’re ,friends or strangers .</p>
-<p>In my opinion, it’s necessary for us to return things we borrowed from someone in time .</p>
-<p>On the one hand ,these things didn’t belong to us ,they’re others’ property . We have no power to take them for ourselves .</p>
-<p>On the other hand , it indicates that other people think us dependable if they lent us something ,and we should not play with their trust in us .</p>
-<p>What’s more , it will drives me crazy if I can’t find something when I need it urgently just because someone have borrowed it and haven’t returned it to me in time .</p>
-<h4 id="When-was-the-last-time-you-owed-someone-an-apology"><a href="#When-was-the-last-time-you-owed-someone-an-apology" class="headerlink" title="When was the last time you owed someone an apology?"></a>When was the last time you owed someone an apology?</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>The last time I owed someone an apology was in the junior year in high school after I had a big quarrel with my best friend Wu .</p>
-<p>That was in the evening after we have a supper together .</p>
-<p>As we were walking to the classroom for the free period ,</p>
-<p>we made jokes with each other .</p>
-<p>But suddenly his face changed greatly , and he blamed me for what I said . he thought it inappropriate .</p>
-<p>But I didn’t think so ,from my perspective ,it’s not a big deal.</p>
-<p>So we had a big fight and didn’t take the initiative to find each other at all.</p>
-<p>In retrospect, if I had offered to apologize, I might not have lost a friend .</p>
-<p>What a pity !</p>
-<h4 id="Something-Else"><a href="#Something-Else" class="headerlink" title="Something Else"></a>Something Else</h4><p>Believe or not .I don’t think I am this kind of person .I’m just the regular kind of guy .Actually I don’t think that’s very responsible to your friends .And it’s not good in a way to become more independent .</p>
-<p>As the saying goes .Take your own decisions on your own matter .I will respond directly .I can’t do this things for you .Because I’m busy on things like studying .If she gets angry easily ,I don’t think this relationship is very reliable ,and I don’t want to talk to you this kind of person at all anymore .</p>
-<p>How do you feel when people do not return things they borrowed from you ?</p>
-<p>It really drives me crazy when somebody do not return things they have borrowed from me .</p>
-<p>Have you met that half the time when this kind of person says he’s going to return you things in time when they borrowed it from you but he never actually does it .It drives me crazy .Such a pain .</p>
-<p>朋友让帮忙买东西，网上查资料，借东西不还，帮忙买吃的</p>
-<p>It really upsets me .</p>
-<p>I hate it .</p>
-<p>The thing that bothers me the most .</p>
-]]></content>
-      <categories>
-        <category>Oral English</category>
-        <category>Distance Class</category>
-      </categories>
-      <tags>
-        <tag>free talk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Free-Talk-2</title>
-    <url>/posts/69917684.html</url>
-    <content><![CDATA[<h4 id="1-Did-you-live-or-would-you-like-to-live-in-a-foreign-country-How-did-you-feel-or-would-you-feel-about-moving-there"><a href="#1-Did-you-live-or-would-you-like-to-live-in-a-foreign-country-How-did-you-feel-or-would-you-feel-about-moving-there" class="headerlink" title="1. Did you live(or would you like to live) in a foreign country? How did you feel(or would you feel )about moving there?"></a>1. Did you live(or would you like to live) in a foreign country? How did you feel(or would you feel )about moving there?</h4><h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>I love to have a try , I have never been some places before .</p>
-<p>No I haven’t exactly .</p>
-<p>I think I will be really exciting to move to anther country .</p>
-<p>I would see something maybe completely different from my motherland . Broaden my horizons .</p>
-<p>I would go to visit some wonderful places of interest to feel the magic of nature .</p>
-<p>I would feel the different culture of other country ,participate in their unique festivals , taste local cuisine , talk to the local people with different personalities .</p>
-<p>What ‘s more ,I can go to the world-famous university to have a further study , making me more knowledgeable .</p>
-<h4 id="2-If-you-move-to-a-foreign-country-what-is-your-biggest-concern"><a href="#2-If-you-move-to-a-foreign-country-what-is-your-biggest-concern" class="headerlink" title="2. If you move to a foreign country, what is your biggest concern?"></a>2. If you move to a foreign country, what is your biggest concern?</h4><h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>I have social phobia. I’m personally very afraid of strong blacks</p>
-<p>The language of course .</p>
-<p>As we all know ,different countries have different languages .</p>
-<p>If we want to move to another city , we should learn how to speak and understand their language at first so that we can make some easy communications , show what we think or need .</p>
-<p>On the other hand ,after we move to another city ,we have to make friends with our neighbors , we will have a better atmosphere if we can understand what one anther is talking about .</p>
-<h4 id="3-What-kind-of-customs-do-you-know-of-living-in-different-countries"><a href="#3-What-kind-of-customs-do-you-know-of-living-in-different-countries" class="headerlink" title="3. What kind of customs do you know of living in different countries?"></a>3. What kind of customs do you know of living in different countries?</h4><h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>To be honest ,I know a little . have dinner so late .until two,,,,,,,</p>
-<p>Americans have casual eating habits. They like to eat beef, pork, chicken and so on.</p>
-<p>Americans do not eat garlic, avoid eating the viscera of various animals, and have no habit of vinegar.</p>
-<p>When drinking drinks, most people like to add ice. Canadians don’t give gifts casually. They usually give gifts only when colleagues are separated and friends are on birthdays or weddings.</p>
-<p>Gifts must be opened in person and you should thank for that .</p>
-<h4 id="4-What-customs-should-a-visitor-to-your-country-know-about-Obey-relationship-bring-something-when-you’re-invited-flowers-and-presents-to-show-your-gratitude"><a href="#4-What-customs-should-a-visitor-to-your-country-know-about-Obey-relationship-bring-something-when-you’re-invited-flowers-and-presents-to-show-your-gratitude" class="headerlink" title="4. What customs should a visitor to your country know about? Obey relationship bring something when you’re invited flowers and presents to show your gratitude ."></a>4. What customs should a visitor to your country know about? Obey relationship bring something when you’re invited flowers and presents to show your gratitude .</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>If you are invited to a Chinese people’s home , the host will shake hands with you .</p>
-<p>When you are having dinner ,the host will put a lot of meals to your bowl .</p>
-<p>It seems that the host want to force you eat a lot of food so that there will be no leftovers .</p>
-<p>But exactly , this is the host’s hospitality . They just want to show you’re an important visitors and want you to eat and drink to your heart’s content .</p>
-<p>If some friends gives you a gift . It’s impolite to open it in front of others .</p>
-<p>You should open it after others left .</p>
-<h4 id="5-What-kind-of-culture-shock-have-you-ever-experienced-in-life"><a href="#5-What-kind-of-culture-shock-have-you-ever-experienced-in-life" class="headerlink" title="5.What kind of culture shock have you ever experienced in life?"></a>5.What kind of culture shock have you ever experienced in life?</h4><h4 id="Pre-4"><a href="#Pre-4" class="headerlink" title="Pre:"></a>Pre:</h4><p>Chinese people pay attention to modesty, which we regard as a virtue .</p>
-<p>When others praise us, we tend to belittle ourselves. But people in western countries will accept praise and express gratitude happily .</p>
-<p>What’s more .</p>
-<p>When a family eats together, Chinese people often sit around the table and get what they need from the food on the table, while Westerners divide the food into small portions in advance, give each person one and eat independently .</p>
-]]></content>
-      <categories>
-        <category>Oral English</category>
-        <category>Distance Class</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Internet_Problem</title>
-    <url>/posts/98e8f0c.html</url>
-    <content><![CDATA[<h4 id="参考句型："><a href="#参考句型：" class="headerlink" title="参考句型："></a>参考句型：</h4><p>With the develop</p>
-<p>Shopping online ,</p>
-<p>The first time I bought something online</p>
-<p>Fit me well</p>
-<p>Deal with it quickly</p>
-<p>More and more people for</p>
-<p>The reminds exchange for another one</p>
-<h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>In the digital era ,we can just use our computers or smart phones to visit shopping websites to buy things we need ,which means we don’t have to move our body but just browse the web ,click, and place an order instead of going to the offline stores.</p>
-<p>But if there’s something the matter with the commodity ,we will have more things to do .</p>
-<p>For example ,after we get the clothes we bought online ,we find there is a tear in the lining or some of buttons are very loose .</p>
-<p>We need to contact after-sales, show our questions and exchange or refund.</p>
-<p>After that ,we have to find an express company to send the goods back and wait for the results.</p>
-<p>But if we shop offline near by,we just need to go to the store ,show our questions ,and exchange or refund.</p>
-]]></content>
-      <categories>
-        <category>Oral English</category>
-        <category>Distance Class</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Cpp-lea</title>
     <url>/posts/2bd5d61f.html</url>
     <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -573,6 +376,243 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker</title>
+    <url>/posts/f5f9fa9b.html</url>
+    <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Windows配置Docker环境"><a href="#Windows配置Docker环境" class="headerlink" title="Windows配置Docker环境"></a>Windows配置Docker环境</h2><h3 id="启用Hyper-v"><a href="#启用Hyper-v" class="headerlink" title="启用Hyper-v"></a>启用Hyper-v</h3><ul>
+<li>控制面板</li>
+<li>程序</li>
+<li>启动或关闭windows功能</li>
+<li>Hyper-v</li>
+</ul>
+<h3 id="WSL及Linux分发版安装"><a href="#WSL及Linux分发版安装" class="headerlink" title="WSL及Linux分发版安装"></a>WSL及Linux分发版安装</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --install </span><br><span class="line">wsl --list --online <span class="comment">// 查看可用的Linux发行版列表</span></span><br><span class="line">wsl --install -d <span class="title class_">Ubuntu</span>-<span class="number">22.04</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改WSL中系统的安装位置"><a href="#修改WSL中系统的安装位置" class="headerlink" title="修改WSL中系统的安装位置"></a>修改WSL中系统的安装位置</h3><ul>
+<li><p>查看所有分发版本<code>wsl -l --all -v</code></p>
+</li>
+<li><p>导出分发版为tar文件到D盘<code>wsl --export Ubuntu-22.04 D:\Environment\ubuntu22.04.tar</code></p>
+</li>
+<li><p>注销当前分发版<code>wsl --unregister Ubuntu-22.04</code></p>
+</li>
+<li><p>重新导入并安装分发版在D盘</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wsl --<span class="keyword">import</span> <span class="title class_">Ubuntu</span>-<span class="number">22.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\<span class="title class_">Ubuntu22</span><span class="number">.04</span> <span class="attr">D</span>:\<span class="title class_">Environment</span>\ubuntu22<span class="number">.04</span>.<span class="property">tar</span> --version <span class="number">2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置默认登录用户<code>ubuntu2204 config --default-user root</code></p>
+</li>
+<li><p>删除tar文件<code>del D:\ubuntu22.04.tar</code></p>
+</li>
+</ul>
+<h3 id="DockerDesktop"><a href="#DockerDesktop" class="headerlink" title="DockerDesktop"></a>DockerDesktop</h3><p>官网下载安装<code>DockerDesktop</code>，最大的问题就是默认安装在c盘，十分占用c盘的空间</p>
+<h4 id="更改DockerDesktop的安装目录"><a href="#更改DockerDesktop的安装目录" class="headerlink" title="更改DockerDesktop的安装目录"></a>更改DockerDesktop的安装目录</h4><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">cmd /c mklink /j <span class="string">&quot;C:\Program Files\Docker&quot;</span> <span class="string">&quot;D:\SoftWare\DockerDesktop&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>实测创建连接的方法不可行，能安装上但是<code>Docker Engine</code>无法启动，会报错<code>Docker Desktop - WSL distro terminated abruptly</code>，看来只能装到C盘，先卸载，再删除链接目录<code>rmdir D:\Software\DockerDesktop</code></p>
+<blockquote>
+<p>todo: 镜像安装的文件夹，没法修改，导致下载会都下载到C盘很难受</p>
+</blockquote>
+<p><a href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">🎉 Docker 简介和安装 - Docker 快速入门 - 易文档 (easydoc.net)</a></p>
+<h2 id="为什么使用docker"><a href="#为什么使用docker" class="headerlink" title="为什么使用docker"></a>为什么使用docker</h2><p>方便测试和生产环境部署，省去很多环境配置的时间</p>
+<h2 id="和虚拟机的区别"><a href="#和虚拟机的区别" class="headerlink" title="和虚拟机的区别"></a>和虚拟机的区别</h2><h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>每台虚拟机需要占用大量的资源，启动时间长。因为需要完整的操作系统，cpu占用等。</p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>docker只是container的一种的实现，是一种容器化的解决方案和平台。</p>
+<p>容器不需要在虚拟化的环境中运行一个操作系统，而是使用宿主机的操作系统，启动速度非常快。需要的资源更少，充分利用物理服务器的资源。</p>
+<h2 id="基本原理和概念"><a href="#基本原理和概念" class="headerlink" title="基本原理和概念"></a>基本原理和概念</h2><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>镜像是一个只读的模板，它可以用来创建容器。</p>
+<h3 id="容器-1"><a href="#容器-1" class="headerlink" title="容器"></a>容器</h3><p>容器是docker的运行实例，他提供了一个独立的可移植的环境。可以在这个环境中运行应用程序。镜像和容器的关系就像java中类和实例的关系一样。</p>
+<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>存储docker镜像的地方，最流行也是常用的仓库就是dockerhub，公共的docker仓库。</p>
+<h2 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h2><p>Client-Server架构模式，</p>
+<h2 id="容器化和Dockerfile"><a href="#容器化和Dockerfile" class="headerlink" title="容器化和Dockerfile"></a>容器化和Dockerfile</h2><ol>
+<li>创建一个Dockerfile</li>
+<li>使用Dockerfile构建镜像</li>
+<li>使用镜像创建和运行容器</li>
+</ol>
+<blockquote>
+<p>如果想要在浏览器之外的环境运行javascipt的代码，就要安装node.js，通过<code>node index.js</code>运行index文件的代码</p>
+</blockquote>
+<h2 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a>常用的命令</h2><h3 id="镜像的构建"><a href="#镜像的构建" class="headerlink" title="镜像的构建"></a>镜像的构建</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">docker build <span class="literal">-t</span> hello<span class="literal">-docker</span> .</span><br></pre></td></tr></table></figure>
+
+<h3 id="镜像的运行"><a href="#镜像的运行" class="headerlink" title="镜像的运行"></a>镜像的运行</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run hello-docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看镜像库"><a href="#查看镜像库" class="headerlink" title="查看镜像库"></a>查看镜像库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h2 id="推荐网站"><a href="#推荐网站" class="headerlink" title="推荐网站"></a>推荐网站</h2><p>play-with-docker 尝试docker的各种功能</p>
+<h2 id="docker-desktop"><a href="#docker-desktop" class="headerlink" title="docker-desktop"></a>docker-desktop</h2><p>docker数据是非持久化的，需要持久化就使用Volumes功能。</p>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><ul>
+<li>用于定义和运行多容器Docker应用程序的工具</li>
+<li>使用YAML文件来配置应用程序的服务</li>
+<li>一条命令就可以创建并启动所有服务</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Free-Talk-2</title>
+    <url>/posts/69917684.html</url>
+    <content><![CDATA[<h4 id="1-Did-you-live-or-would-you-like-to-live-in-a-foreign-country-How-did-you-feel-or-would-you-feel-about-moving-there"><a href="#1-Did-you-live-or-would-you-like-to-live-in-a-foreign-country-How-did-you-feel-or-would-you-feel-about-moving-there" class="headerlink" title="1. Did you live(or would you like to live) in a foreign country? How did you feel(or would you feel )about moving there?"></a>1. Did you live(or would you like to live) in a foreign country? How did you feel(or would you feel )about moving there?</h4><h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>I love to have a try , I have never been some places before .</p>
+<p>No I haven’t exactly .</p>
+<p>I think I will be really exciting to move to anther country .</p>
+<p>I would see something maybe completely different from my motherland . Broaden my horizons .</p>
+<p>I would go to visit some wonderful places of interest to feel the magic of nature .</p>
+<p>I would feel the different culture of other country ,participate in their unique festivals , taste local cuisine , talk to the local people with different personalities .</p>
+<p>What ‘s more ,I can go to the world-famous university to have a further study , making me more knowledgeable .</p>
+<h4 id="2-If-you-move-to-a-foreign-country-what-is-your-biggest-concern"><a href="#2-If-you-move-to-a-foreign-country-what-is-your-biggest-concern" class="headerlink" title="2. If you move to a foreign country, what is your biggest concern?"></a>2. If you move to a foreign country, what is your biggest concern?</h4><h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>I have social phobia. I’m personally very afraid of strong blacks</p>
+<p>The language of course .</p>
+<p>As we all know ,different countries have different languages .</p>
+<p>If we want to move to another city , we should learn how to speak and understand their language at first so that we can make some easy communications , show what we think or need .</p>
+<p>On the other hand ,after we move to another city ,we have to make friends with our neighbors , we will have a better atmosphere if we can understand what one anther is talking about .</p>
+<h4 id="3-What-kind-of-customs-do-you-know-of-living-in-different-countries"><a href="#3-What-kind-of-customs-do-you-know-of-living-in-different-countries" class="headerlink" title="3. What kind of customs do you know of living in different countries?"></a>3. What kind of customs do you know of living in different countries?</h4><h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>To be honest ,I know a little . have dinner so late .until two,,,,,,,</p>
+<p>Americans have casual eating habits. They like to eat beef, pork, chicken and so on.</p>
+<p>Americans do not eat garlic, avoid eating the viscera of various animals, and have no habit of vinegar.</p>
+<p>When drinking drinks, most people like to add ice. Canadians don’t give gifts casually. They usually give gifts only when colleagues are separated and friends are on birthdays or weddings.</p>
+<p>Gifts must be opened in person and you should thank for that .</p>
+<h4 id="4-What-customs-should-a-visitor-to-your-country-know-about-Obey-relationship-bring-something-when-you’re-invited-flowers-and-presents-to-show-your-gratitude"><a href="#4-What-customs-should-a-visitor-to-your-country-know-about-Obey-relationship-bring-something-when-you’re-invited-flowers-and-presents-to-show-your-gratitude" class="headerlink" title="4. What customs should a visitor to your country know about? Obey relationship bring something when you’re invited flowers and presents to show your gratitude ."></a>4. What customs should a visitor to your country know about? Obey relationship bring something when you’re invited flowers and presents to show your gratitude .</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>If you are invited to a Chinese people’s home , the host will shake hands with you .</p>
+<p>When you are having dinner ,the host will put a lot of meals to your bowl .</p>
+<p>It seems that the host want to force you eat a lot of food so that there will be no leftovers .</p>
+<p>But exactly , this is the host’s hospitality . They just want to show you’re an important visitors and want you to eat and drink to your heart’s content .</p>
+<p>If some friends gives you a gift . It’s impolite to open it in front of others .</p>
+<p>You should open it after others left .</p>
+<h4 id="5-What-kind-of-culture-shock-have-you-ever-experienced-in-life"><a href="#5-What-kind-of-culture-shock-have-you-ever-experienced-in-life" class="headerlink" title="5.What kind of culture shock have you ever experienced in life?"></a>5.What kind of culture shock have you ever experienced in life?</h4><h4 id="Pre-4"><a href="#Pre-4" class="headerlink" title="Pre:"></a>Pre:</h4><p>Chinese people pay attention to modesty, which we regard as a virtue .</p>
+<p>When others praise us, we tend to belittle ourselves. But people in western countries will accept praise and express gratitude happily .</p>
+<p>What’s more .</p>
+<p>When a family eats together, Chinese people often sit around the table and get what they need from the food on the table, while Westerners divide the food into small portions in advance, give each person one and eat independently .</p>
+]]></content>
+      <categories>
+        <category>Oral English</category>
+        <category>Distance Class</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Free-Talk-1</title>
+    <url>/posts/f098273e.html</url>
+    <content><![CDATA[<h3 id="Free-Talk"><a href="#Free-Talk" class="headerlink" title="Free Talk"></a>Free Talk</h3><h4 id="1-The-favors-the-people-might-have"><a href="#1-The-favors-the-people-might-have" class="headerlink" title="1.The favors the people might have."></a>1.The favors the people might have.</h4><h4 id="思考的角度："><a href="#思考的角度：" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>思考的角度：具体的事情：带个饭什么的 照顾宠物。关于suggestion。重要的事情，别人会询问建议 假期到哪旅游，工作，房子，去哪玩，找什么性格的朋友，</p>
+<h4 id="参考句型："><a href="#参考句型：" class="headerlink" title="参考句型："></a>参考句型：</h4><p>I was wondering if you could look after my pet ?</p>
+<p>Give the message to somebody</p>
+<p>where she could go</p>
+<h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>Someone will ask you to borrow something ,lend something ,figure out something difficult for us .</p>
+<p>When we are in a new place we hadn’t arrived before ,we need someone to ask for directions.</p>
+<p>When we cannot figure out something difficult for a long time ,maybe a math or physics problem, we need someone to give us some tips .</p>
+<p>When we need money urgently , we need someone who could lend us money.</p>
+<p>When we forget to take our stationery ,such as pens rulers erasers and so on ,we could ask someone for help .</p>
+<p>When we’re emotional ,we could find someone to talk to ,after that ,maybe we’re going to be relieved .</p>
+<h4 id="2-What-are-three-favors-that-you-dislike-being-asked"><a href="#2-What-are-three-favors-that-you-dislike-being-asked" class="headerlink" title="2.What are three favors that you dislike being asked?"></a>2.What are three favors that you dislike being asked?</h4><h4 id="思考的角度：-1"><a href="#思考的角度：-1" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>买东西，查资料， 违背道德与法律的事因为别人的懒惰而要求的帮忙不会去帮，借东西不还的， 会让你产生情绪，厌倦，学会表达主观情绪</p>
+<h4 id="参考句型：-1"><a href="#参考句型：-1" class="headerlink" title="参考句型："></a>参考句型：</h4><p>bring food .</p>
+<p>download something I have absolutely no need for</p>
+<p>I hate it when someone ask me to buy something to eat .</p>
+<p>I hate it when someone …………</p>
+<p>I let me down (upset)</p>
+<p>It drivers me crazy when</p>
+<p>You know I really hate one of those guys ,</p>
+<h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>I wouldn’t like someone to ask me for money because I’m really poor .</p>
+<p>I wouldn’t like someone to ask me for directions because I have a bad sense of direction.</p>
+<p>I wouldn’t like someone to ask me for emotional advice between boy and girl ,because I truly need a hand too !</p>
+<h4 id="3-Should-you-always-say-‘yes’-to-a-friend"><a href="#3-Should-you-always-say-‘yes’-to-a-friend" class="headerlink" title="3.Should you always say ‘yes’ to a friend?"></a>3.Should you always say ‘yes’ to a friend?</h4><h4 id="What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about"><a href="#What-would-you-do-if-your-friend-asked-you-a-favor-you-didn’t-feel-good-about" class="headerlink" title="What would you do if your friend asked you a favor you didn’t feel good about?"></a>What would you do if your friend asked you a favor you didn’t feel good about?</h4><h4 id="思考的角度：-2"><a href="#思考的角度：-2" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>如果我不帮她没有人会帮 首先要正面回答这个问题， ,我不帮的话，我会把话讲明，解释自己的难处，我也像帮忙，但是其他人会做的更好，看你自己是个什么样的人 拒绝别人会很难受，给出具体的小的解释，如果他会容易生气，我不想和他交往，给出自己具体的 可以举一个例子，</p>
+<h4 id="参考句型：-2"><a href="#参考句型：-2" class="headerlink" title="参考句型："></a>参考句型：</h4><p>Take care of yourself at first ,then you could have the power to help others</p>
+<p>I always say yes</p>
+<p>I don’t think I’m one of this kind of people</p>
+<p>As for me ,as the saying goes ,you know what I mean yeah ?</p>
+<h4 id="Pre："><a href="#Pre：" class="headerlink" title="Pre："></a>Pre：</h4><p>It depends on the situation ,if a friend in great need asks me for help ,I will lend a hand immediately and do what I can do , no matter how difficult the things they’re facing .</p>
+<p>Because we’re brothers ,their problems are my problems .</p>
+<p>To help others is to help ourselves, for the good we do will be returned to us.</p>
+<p>I will lend a hand if the thing is helpful for them .</p>
+<p>As the old saying says :” If a person only thinks of himself ,then in his life ,sad things must be more than the happy things .”</p>
+<p>Conversely ,if I offer a hand ,I will get something cheerful and satisfied, even if the favor was what I didn’t feel good about .</p>
+<h4 id="4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？"><a href="#4-How-do-you-feel-when-people-do-not-return-things-they-borrowed-from-you？" class="headerlink" title="4. How do you feel when people do not return things they borrowed from you？"></a>4. How do you feel when people do not return things they borrowed from you？</h4><h4 id="思考的角度：-3"><a href="#思考的角度：-3" class="headerlink" title="思考的角度："></a>思考的角度：</h4><p>很久不还东西，当我急用的时候才发现自己已经借出去了。 表达自己的情绪，可以使用一些更加高级的表达.freetalk自述高阶版 可以写下来，语言是重复出来的，</p>
+<h4 id="参考句型：-3"><a href="#参考句型：-3" class="headerlink" title="参考句型："></a>参考句型：</h4><p>It drives me crazy ,</p>
+<p>I don’t want to make friends with such a person</p>
+<p>he’s such a pain !</p>
+<h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>I will feel not good ,no matter who they’re ,friends or strangers .</p>
+<p>In my opinion, it’s necessary for us to return things we borrowed from someone in time .</p>
+<p>On the one hand ,these things didn’t belong to us ,they’re others’ property . We have no power to take them for ourselves .</p>
+<p>On the other hand , it indicates that other people think us dependable if they lent us something ,and we should not play with their trust in us .</p>
+<p>What’s more , it will drives me crazy if I can’t find something when I need it urgently just because someone have borrowed it and haven’t returned it to me in time .</p>
+<h4 id="When-was-the-last-time-you-owed-someone-an-apology"><a href="#When-was-the-last-time-you-owed-someone-an-apology" class="headerlink" title="When was the last time you owed someone an apology?"></a>When was the last time you owed someone an apology?</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>The last time I owed someone an apology was in the junior year in high school after I had a big quarrel with my best friend Wu .</p>
+<p>That was in the evening after we have a supper together .</p>
+<p>As we were walking to the classroom for the free period ,</p>
+<p>we made jokes with each other .</p>
+<p>But suddenly his face changed greatly , and he blamed me for what I said . he thought it inappropriate .</p>
+<p>But I didn’t think so ,from my perspective ,it’s not a big deal.</p>
+<p>So we had a big fight and didn’t take the initiative to find each other at all.</p>
+<p>In retrospect, if I had offered to apologize, I might not have lost a friend .</p>
+<p>What a pity !</p>
+<h4 id="Something-Else"><a href="#Something-Else" class="headerlink" title="Something Else"></a>Something Else</h4><p>Believe or not .I don’t think I am this kind of person .I’m just the regular kind of guy .Actually I don’t think that’s very responsible to your friends .And it’s not good in a way to become more independent .</p>
+<p>As the saying goes .Take your own decisions on your own matter .I will respond directly .I can’t do this things for you .Because I’m busy on things like studying .If she gets angry easily ,I don’t think this relationship is very reliable ,and I don’t want to talk to you this kind of person at all anymore .</p>
+<p>How do you feel when people do not return things they borrowed from you ?</p>
+<p>It really drives me crazy when somebody do not return things they have borrowed from me .</p>
+<p>Have you met that half the time when this kind of person says he’s going to return you things in time when they borrowed it from you but he never actually does it .It drives me crazy .Such a pain .</p>
+<p>朋友让帮忙买东西，网上查资料，借东西不还，帮忙买吃的</p>
+<p>It really upsets me .</p>
+<p>I hate it .</p>
+<p>The thing that bothers me the most .</p>
+]]></content>
+      <categories>
+        <category>Oral English</category>
+        <category>Distance Class</category>
+      </categories>
+      <tags>
+        <tag>free talk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Free-Talk-3</title>
+    <url>/posts/1e964612.html</url>
+    <content><![CDATA[<h4 id="1-Do-you-think-your-city-is-clean"><a href="#1-Do-you-think-your-city-is-clean" class="headerlink" title="1. Do you think your city is clean?"></a>1. Do you think your city is clean?</h4><h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>I don’t think my city is clean .</p>
+<p>As your know ,I’m from Huainan in Anhui province ,which is a raw coal origin .</p>
+<p>Large and small coal mines are scattered throughout the city .</p>
+<p>Every time a coal truck goes by ,it will raises a cloud of dust .</p>
+<p>The flowers and plants around the mine were covered with grey.</p>
+<p>Since present Xi took office ,putting forward the proposition that green hills and clear waters are mountains of gold and silver ,things have changed.</p>
+<h4 id="2-How-do-U-feel-when-seeing-people-throwing-rubbish-on-the-street"><a href="#2-How-do-U-feel-when-seeing-people-throwing-rubbish-on-the-street" class="headerlink" title="2. How do U feel when seeing people throwing rubbish on the street?"></a>2. How do U feel when seeing people throwing rubbish on the street?</h4><h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>Parents teach me to throw rubbish in to the rubbish .</p>
+<p>Education .</p>
+<p>That’s truly a terrible behavior .</p>
+<p>They’re so inexperienced and selfish .</p>
+<p>I may try to come forward and stop this behavior as possible as I can .</p>
+<p>Or just tell them how much our environment needs our common protection and persuade them to pick the rubbish up and throw it into the rubbish bins.</p>
+<h4 id="3-Why-do-some-people-like-to-throw-rubbish-on-the-street"><a href="#3-Why-do-some-people-like-to-throw-rubbish-on-the-street" class="headerlink" title="3. Why do some people like to throw rubbish on the street?"></a>3. Why do some people like to throw rubbish on the street?</h4><h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>They’re lazy to walk to the rubbish bin to throw rubbish .</p>
+<p>They maybe think going to the rubbish bin to just throw a bottles is so unnecessary and it’s so convenient to just throw it on the ground .</p>
+<p>And they may think the things that they throw everywhere is not a big deal ,and it will do a very little harm to our environment or just the things around them .</p>
+<p>They’re so inexperienced and selfish that they didn’t realize what they’re doing is making our living environment worse and worse .</p>
+<h4 id="4-What-can-U-do-to-make-the-city-cleaner"><a href="#4-What-can-U-do-to-make-the-city-cleaner" class="headerlink" title="4. What can U do to make the city cleaner?"></a>4. What can U do to make the city cleaner?</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>Take an active part in planting trees .</p>
+<p>Don’t throw rubbish everywhere .</p>
+<p>Persuade people around me to do something with me .</p>
+<p>We can take actions step by step to make sure that we have a future to grow up in person by person ,family by family ,community by community together we can make a difference .</p>
+<h4 id="5-Do-you-do-anything-to-protect-the-environment"><a href="#5-Do-you-do-anything-to-protect-the-environment" class="headerlink" title="5. Do you do anything to protect the environment?"></a>5. Do you do anything to protect the environment?</h4><h4 id="Pre-4"><a href="#Pre-4" class="headerlink" title="Pre:"></a>Pre:</h4><p>Yes, of course . My family and I reuse many items in my home ,cans ,bottles ,plastic bags and so on rather than throwing away .</p>
+<p>I usually make sure we use recycle bins every time .</p>
+<p>There’re many simple things we and our family can do around our house such as planting a tree for the community and watch it grow .</p>
+<h4 id="6-Why-should-people-follow-the-law-on-environmental-protection"><a href="#6-Why-should-people-follow-the-law-on-environmental-protection" class="headerlink" title="6.Why should people follow the law on environmental protection ?"></a>6.Why should people follow the law on environmental protection ?</h4><h4 id="Pre-5"><a href="#Pre-5" class="headerlink" title="Pre:"></a>Pre:</h4><p>The earth is not only our home for survival, but also the home of other creatures in the world .</p>
+<p>Therefore, it is our duty to protect the environment .</p>
+<p>It could mitigate climate change and energy waste and reduce the threat of greenhouse effect to all human beings .</p>
+<p>The climate change could destroy the world we’re living .</p>
+<p>Some scientists predict that within 50 years many parts of our world could be under 20cm of water .</p>
+<p>We can prevent this if we work together .</p>
+<p>All these things we do now could not only save the environment but also save our money .</p>
+<p>And it is a chance to preserve our future .</p>
+]]></content>
+      <categories>
+        <category>Oral English</category>
+        <category>Distance Class</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Internet_Problem</title>
+    <url>/posts/98e8f0c.html</url>
+    <content><![CDATA[<h4 id="参考句型："><a href="#参考句型：" class="headerlink" title="参考句型："></a>参考句型：</h4><p>With the develop</p>
+<p>Shopping online ,</p>
+<p>The first time I bought something online</p>
+<p>Fit me well</p>
+<p>Deal with it quickly</p>
+<p>More and more people for</p>
+<p>The reminds exchange for another one</p>
+<h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>In the digital era ,we can just use our computers or smart phones to visit shopping websites to buy things we need ,which means we don’t have to move our body but just browse the web ,click, and place an order instead of going to the offline stores.</p>
+<p>But if there’s something the matter with the commodity ,we will have more things to do .</p>
+<p>For example ,after we get the clothes we bought online ,we find there is a tear in the lining or some of buttons are very loose .</p>
+<p>We need to contact after-sales, show our questions and exchange or refund.</p>
+<p>After that ,we have to find an express company to send the goods back and wait for the results.</p>
+<p>But if we shop offline near by,we just need to go to the store ,show our questions ,and exchange or refund.</p>
+]]></content>
+      <categories>
+        <category>Oral English</category>
+        <category>Distance Class</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Introduce_job</title>
     <url>/posts/6926aa6c.html</url>
     <content><![CDATA[<h4 id="How-to-introduce-your-job"><a href="#How-to-introduce-your-job" class="headerlink" title="How to introduce your job ."></a>How to introduce your job .</h4><p>Hello everyone,I’m Tammer.</p>
@@ -633,46 +673,6 @@
 <p>She’s also an animal lover ,so she want to own a cat in the future.</p>
 <p>She’s also a hard-working girl ,she would practice spoken English day and night.</p>
 <p>I haven’t seen such a wonderful girl before . I wish there will be more people like her in the world.</p>
-]]></content>
-      <categories>
-        <category>Oral English</category>
-        <category>Distance Class</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Free-Talk-3</title>
-    <url>/posts/1e964612.html</url>
-    <content><![CDATA[<h4 id="1-Do-you-think-your-city-is-clean"><a href="#1-Do-you-think-your-city-is-clean" class="headerlink" title="1. Do you think your city is clean?"></a>1. Do you think your city is clean?</h4><h4 id="Pre"><a href="#Pre" class="headerlink" title="Pre:"></a>Pre:</h4><p>I don’t think my city is clean .</p>
-<p>As your know ,I’m from Huainan in Anhui province ,which is a raw coal origin .</p>
-<p>Large and small coal mines are scattered throughout the city .</p>
-<p>Every time a coal truck goes by ,it will raises a cloud of dust .</p>
-<p>The flowers and plants around the mine were covered with grey.</p>
-<p>Since present Xi took office ,putting forward the proposition that green hills and clear waters are mountains of gold and silver ,things have changed.</p>
-<h4 id="2-How-do-U-feel-when-seeing-people-throwing-rubbish-on-the-street"><a href="#2-How-do-U-feel-when-seeing-people-throwing-rubbish-on-the-street" class="headerlink" title="2. How do U feel when seeing people throwing rubbish on the street?"></a>2. How do U feel when seeing people throwing rubbish on the street?</h4><h4 id="Pre-1"><a href="#Pre-1" class="headerlink" title="Pre:"></a>Pre:</h4><p>Parents teach me to throw rubbish in to the rubbish .</p>
-<p>Education .</p>
-<p>That’s truly a terrible behavior .</p>
-<p>They’re so inexperienced and selfish .</p>
-<p>I may try to come forward and stop this behavior as possible as I can .</p>
-<p>Or just tell them how much our environment needs our common protection and persuade them to pick the rubbish up and throw it into the rubbish bins.</p>
-<h4 id="3-Why-do-some-people-like-to-throw-rubbish-on-the-street"><a href="#3-Why-do-some-people-like-to-throw-rubbish-on-the-street" class="headerlink" title="3. Why do some people like to throw rubbish on the street?"></a>3. Why do some people like to throw rubbish on the street?</h4><h4 id="Pre-2"><a href="#Pre-2" class="headerlink" title="Pre:"></a>Pre:</h4><p>They’re lazy to walk to the rubbish bin to throw rubbish .</p>
-<p>They maybe think going to the rubbish bin to just throw a bottles is so unnecessary and it’s so convenient to just throw it on the ground .</p>
-<p>And they may think the things that they throw everywhere is not a big deal ,and it will do a very little harm to our environment or just the things around them .</p>
-<p>They’re so inexperienced and selfish that they didn’t realize what they’re doing is making our living environment worse and worse .</p>
-<h4 id="4-What-can-U-do-to-make-the-city-cleaner"><a href="#4-What-can-U-do-to-make-the-city-cleaner" class="headerlink" title="4. What can U do to make the city cleaner?"></a>4. What can U do to make the city cleaner?</h4><h4 id="Pre-3"><a href="#Pre-3" class="headerlink" title="Pre:"></a>Pre:</h4><p>Take an active part in planting trees .</p>
-<p>Don’t throw rubbish everywhere .</p>
-<p>Persuade people around me to do something with me .</p>
-<p>We can take actions step by step to make sure that we have a future to grow up in person by person ,family by family ,community by community together we can make a difference .</p>
-<h4 id="5-Do-you-do-anything-to-protect-the-environment"><a href="#5-Do-you-do-anything-to-protect-the-environment" class="headerlink" title="5. Do you do anything to protect the environment?"></a>5. Do you do anything to protect the environment?</h4><h4 id="Pre-4"><a href="#Pre-4" class="headerlink" title="Pre:"></a>Pre:</h4><p>Yes, of course . My family and I reuse many items in my home ,cans ,bottles ,plastic bags and so on rather than throwing away .</p>
-<p>I usually make sure we use recycle bins every time .</p>
-<p>There’re many simple things we and our family can do around our house such as planting a tree for the community and watch it grow .</p>
-<h4 id="6-Why-should-people-follow-the-law-on-environmental-protection"><a href="#6-Why-should-people-follow-the-law-on-environmental-protection" class="headerlink" title="6.Why should people follow the law on environmental protection ?"></a>6.Why should people follow the law on environmental protection ?</h4><h4 id="Pre-5"><a href="#Pre-5" class="headerlink" title="Pre:"></a>Pre:</h4><p>The earth is not only our home for survival, but also the home of other creatures in the world .</p>
-<p>Therefore, it is our duty to protect the environment .</p>
-<p>It could mitigate climate change and energy waste and reduce the threat of greenhouse effect to all human beings .</p>
-<p>The climate change could destroy the world we’re living .</p>
-<p>Some scientists predict that within 50 years many parts of our world could be under 20cm of water .</p>
-<p>We can prevent this if we work together .</p>
-<p>All these things we do now could not only save the environment but also save our money .</p>
-<p>And it is a chance to preserve our future .</p>
 ]]></content>
       <categories>
         <category>Oral English</category>
@@ -1057,7 +1057,9 @@
 
 <h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><h3 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h3><p>本地部署，查看评论功能的时候登录会显示404，不知道如何解决，但是将代码push上去之后，访问github page就没有问题，确实加载的时候有点慢。</p>
 <p>之后sign with github又能正常使用了</p>
-<h3 id="部分页面不能评论"><a href="#部分页面不能评论" class="headerlink" title="部分页面不能评论"></a>部分页面不能评论</h3><p>配置之后发现tags, categories, about页面都有评论，想要不能评论</p>
+<h3 id="部分页面不能评论"><a href="#部分页面不能评论" class="headerlink" title="部分页面不能评论"></a>部分页面不能评论</h3><p>配置之后发现tags, categories, about页面都有评论，想要不能评论，可以在对应的md页面的头部添加<code>disable_comments: true</code>配置项</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2023-08-06 18:10:02</span><br><span class="line">type: categories</span><br><span class="line">disable_comments: true</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>技术</category>
@@ -1717,11 +1719,6 @@
       </tags>
   </entry>
   <entry>
-    <title>《解忧杂货铺》</title>
-    <url>/posts/79b1aa9b.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>《白夜行》</title>
     <url>/posts/ba52eee0.html</url>
     <content><![CDATA[<h1 id="《白夜行》"><a href="#《白夜行》" class="headerlink" title="《白夜行》"></a>《白夜行》</h1>]]></content>
@@ -1731,6 +1728,11 @@
       <tags>
         <tag>reading</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>《解忧杂货铺》</title>
+    <url>/posts/79b1aa9b.html</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>《追风筝的人》</title>
