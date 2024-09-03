@@ -1057,8 +1057,8 @@
 
 <h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><h3 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h3><p>本地部署，查看评论功能的时候登录会显示404，不知道如何解决，但是将代码push上去之后，访问github page就没有问题，确实加载的时候有点慢。</p>
 <p>之后sign with github又能正常使用了</p>
-<h3 id="部分页面不能评论"><a href="#部分页面不能评论" class="headerlink" title="部分页面不能评论"></a>部分页面不能评论</h3><p>配置之后发现tags, categories, about页面都有评论，想要不能评论，可以在对应的md页面的头部添加<code>disable_comments: true</code>配置项</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2023-08-06 18:10:02</span><br><span class="line">type: categories</span><br><span class="line">disable_comments: true</span><br></pre></td></tr></table></figure>
+<h3 id="设置部分页面不能评论"><a href="#设置部分页面不能评论" class="headerlink" title="设置部分页面不能评论"></a>设置部分页面不能评论</h3><p>配置之后发现tags, categories, about页面都有评论，想要不能评论，可以在对应的md页面的头部添加<code>comments: false</code>配置项</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2023-08-06 18:10:02</span><br><span class="line">type: categories</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
