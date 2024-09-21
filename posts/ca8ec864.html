@@ -58,6 +58,8 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -296,11 +298,11 @@
 <h4 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h4><blockquote>
 <p>向量数据库的核心思想是将文本转换成向量，然后将向量存储在数据库中，当用户输入问题时，将问题转换成向量，然后在数据库中搜索最相似的向量和上下文，最后将文本返回给用户</p>
 </blockquote>
-<p>当我们有一份文档需要 GPT 处理时，例如这份文档是客服培训资料或者操作手册，我们可以先将这份文档的所有内容转化成向量（这个过程称之为 Vector Embedding<vector embedding>），然后当用户提出相关问题时，我们将用户的搜索内容转换成向量，然后在数据库中搜索最相似的向量，匹配最相似的几个上下文，最后将上下文返回给 GPT。这样不仅可以大大减少 GPT 的计算量，从而提高响应速度，更重要的是降低成本，并绕过 GPT 的 tokens 限制。</p>
+<p>当我们有一份文档需要 GPT 处理时，例如这份文档是客服培训资料或者操作手册，我们可以先将这份文档的所有内容转化成向量（这个过程称之为 Vector Embedding<vector embedding="">），然后当用户提出相关问题时，我们将用户的搜索内容转换成向量，然后在数据库中搜索最相似的向量，匹配最相似的几个上下文，最后将上下文返回给 GPT。这样不仅可以大大减少 GPT 的计算量，从而提高响应速度，更重要的是降低成本，并绕过 GPT 的 tokens 限制。</vector></p>
 <h4 id="Vector-Embedding"><a href="#Vector-Embedding" class="headerlink" title="Vector Embedding"></a>Vector Embedding</h4><h5 id="传统的数据库"><a href="#传统的数据库" class="headerlink" title="传统的数据库"></a>传统的数据库</h5><blockquote>
 <p>本质上是基于文本的精确匹配，这种索引和搜索算法对于关键字的搜索功能非常合适，但对于语义搜索功能就非常弱</p>
 </blockquote>
-<p>传统数据库无法识别语义关系，例如搜索小狗没法得到柯基等结果，传统的应用需要人为地打上特征标签进行关联。如何生成和挑选特征这个过程(特征工程<Feature Engineering>)将原始数据转化成更好的表达问题本质的特征的过程。自动化的方式来提取这些特征，而这可以通过 Vector Embedding 实现。</p>
+<p>传统数据库无法识别语义关系，例如搜索小狗没法得到柯基等结果，传统的应用需要人为地打上特征标签进行关联。如何生成和挑选特征这个过程(特征工程<feature engineering="">)将原始数据转化成更好的表达问题本质的特征的过程。自动化的方式来提取这些特征，而这可以通过 Vector Embedding 实现。</feature></p>
 <h4 id="特征和向量"><a href="#特征和向量" class="headerlink" title="特征和向量"></a>特征和向量</h4><blockquote>
 <p>向量数据库的核心在于相似性搜索(Similarity Search)</p>
 </blockquote>
@@ -316,7 +318,7 @@
 <p>量化：内存中可以将聚类中心里面每一个向量都用聚类中心的向量来表示，并维护一个所有向量到聚类中心的码本，减少内存占用。</p>
 <p>但是在高维坐标系中，还会遇到维度灾难问题，具体来说，随着维度的增加，数据点之间的距离会呈指数级增长，这也就意味着，在高维坐标系中，需要更多的聚类中心点将数据点分成更小的簇，才能提高分类的质量。否者，向量和自己的聚类中心距离很远，会极大的降低搜索的速度和质量。</p>
 <p>但如果想要维持分类和搜索质量，就需要维护数量庞大的聚类中心。随之而来会带来另一个问题，那就是聚类中心点的数量会随着维度的增加而指数级增长，这样会导致我们存储码本的数量极速增加，从而极大的增加了内存的消耗。例如一个 128 维的向量，需要维护 2^64 个聚类中心才能维持不错的量化结果，但这样的码本存储大小已经超过维护原始向量的内存大小了。</p>
-<p>解决这个问题的方法是将向量分解为多个子向量，然后对每个子向量独立进行量化，比如将 128 维的向量分为 8 个 16 维的向量，然后在 8 个 16 维的子向量上分别进行聚类，因为 16 维的子向量大概只需要 256 个聚类中心就能得到还不错的量化结果，所以就可以将码本的大小从 2^64 降低到 8 * 256 &#x3D; 2048 个聚类中心，从而降低内存开销。</p>
+<p>解决这个问题的方法是将向量分解为多个子向量，然后对每个子向量独立进行量化，比如将 128 维的向量分为 8 个 16 维的向量，然后在 8 个 16 维的子向量上分别进行聚类，因为 16 维的子向量大概只需要 256 个聚类中心就能得到还不错的量化结果，所以就可以将码本的大小从 2^64 降低到 8 * 256 = 2048 个聚类中心，从而降低内存开销。</p>
 <h4 id="向量数据库的选型"><a href="#向量数据库的选型" class="headerlink" title="向量数据库的选型"></a>向量数据库的选型</h4><ol>
 <li><p>分布式</p>
 </li>
@@ -393,13 +395,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">43k</span>
+    <span title="站点总字数">46k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:38</span>
+    <span title="站点阅读时长">2:49</span>
   </span>
 </div>
 <div class="busuanzi-count">
