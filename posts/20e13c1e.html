@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="The note to learn the basics of JRPC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grpc-lea">
+<meta property="og:url" content="https://dra-tammer.github.io/posts/20e13c1e.html">
+<meta property="og:site_name" content="Toothless">
+<meta property="og:description" content="The note to learn the basics of JRPC">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-06T10:18:26.000Z">
+<meta property="article:modified_time" content="2024-09-03T14:08:30.000Z">
+<meta property="article:author" content="tammer">
+<meta property="article:tag" content="note">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dra-tammer.github.io/posts/20e13c1e.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dra-tammer.github.io/posts/20e13c1e.html","path":"posts/20e13c1e.html","title":"grpc-lea"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>grpc-lea | Toothless</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Toothless" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Toothless</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">world for tammer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">23</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grpc"><span class="nav-number">1.</span> <span class="nav-text">grpc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#protocol-buffer"><span class="nav-number">1.1.</span> <span class="nav-text">protocol buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99proto%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">编写proto文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proto%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.4.</span> <span class="nav-text">proto文件介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%BC%96%E5%86%99"><span class="nav-number">1.5.</span> <span class="nav-text">服务端编写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%BC%96%E5%86%99"><span class="nav-number">1.6.</span> <span class="nav-text">客户端编写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E5%92%8C%E8%AE%A4%E8%AF%81"><span class="nav-number">1.7.</span> <span class="nav-text">加密和认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-TLS%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="nav-number">1.8.</span> <span class="nav-text">SSL&#x2F;TLS认证方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6"><span class="nav-number">1.8.1.</span> <span class="nav-text">生成证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="nav-number">1.8.2.</span> <span class="nav-text">编写服务端代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#token%E8%AE%A4%E8%AF%81"><span class="nav-number">1.9.</span> <span class="nav-text">token认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https-ssl-tls"><span class="nav-number">1.10.</span> <span class="nav-text">https,ssl,tls</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http"><span class="nav-number">1.10.1.</span> <span class="nav-text">http</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssl-tls"><span class="nav-number">1.10.2.</span> <span class="nav-text">ssl&#x2F;tls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https-http-2-0"><span class="nav-number">1.10.3.</span> <span class="nav-text">https(http 2.0)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E7%9A%84%E7%89%88%E6%9C%AC%E5%92%8C%E5%8E%86%E5%8F%B2"><span class="nav-number">1.10.3.1.</span> <span class="nav-text">HTTP的版本和历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-%E5%92%8CTCP-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.10.3.2.</span> <span class="nav-text">HTTP 和TCP 之间的关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">1.11.</span> <span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">1.11.1.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">1.11.2.</span> <span class="nav-text">非对称加密</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tammer"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">tammer</p>
+  <div class="site-description" itemprop="description">我忘记一切悲剧，所见皆是奇迹</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Dra-Tammer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Dra-Tammer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dra-tammer.github.io/posts/20e13c1e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="tammer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Toothless">
+      <meta itemprop="description" content="我忘记一切悲剧，所见皆是奇迹">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="grpc-lea | Toothless">
+      <meta itemprop="description" content="The note to learn the basics of JRPC">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          grpc-lea
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-06 18:18:26" itemprop="dateCreated datePublished" datetime="2023-08-06T18:18:26+08:00">2023-08-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-09-03 22:08:30" itemprop="dateModified" datetime="2024-09-03T22:08:30+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AC%94%E8%AE%B0/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">The note to learn the basics of JRPC</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="grpc"><a href="#grpc" class="headerlink" title="grpc"></a>grpc</h1><p>调用方为client，被调用方为server。“服务定义”的思想，通过某种方式来描述一个服务，这种描述方式是语言无关的，在这个“服务定义”的过程中，我们描述了我们提供的服务是什么，有哪些方法可以被调用，这些方法有什么样的入参，有什么样的回参。</p>
+<p>grpc会屏蔽底层的细节，client只需要直接调用定义好的方法，就能拿到预期的返回结果。对于server端来说，还需要实现我们定义的方法。</p>
+<p>这是一种约定，约定好接口 ，server实现这个接口，client调用这个接口的代理对象，至于其他细节，交给grpc。</p>
+<p>我们在定义服务和在编码和解码的过程中，应该是做到语言无关的。</p>
+<h2 id="protocol-buffer"><a href="#protocol-buffer" class="headerlink" title="protocol buffer"></a>protocol buffer</h2><p>谷歌开源的一套成熟的数据结构序列化机制。数据传输的时候都是二进制传输，也就是字节流，适合高性能，对响应速度有要求的数据传输场景。因为profobuf是二进制数据格式，需要编码和解码，数据本身不具有可读性，因此只能反序列化之后得到真正可读的数据。</p>
+<p><strong>序列化：将数据结构或对象转换成二进制串的过程</strong></p>
+<p><strong>反序列化：将在序列化过程中产生的二进制串转换成数据结构或对象的过程</strong></p>
+<ol>
+<li>序列化之后体积相比json和xml更小，适合网络传输。</li>
+<li>支持跨平台多语言。</li>
+<li>消息格式升级和兼容性还不错。</li>
+<li>序列化反序列化速度很快。</li>
+</ol>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li><p>下载protoc</p>
+</li>
+<li><p>安装grpc的核心库，这是protocol编译器，可以生成不同语言的代码。</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get google.golang.org/grpc</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>各个语言的代码生成工具，go就是<code>protoc-gen-go</code></p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> install google.golang.org/protobuf/cmd/protoc-gen-<span class="keyword">go</span>@latest</span><br><span class="line"><span class="keyword">go</span> install google.golang.org/grpc/cmd/protoc-gen-<span class="keyword">go</span>-grpc@latest</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h2 id="编写proto文件"><a href="#编写proto文件" class="headerlink" title="编写proto文件"></a>编写proto文件</h2><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 约束</span></span><br><span class="line"><span class="comment">// 说明使用的是proto3yufa</span></span><br><span class="line">syntax = <span class="string">"proto3"</span>;</span><br><span class="line"><span class="comment">// 这部分的内容是关于最后生成的go文件是处在哪个目录哪个区中，代表在当前目录生成，service代表了生成给的go文件的报名是service</span></span><br><span class="line">option go_package = <span class="string">".;service"</span>; <span class="comment">// 两个参数，生成的目录，包名</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个服务，在这个服务中需要有一个方法，这个方法可以接受客户端的参数，再返回客户端的响应</span></span><br><span class="line"><span class="comment">// 我们定义一个service，称为sayhello，这个服务中有一个rpc方法，名为sayhello</span></span><br><span class="line"><span class="comment">// 这个方法会发送一个hellorequest，然后返回一个helloresponse</span></span><br><span class="line"></span><br><span class="line">service SayHello {</span><br><span class="line">  rpc SayHello(HelloRequest) returns (HelloResponse) {}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// message 关键字，可以理解为go中的结构体。</span></span><br><span class="line"><span class="comment">// 这里比较特别的是变量后面的”赋值“，注意，这里并不是赋值，而是定义在这个变量在这个message中的位置</span></span><br><span class="line">message HelloRequest {</span><br><span class="line">  <span class="type">string</span> requestName = <span class="number">1</span>;</span><br><span class="line">  <span class="comment">// int64 age = 2</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">message HelloResponse {</span><br><span class="line">  <span class="type">string</span> responseMsg = <span class="number">1</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这个就是一个约束，server端和client端都得有</p>
+<p>在同级目录下生成文件：两个参数，生成位置，把哪个文件生成代码，注意等号周围空格的问题</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">protoc --go_out=. hello.proto</span><br><span class="line">protoc --<span class="keyword">go</span>-grpc_out=. hello.proto</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="proto文件介绍"><a href="#proto文件介绍" class="headerlink" title="proto文件介绍"></a>proto文件介绍</h2><blockquote>
+<p>message</p>
+</blockquote>
+<p>message : protobuf 中定义一个消息类型式是通过关键字message字段指定的，消息就是要传输的数据格式的定义</p>
+<p>message 关键字类似于c++中的class，java中的class，go中的结构体</p>
+<p>在消息中承载的数据分别对应每一个字段，其中每一个字段都有一个名字和一种类型。</p>
+<p>一个proto文件中可以定义多个消息类型</p>
+<blockquote>
+<p>字段规则</p>
+</blockquote>
+<p>required:消息体中必填字段，不设置会导致编码异常，proto2中用，proto3中不用</p>
+<p>optional:可填字段，protobuf3没有required，optional等说明关键字，默认为optional</p>
+<p>repeated:可重复字段，重复的值的顺序会被保留在go中重复的会被定义为切片。</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">repeated <span class="type">string</span> name  = <span class="number">3</span>;</span><br><span class="line">[]<span class="type">string</span></span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>消息号</p>
+</blockquote>
+<p>每个字段都得有一个唯一的标识号，1到2^29-1的一个整数</p>
+<blockquote>
+<p>嵌套消息</p>
+</blockquote>
+<p>可以在其他消息类型中定义，使用消息类型</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">message PersonInfo{</span><br><span class="line">    message Person {</span><br><span class="line">        <span class="type">string</span> name = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int32</span> height = <span class="number">2</span>;</span><br><span class="line">        repeated <span class="type">int32</span> weight = <span class="number">3</span>;</span><br><span class="line">    }</span><br><span class="line">    repeated Person info = <span class="number">1</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果要在它的父消息外部重用这个消息类型，需要personinfo.person形式使用</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">message PersonMessage{</span><br><span class="line">    PersonInfo.Person info = 1;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>服务定义</p>
+</blockquote>
+<p>如果想要将消息类型用在rpc系统中，可以在.proto文件中定义一个rpc服务接口，protocol buffer编译器将会根据所选择的不同语言生成服务接口代码及存根</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service SearchService {</span><br><span class="line">    # rpc 服务函数名 （参数）返回（返回参数）</span><br><span class="line">    rpc Search(SearchRequest) returns (SearchResponse)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>定义了一个rpc服务，该方法接收searchrequest返回searchresponse</p>
+<h2 id="服务端编写"><a href="#服务端编写" class="headerlink" title="服务端编写"></a>服务端编写</h2><ul>
+<li><p>创建grpc server对象，可以理解他是server端的抽象对象。</p>
+</li>
+<li><p>将server（其包含需要被调用的服务端接口）注册到grpc server的内部注册中心。</p>
+<p>这样可以在接收到请求时，通过内部的服务发现，发现该服务端接口并转换进行逻辑处理。</p>
+</li>
+<li><p>创建listen，监听tcp端口</p>
+</li>
+<li><p>grpc server开始lis.accept，直到stop</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"google.golang.org/grpc"</span></span><br><span class="line">	pb <span class="string">"grpc_demo/server/proto"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// hello server</span></span><br><span class="line"><span class="keyword">type</span> server <span class="keyword">struct</span> {</span><br><span class="line">	pb.UnimplementedSayHelloServer</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, <span class="type">error</span>) {</span><br><span class="line">	fmt.Println(<span class="string">"requestName"</span> + req.RequestName)</span><br><span class="line">	<span class="keyword">return</span> &amp;pb.HelloResponse{ResponseMsg: <span class="string">"hello world"</span> + req.RequestName}, <span class="literal">nil</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	<span class="comment">// 开启端口</span></span><br><span class="line">	listen, _ := net.Listen(<span class="string">"tcp"</span>, <span class="string">":9090"</span>)</span><br><span class="line">	<span class="comment">// 创建grpc服务</span></span><br><span class="line">	grpc_server := grpc.NewServer()</span><br><span class="line">	<span class="comment">// 注册服务</span></span><br><span class="line">	pb.RegisterSayHelloServer(grpc_server, &amp;server{})</span><br><span class="line">	<span class="comment">// 启动服务</span></span><br><span class="line">	err := grpc_server.Serve(listen)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		fmt.Println(<span class="string">"failed to serve : %v"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="客户端编写"><a href="#客户端编写" class="headerlink" title="客户端编写"></a>客户端编写</h2><ul>
+<li>创建与给定目标（服务器）的连接交互</li>
+<li>创建server的客户端对象</li>
+<li>发送rpc请求，等待同步响应，得到回调后返回响应的结果</li>
+<li>输出响应结果</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// go语言写连接代码，一定会有这两行，连接要处理错误，要关闭</span></span><br><span class="line">conn, err := grpc.Dial(<span class="string">"127.0.0.1:9090"</span>, grpc.WithTransportCredentials(insecure.NewCredentials())) <span class="comment">// 暂时不加密和验证</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		log.Fatalf(<span class="string">"did not connect : %v"</span>, err)</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"google.golang.org/grpc"</span></span><br><span class="line">	<span class="string">"google.golang.org/grpc/credentials/insecure"</span></span><br><span class="line">	pb <span class="string">"grpc_demo/server/proto"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	conn, err := grpc.Dial(<span class="string">"127.0.0.1:9090"</span>, grpc.WithTransportCredentials(insecure.NewCredentials())) <span class="comment">// 暂时不加密</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		log.Fatalf(<span class="string">"did not connect : %v"</span>, err)</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()</span><br><span class="line">	<span class="comment">// 建立连接</span></span><br><span class="line">	client := pb.NewSayHelloClient(conn)</span><br><span class="line">	<span class="comment">// 执行rpc调用（这个方法在服务器端来实现并返回结果）</span></span><br><span class="line">	resp, _ := client.SayHello(context.Background(), &amp;pb.HelloRequest{RequestName: <span class="string">"kuangshen"</span>})</span><br><span class="line">	fmt.Println(resp.GetResponseMsg())</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="加密和认证"><a href="#加密和认证" class="headerlink" title="加密和认证"></a>加密和认证</h2><p>grpc是一个典型的C/S模型，需要开发客户端和服务端，客户端和服务端需要达成协议，使用某一个确实的传输协议来传输数据。grpc通常默认是使用protobuf来作为传输协议，当然可以其他自定义的。</p>
+<p>那么，客户端与服务端要通信之前，客户端如何知道自己的数据是发给哪一个明确的服务端呢?反过来，服务端是不是也需要有一种方式来弄个清楚自己的数据要返回给谁呢?</p>
+<p>那么就不得不提gRPC的认证</p>
+<p>此处说到的认证，不是用户的身份认证，而是指多个server 和多个client之间，如何识别对方是谁，并且可以安全的进行数据传输</p>
+<ul>
+<li><font style="color:red;">SSL / TLS认证方式(采用http2协议)</font></li>
+<li><font style="color:red;">基于Token的认证方式(基于安全连接).</font></li>
+<li>不采用任何措施的连接，这是不安全的连接(默认采用http1)</li>
+<li>自定义的身份认证</li>
+</ul>
+<p>客户端和服务端之间调用，我们可以通过加入证书的方式，实现调用的安全性</p>
+<p>TLS (Transport Laver Security，安全传输层) , TLS是建立在传输层TCP协议之上的协议，服务于应用层，它的前身是SSL(Secure Socket Layer安全套接字层)，<code>https中的s就是ssl的意思</code> 它实现了将应用层的报文进行加密后再交由TCP进行传输的功能。</p>
+<p>TLS协议主要解决如下三个网络安全问题</p>
+<ol>
+<li>保密(message privacy)，保密通过加密encryption实现，所有信息都加密传输，第三方无法嗅探:2)完整性(messageintegrity)，通过MAC校验机制，一旦被算改，通信双方会立刻发现:</li>
+<li>完整性(message integrity)，通过MAC校验机制，一旦被篡改，通信双方会立刻发现;</li>
+<li>认证(mutualauthentication)，双方认证,双方都可以配备证书，防止身份被冒充;</li>
+</ol>
+<blockquote>
+<p>生产环境可以购买证书或者使用一些平台发放的免费证书     <code>宝塔等生成证书</code>   <code>nginx</code></p>
+</blockquote>
+<ul>
+<li>key:服务器上的私钥文件，用于对发送给客户端数据的加密，以及对从客户端接收到数据的解密</li>
+<li>csr:证书签名请求文件，用于提交给证书颁发机构(CA)对证书签名</li>
+<li>crt:由证书颁发机构(CA)签名后的证书，或者是开发者自签名的证书，包含证书持有人的信息，持有人的公钥，以及签署者的签名等信息.</li>
+<li>pem:是基于Base64编码的证书格式，扩展名包括PEM、CRT和CER。</li>
+</ul>
+<h2 id="SSL-TLS认证方式"><a href="#SSL-TLS认证方式" class="headerlink" title="SSL/TLS认证方式"></a>SSL/TLS认证方式</h2><p>通过<code>openssl</code>生成证书和私钥</p>
+<ol>
+<li>下载</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://slproweb.com/products/Win32OpenSSL.html">Win32/Win64 OpenSSL Installer for Windows - Shining Light Productions (slproweb.com)</a></p>
+</blockquote>
+<ol>
+<li>配置环境变量</li>
+<li>命令行测试</li>
+</ol>
+<h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><h3 id="编写服务端代码"><a href="#编写服务端代码" class="headerlink" title="编写服务端代码"></a>编写服务端代码</h3><h2 id="token认证"><a href="#token认证" class="headerlink" title="token认证"></a>token认证</h2><p>这个接口需要客户端实现</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> PerRPCCredentials <span class="keyword">interface</span> {</span><br><span class="line">    GetRequestMetadata(ctx context.Context,uri ...<span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>,<span class="type">error</span>)</span><br><span class="line">    RequireTransportSecurity() <span class="type">bool</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>第一个方法是获取元数据信息，也就是客户端提供的key，value对，context用于控制超时和取消，uri是请求入口的uri</p>
+<p>第二个方法的作用是否需要基于tls认证进行安全传输，如果返回值是true，则必须加上tls验证，返回值是false不用 </p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ClientTokenAuth)</span></span> GetRequestMetadata(ctx context.Context, uri ...<span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">error</span>) {</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>{</span><br><span class="line">		<span class="string">"appId"</span>:  <span class="string">"tammerdemo"</span>,</span><br><span class="line">		<span class="string">"appKey"</span>: <span class="string">"123123"</span>,</span><br><span class="line">	}, <span class="literal">nil</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ClientTokenAuth)</span></span> RequireTransportSecurity() <span class="type">bool</span> {</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {}</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 业务</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, <span class="type">error</span>) {</span><br><span class="line">	<span class="comment">// 获取元数据的信息</span></span><br><span class="line">	md, ok := metadata.FromIncomingContext(ctx)</span><br><span class="line">	<span class="keyword">if</span> !ok {</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">"未传输token"</span>)</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">var</span> appId <span class="type">string</span></span><br><span class="line">	<span class="keyword">var</span> appKey <span class="type">string</span></span><br><span class="line">	<span class="keyword">if</span> v, ok := md[<span class="string">"appid"</span>]; ok {</span><br><span class="line">		appId = v[<span class="number">0</span>]</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> v, ok := md[<span class="string">"appkey"</span>]; ok {</span><br><span class="line">		appKey = v[<span class="number">0</span>]</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 校验的过程</span></span><br><span class="line">	<span class="keyword">if</span> appId != <span class="string">"tammerdemo"</span> || appKey != <span class="string">"123123"</span> {</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">"token不正确"</span>)</span><br><span class="line">	}</span><br><span class="line">	fmt.Println(appId, appKey)</span><br><span class="line">	fmt.Println(<span class="string">"requestName"</span> + req.RequestName)</span><br><span class="line">	<span class="keyword">return</span> &amp;pb.HelloResponse{ResponseMsg: <span class="string">"hello world"</span> + req.RequestName}, <span class="literal">nil</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>gRPC将各种认证方式浓缩统一到一个凭证(credentials) 上，可以单独使用一种凭证，比如只使用TLS凭证或者只使用自定义证，也可以务种凭证组合，gRPC提供统一的API验证机制，使研发人员使用方便，这也是gRPC设计的巧妙之处</p>
+<h2 id="https-ssl-tls"><a href="#https-ssl-tls" class="headerlink" title="https,ssl,tls"></a>https,ssl,tls</h2><h3 id="http"><a href="#http" class="headerlink" title="http"></a>http</h3><p>首先，HTTP 是一个网络协议，是专门用来帮你传输 Web 内容，HTTP协议大部分网站都是通过 HTTP 协来传输 Web 页面、以及 Web 页面上包含的各种东东(图片，CSS 样式、JS 脚本)。</p>
+<h3 id="ssl-tls"><a href="#ssl-tls" class="headerlink" title="ssl/tls"></a>ssl/tls</h3><p>SSL是洋文“Secure Sockets layer”的写，中文叫做“安全套接层”。它是在上世纪90年代中期，由网景公司设计的。(顺便插一句，网景公司不光发明了 SSL，还发明了很多Web的基础设施-比如“CSS样式表”和“JS脚本”)</p>
+<p>为啥要发明 SSL 这个协议捍因为原先与联网上使用的 HTTP 协议是明文的，存在很多缺点—传输内容会被偷窥（嗅探）和篡改。发明 SSL 协议，就是为了解这些问题。</p>
+<p>到了1999年，SSL 因为应用广泛，已经成为与联网上的事实标准IETF 就在那年把 SSL 标准化。标准化之后的名称政为 TLS(是“Transport Layer Security”的写)，中文叫做“传输层安全协议”</p>
+<p>很多相关的文章都把这两者并列称呼(SSL/TLS)，因为这两者可以视作同一个东西的不同阶段。</p>
+<h3 id="https-http-2-0"><a href="#https-http-2-0" class="headerlink" title="https(http 2.0)"></a>https(http 2.0)</h3><p>更安全的http传输</p>
+<p>解释完 HTTP  SSL/TLS，现在就可以来解释 HTTPS 。咱们通所说的 HTTPS 议，说了就是”HTTP 协”和SSLLS 协”的组合。</p>
+<p>你可以把 HTTPS大理解为-“HTTPover SSL”或“HTTP over LS” (反正SSL和TLS 差不多)。</p>
+<p>作为背景知识介绍，还需要再稍微谈一下 HTTP 协议本身的特点。HTTP 本身有很多特点，考虑到篇幅有限，只谈那些和 HTTPS 相关的特点</p>
+<h4 id="HTTP的版本和历史"><a href="#HTTP的版本和历史" class="headerlink" title="HTTP的版本和历史"></a>HTTP的版本和历史</h4><p>如今咱们用的 HTTP 协议，版本号是 1.1(也就是 HTTP 1.1) 。这 1.1 版本是1995年开始起草的技术文档是 RFC2068)，并在1999年正式发布技术文档是RFC2616)。<br>在1.1之前，还有曾经出现过两个版本“0.9 和1.0”，其中的HTTP 0.9[没有]被广泛使用，而HTTP1.0 被广泛使用过</p>
+<h4 id="HTTP-和TCP-之间的关系"><a href="#HTTP-和TCP-之间的关系" class="headerlink" title="HTTP 和TCP 之间的关系"></a>HTTP 和TCP 之间的关系</h4><p>简单地说，TCP协议是HTTP 协议的基石-HTTP 协议需要依靠TCP 协议来传输数据</p>
+<p>在网络分层模型中，TCP被称为“传输层协议”，而HTTP被称为“应用层协议“</p>
+<p>有很多常见的应用层协议是以TCP 为基础的，比如“FTP、SMTP、POP、IMAP”等CP 被称为”面向连接”的传输层协议、关于它的具体细节，俺就不展开了(否则幅又失控了)，你只需知道:传输层丰要有两协议、分别是 TCP 和 UIDP.TCP比UDP更可靠。</p>
+<p>你可以把 TCP 协议想象成某个水管，发送端这头进水，接收端那头就出水。并且 TCP 协议能够确保，先发送的数据先到达(与之相反，UDP不保证这点)。</p>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>所谓的“对称加密技术”意思就是说:“加密”和“解密”使用[相同的密钥。</p>
+<p>这个比较好理解。就好比你用 7zip 或 WinRAR 创建一个带密码(口令)的加密压缩包。</p>
+<p>当你下次要把这个压缩文件解开的时候，你需要输入[同样的]密码。E这个例子中，密码/口令就如同刚才说的“密钥”</p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>所谓的“非对称加密技术”“加密”和“解密”，意思就是说:使用[不同]密钥。</p>
+<p>这玩意儿比较难理解，也比较难想到。当年“非对称加密”的发明，还被誉为“密码学”历史上的一次革命。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"><i class="fa fa-tag"></i> 技术</a>
+              <a href="/tags/go/" rel="tag"><i class="fa fa-tag"></i> go</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/98e8f0c.html" rel="prev" title="Internet_Problem">
+                  <i class="fa fa-angle-left"></i> Internet_Problem
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/dc9cb9f1.html" rel="next" title="Matlab">
+                  Matlab <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">tammer</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">54k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:15</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+    <span id="timeDate">载入天数...</span>
+
+    <script>
+    var now = new Date();
+
+    function createtime() {
+        //此处修改你的建站时间或者网站上线时间
+        var create_time = '<%- theme.running_time.create_time %>';
+        var grt = new Date("08/05/2023 12:00:00");
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("timeDate").innerHTML = "This world has been running for " + dnum + " 天 " + hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+
+    }
+    setInterval("createtime()", 250);
+    </script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"Dra-Tammer/blog_comments_db","issue_term":"title","theme":"github-dark"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
