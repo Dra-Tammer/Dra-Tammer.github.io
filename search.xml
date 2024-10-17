@@ -2759,4 +2759,80 @@
         <tag>算法</tag>
       </tags>
   </entry>
+  <entry>
+    <title>machine-learning</title>
+    <url>/posts/da37838d.html</url>
+    <content><![CDATA[<h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><blockquote>
+<p>计算机无需明确编程即可学习的研究领域</p>
+</blockquote>
+<h2 id="人工智能的术语"><a href="#人工智能的术语" class="headerlink" title="人工智能的术语"></a>人工智能的术语</h2><ul>
+<li>训练集(training set)：用于训练模型的数据集</li>
+<li>输入变量/输入特征(input)：x</li>
+<li>目标变量/输出变量：y</li>
+<li>预测的目标变量：y-hat</li>
+<li>训练数据的总数：m</li>
+<li>单个训练示例：(x, y)</li>
+<li>第几个训练数据：(x<sup>(i)</sup>, y<sup>(i)</sup>)</li>
+</ul>
+<h2 id="监督学习-supervised-learning"><a href="#监督学习-supervised-learning" class="headerlink" title="监督学习(supervised learning)"></a>监督学习(supervised learning)</h2><blockquote>
+<p>当下创造经济价值最多的机器学习形式是监督学习</p>
+</blockquote>
+<p>在监督学习中，数据同时带有输入x和输入标签y</p>
+<p>学习预测输入、输出或者X到Y的映射</p>
+<h3 id="回归算法-regression"><a href="#回归算法-regression" class="headerlink" title="回归算法(regression)"></a>回归算法(regression)</h3><p>学习预测数字，无限多的可能数</p>
+<h3 id="分类算法-classification"><a href="#分类算法-classification" class="headerlink" title="分类算法(classification)"></a>分类算法(classification)</h3><p>输出的可能性是有限的，一组有限的输出类别，通过拟合算法找到一条分界线</p>
+<h2 id="无监督学习-unsupervised-learning"><a href="#无监督学习-unsupervised-learning" class="headerlink" title="无监督学习(unsupervised learning)"></a>无监督学习(unsupervised learning)</h2><blockquote>
+<p>最广泛使用的机器学习形式是无监督学习</p>
+</blockquote>
+<p>不试图监督算法为了给每个输入提供一些正确的答案，相反，我们要求我们的空间自己弄清楚什么是有趣的，或者这个数据中可能有什么模式或者结构。人们没有提前为算法给出示例的正确答案。	</p>
+<p>在无监督学习中，数据仅带有输入x而没有输出标签y，而且算法必须发现数据中的某种结构或者某种模式或者某些有趣的东西</p>
+<h3 id="聚类算法-clustering"><a href="#聚类算法-clustering" class="headerlink" title="聚类算法(clustering)"></a>聚类算法(clustering)</h3><p>就是一种无监督学习，将相似的数据点分组</p>
+<h3 id="异常检测-anomaly-detection"><a href="#异常检测-anomaly-detection" class="headerlink" title="异常检测(anomaly detection)"></a>异常检测(anomaly detection)</h3><p>检测异常事件</p>
+<h3 id="降维-dimensionality-reduction"><a href="#降维-dimensionality-reduction" class="headerlink" title="降维(dimensionality reduction)"></a>降维(dimensionality reduction)</h3><p>将一个大的数据集，压缩到一个小得多的数据集，而丢失尽可能少的信息</p>
+<h2 id="jupyter-notebook"><a href="#jupyter-notebook" class="headerlink" title="jupyter notebook"></a>jupyter notebook</h2><p>实验环境</p>
+<h2 id="线性回归模型-linear-regression"><a href="#线性回归模型-linear-regression" class="headerlink" title="线性回归模型(linear regression)"></a>线性回归模型(linear regression)</h2><p>将一条直线拟合到数据中，预测数字的监督学习，只有一个输入特征或者说变量</p>
+<p>具有一个输入变量的线性模型，另一个名称：单变量线性回归</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p><code>feature --&gt; model --&gt; prediction</code></p>
+<p><code>x --&gt; f --&gt; y-hat (estimated y)</code></p>
+<h3 id="f-model"><a href="#f-model" class="headerlink" title="f/model"></a>f/model</h3><p>f<sub>w, b</sub> = wx + b</p>
+<p><code>f(x) = wx + b</code></p>
+<h2 id="代价函数-cost-function"><a href="#代价函数-cost-function" class="headerlink" title="代价函数(cost function)"></a>代价函数(cost function)</h2><blockquote>
+<p>衡量拟合程度</p>
+</blockquote>
+<p>w, b是模型的参数，在机器学习w, b是咱可以调整的变量，以改进模型，或者称为系数或者权重</p>
+<p>为了构建一个不会随着训练集大小变大而自动变大的成本函数，我们将计算平均平方误差而不是总平方误差，按照惯例，人们使用的成本函数实际上是除以2乘以m，额外除以2只是为了让我们后面的一些计算看起来更整洁，但是无论是否包含此除以2，成本函数仍然有效。</p>
+<p>线性回归问题最常用的代价函数就是<code>平方误差成本函数</code>，训练的目的是使成本函数尽可能小，找到j最小的时候的w, b的值</p>
+<p>$$<br>J(w,b)=\frac{1}{2m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})^2<br>$$</p>
+<h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>梯度下降算法是一种可以用于求任何代价函数的最小值的算法，不仅仅是线性回归的代价函数，在w，b—上最小化代价函数</p>
+<p>从对参数的猜测开始，不断变化w，b的值去降低代价函数的值，直到我们得到最小值或者接近最小值，有时候代价函数的最小值可能存在不止一个，神经网络的代价函数的图就是上下起伏的，有多个谷底</p>
+<p>在山峰上的时候如果想要去到谷底，环顾一周，看哪能最速下坡，一步一步重复，就到谷底。</p>
+<p>可以通过选择开始的w，b值，<code>设置不同的起点，会进入一个完全不同的山谷，进入局部最小值</code>。</p>
+<h3 id="实现梯度下降算法"><a href="#实现梯度下降算法" class="headerlink" title="实现梯度下降算法"></a>实现梯度下降算法</h3><p>$$<br>w=w-\alpha\frac{\partial}{\partial w}J(w,b)<br>\<br>b=b-\alpha\frac{\partial}{\partial b}J(w,b)<br>$$</p>
+<p>在程序中<code>=</code>是赋值的意思，而不是数学符号中的真值断言，如果像完成真值断言的功能使用<code>==</code>，断言两个值是否相等</p>
+<h4 id="Alpha"><a href="#Alpha" class="headerlink" title="Alpha"></a>Alpha</h4><p>学习率</p>
+<p>0~1之间的一个小的正数，控制下坡的步幅，控制更新时的步长</p>
+<h4 id="j的导数项"><a href="#j的导数项" class="headerlink" title="j的导数项"></a>j的导数项</h4><p>朝哪个方向迈出脚步</p>
+<h3 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h3><p>设定一个开始值，不断执行这个更新步骤，直到算法收敛，也就是说走到谷底，或者说十分接近谷底，不再随着采取的每一个额外步骤而发生很大变化</p>
+<h3 id="正确同时更新"><a href="#正确同时更新" class="headerlink" title="正确同时更新"></a>正确同时更新</h3><p>$$<br>tmp_w=w-\alpha\frac{\partial}{\partial w}J(w,b)\<br>tmp_b=b-\alpha\frac{\partial}{\partial b}J(w,b)\<br>w=tmp_w<br>b=tmp_b<br>$$</p>
+<h3 id="学习率的选择"><a href="#学习率的选择" class="headerlink" title="学习率的选择"></a>学习率的选择</h3><blockquote>
+<p>影响效率</p>
+</blockquote>
+<p>学习率太小，每次迈出的步子，收敛的速度会很慢，需要很多步骤</p>
+<p>学习率太大，每次迈出的步子太大，有可能会错i过适合收敛的位置，最后无法收敛甚至发散，离最小值越来远<br>$$<br>w=w-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})x^{(i)}\<br>b=b-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})<br>$$<br>线性回归只有一个最小值，因为他是一个凸函数</p>
+<p>这种梯度下降叫做批量梯度下降(bashed grading descent)，在梯度下降的每一步中我们都在查看所有的训练示例，而不仅仅是训练数据的一个子集，每次计算的时候都看了整个训练集</p>
+<p>也有使用子集进行计算，我们选择批量梯度下降算法进行线性回归</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>机器学习</category>
+        <category>人工智能</category>
+        <category>lea</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>人工智能</tag>
+        <tag>机器学习</tag>
+        <tag>lea</tag>
+      </tags>
+  </entry>
 </search>
