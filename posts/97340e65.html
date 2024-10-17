@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="学习pytorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch_lea">
+<meta property="og:url" content="https://dra-tammer.github.io/posts/97340e65.html">
+<meta property="og:site_name" content="Toothless">
+<meta property="og:description" content="学习pytorch">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-17T08:19:14.000Z">
+<meta property="article:modified_time" content="2024-10-17T08:20:24.036Z">
+<meta property="article:author" content="tammer">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dra-tammer.github.io/posts/97340e65.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dra-tammer.github.io/posts/97340e65.html","path":"posts/97340e65.html","title":"pytorch_lea"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pytorch_lea | Toothless</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Toothless" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Toothless</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">world for tammer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">29</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pytoch"><span class="nav-number">1.</span> <span class="nav-text">pytoch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%93%E4%B8%8B%E6%9C%AA%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">当下未成功解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-clone"><span class="nav-number">1.1.1.</span> <span class="nav-text">ssh clone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tensorboard"><span class="nav-number">1.1.2.</span> <span class="nav-text">tensorboard</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E5%9C%B0%E7%AE%A1%E7%90%86%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">有序地管理环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pip%E6%8D%A2%E6%BA%90"><span class="nav-number">1.3.</span> <span class="nav-text">pip换源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conda%E6%8D%A2%E6%BA%90"><span class="nav-number">1.4.</span> <span class="nav-text">conda换源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%86%85%E5%AE%89%E8%A3%85pytoch"><span class="nav-number">1.5.</span> <span class="nav-text">环境内安装pytoch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%BE%E5%8D%A1%E6%94%AF%E6%8C%81%E7%9A%84cuda%E7%89%88%E6%9C%AC"><span class="nav-number">1.6.</span> <span class="nav-text">查看显卡支持的cuda版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jupyter"><span class="nav-number">1.7.</span> <span class="nav-text">jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E7%8E%AF%E5%A2%83"><span class="nav-number">1.8.</span> <span class="nav-text">三种编写代码的环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#py%E6%96%87%E4%BB%B6"><span class="nav-number">1.8.1.</span> <span class="nav-text">py文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jupyter-1"><span class="nav-number">1.8.2.</span> <span class="nav-text">jupyter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-console"><span class="nav-number">1.8.3.</span> <span class="nav-text">python console</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E5%A4%A7%E6%B3%95%E5%AE%9D%E5%87%BD%E6%95%B0"><span class="nav-number">1.9.</span> <span class="nav-text">两大法宝函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dir"><span class="nav-number">1.9.1.</span> <span class="nav-text">dir()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#help"><span class="nav-number">1.9.2.</span> <span class="nav-text">help()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">1.10.</span> <span class="nav-text">pytorch加载数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dateset"><span class="nav-number">1.10.1.</span> <span class="nav-text">Dateset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dateloader"><span class="nav-number">1.10.2.</span> <span class="nav-text">Dateloader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torchvision"><span class="nav-number">1.11.</span> <span class="nav-text">torchvision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#opencv"><span class="nav-number">1.12.</span> <span class="nav-text">opencv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E4%B8%AD%E7%9A%84%E8%BD%AC%E8%AF%91"><span class="nav-number">1.13.</span> <span class="nav-text">windows中的转译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorboard%E7%9A%84%E4%BD%BF%E7%94%A8-%E6%9C%AA%E6%88%90%E5%8A%9F"><span class="nav-number">1.14.</span> <span class="nav-text">tensorboard的使用(未成功)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.15.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NumPy"><span class="nav-number">1.16.</span> <span class="nav-text">NumPy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensor"><span class="nav-number">1.17.</span> <span class="nav-text">tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97"><span class="nav-number">1.18.</span> <span class="nav-text">并行计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8CUDA%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83"><span class="nav-number">1.19.</span> <span class="nav-text">使用CUDA加速训练</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tammer"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">tammer</p>
+  <div class="site-description" itemprop="description">我忘记一切悲剧，所见皆是奇迹</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Dra-Tammer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Dra-Tammer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dra-tammer.github.io/posts/97340e65.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="tammer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Toothless">
+      <meta itemprop="description" content="我忘记一切悲剧，所见皆是奇迹">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="pytorch_lea | Toothless">
+      <meta itemprop="description" content="学习pytorch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pytorch_lea
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-10-17 16:19:14 / 修改时间：16:20:24" itemprop="dateCreated datePublished" datetime="2024-10-17T16:19:14+08:00">2024-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/" itemprop="url" rel="index"><span itemprop="name">pytorch</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">学习pytorch</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="pytoch"><a href="#pytoch" class="headerlink" title="pytoch"></a>pytoch</h1><h2 id="当下未成功解决的问题"><a href="#当下未成功解决的问题" class="headerlink" title="当下未成功解决的问题"></a>当下未成功解决的问题</h2><h3 id="ssh-clone"><a href="#ssh-clone" class="headerlink" title="ssh clone"></a>ssh clone</h3><blockquote>
+<p>太看脸了，有时候会成功，有时候会失败，跟配置代理关联不大，仅成功过两次</p>
+</blockquote>
+<p>git clone无法使用ssh，但是https正常clone，代码push也是正常提交，ssh连接也建立成功</p>
+<h3 id="tensorboard"><a href="#tensorboard" class="headerlink" title="tensorboard"></a>tensorboard</h3><p>下载tensorboard之后会一直报错，说是找不到相应的库，按照需要的依赖一个一个安装之后还是报错，程序能够运行，能够生成logs文件，但是tensorboard显示图像出现问题</p>
+<h2 id="有序地管理环境"><a href="#有序地管理环境" class="headerlink" title="有序地管理环境"></a>有序地管理环境</h2><blockquote>
+<p>conda可以创建一个盒子，里面的环境配置独立</p>
+</blockquote>
+<p>创建环境</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pytorch python=<span class="number">3.8</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>n是name的意思，后面输入环境的名称</p>
+<p>激活环境</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate pytorch</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看工具包</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="built_in">list</span> | conda <span class="built_in">list</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>删除环境及其依赖</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove -n <span class="string">"envname"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>清理环境，释放磁盘空间</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all</span><br></pre></td></tr></tbody></table></figure>
+
+<p>conda clean –all操作不会直接影响已经创建的虚拟环境。该命令主要用于清理conda缓存目录中的下载的包文件、索引文件和不必要的缓存文件，以释放磁盘空间。</p>
+<p>已经创建的虚拟环境包含在磁盘上的特定目录中，而conda clean –all操作不会直接删除这些虚拟环境目录或其中的包。这意味着你的虚拟环境和其中已安装的包将保持不变。</p>
+<p>然而，清理操作可能会影响你的使用体验。如果你清理了缓存文件和索引文件，那么在以后的包安装和更新过程中，conda可能会重新下载这些文件，可能会稍微增加一些下载时间。</p>
+<p>总之，conda clean –all操作主要针对conda缓存目录中的文件，不会直接影响已经创建的虚拟环境和其中的包。如果你只关注已经创建的虚拟环境，可以放心使用该命令来释放磁盘空间。</p>
+<h2 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h2><p>Windows：</p>
+<p>文件管理器文件路径地址栏敲：<code>%APPDATA%</code> 回车，快速进入 <code>C:\Users\电脑用户\AppData\Roaming</code> 文件夹中 2、新建 pip 文件夹并在文件夹中新建 <code>pip.ini</code> 配置文件 3、我们需要在<code>pip.ini</code> 配置文件内容，我们可以选择使用记事本打开，输入以下内容，并按下ctrl+s保存，在这里我们使用的是豆瓣源为例子。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">[install]</span><br><span class="line">use-mirrors =true</span><br><span class="line">trusted-host = https://pypi.tuna.tsinghua.edu.cn</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看 镜像地址：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 config list   </span><br><span class="line">global.index-url='https://pypi.tuna.tsinghua.edu.cn/simple'</span><br><span class="line">install.trusted-host='https://pypi.tuna.tsinghua.edu.cn'</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="conda换源"><a href="#conda换源" class="headerlink" title="conda换源"></a>conda换源</h2><p>Windows系统：</p>
+<p>TUNA 提供了 Anaconda 仓库与第三方源的镜像，各系统都可以通过修改用户目录下的 <code>.condarc</code> 文件。Windows 用户无法直接创建名为 <code>.condarc</code> 的文件，可先执行<code>conda config --set show_channel_urls yes</code>生成该文件之后再修改。</p>
+<p>完成这一步后，我们需要修改<code>C:\Users\User_name\.condarc</code>这个文件，打开后将文件里原始内容删除，将下面的内容复制进去并保存。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这一步完成后，我们需要打开<code>Anaconda Prompt</code> 运行 <code>conda clean -i</code> 清除索引缓存，保证用的是镜像站提供的索引。</p>
+<h2 id="环境内安装pytoch"><a href="#环境内安装pytoch" class="headerlink" title="环境内安装pytoch"></a>环境内安装pytoch</h2><blockquote>
+<p><strong>NOTE:</strong> Latest PyTorch requires Python 3.8 or later.</p>
+</blockquote>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio pytorch-cuda=<span class="number">12.4</span> -c pytorch -c nvidia</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="查看显卡支持的cuda版本"><a href="#查看显卡支持的cuda版本" class="headerlink" title="查看显卡支持的cuda版本"></a>查看显卡支持的cuda版本</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="jupyter"><a href="#jupyter" class="headerlink" title="jupyter"></a>jupyter</h2><p>安装的时候安装在了base环境下</p>
+<p>在pytorch环境中安装jupyter</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
+
+<p>命令行下启动jupyter</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
+
+<p>打开D盘下的工作目录，先切换，再打开jupyter</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(pytorch) C:\Users\tammer&gt;D:</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="三种编写代码的环境"><a href="#三种编写代码的环境" class="headerlink" title="三种编写代码的环境"></a>三种编写代码的环境</h2><h3 id="py文件"><a href="#py文件" class="headerlink" title="py文件"></a>py文件</h3><p>代码是以块为一个整体的话，py中代码出现问题就要从头开始执行</p>
+<blockquote>
+<p>通用，传播方便，适用于大型项目</p>
+<p>需要从头运行</p>
+</blockquote>
+<h3 id="jupyter-1"><a href="#jupyter-1" class="headerlink" title="jupyter"></a>jupyter</h3><p>人为地分块，也就是以任意块进行运行的</p>
+<blockquote>
+<p>利于代码阅读及修改</p>
+<p>环境需要配置</p>
+</blockquote>
+<h3 id="python-console"><a href="#python-console" class="headerlink" title="python console"></a>python console</h3><p>以每一行为块或者任意块执行的，一行出现问题，解决之后继续执行</p>
+<blockquote>
+<p>显示每个变量属性</p>
+<p>不利于代码阅读及修改</p>
+</blockquote>
+<h2 id="两大法宝函数"><a href="#两大法宝函数" class="headerlink" title="两大法宝函数"></a>两大法宝函数</h2><h3 id="dir"><a href="#dir" class="headerlink" title="dir()"></a>dir()</h3><p>工具箱以及工具箱中的分隔区有什么东西</p>
+<p>也就是看方法里面有什么可以调用的函数，或者理解说查看这个对象里面的内容，查看这个分隔区中还有没有其他的分隔区</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">torch.cuda.is_available()</span><br><span class="line">Out[<span class="number">4</span>]: <span class="literal">True</span></span><br><span class="line"><span class="built_in">dir</span>(torch)</span><br><span class="line">Out[<span class="number">5</span>]: </span><br><span class="line">[<span class="string">'AVG'</span>,</span><br><span class="line"> <span class="string">'AggregationType'</span>,</span><br><span class="line"> <span class="string">'AliasDb'</span>,</span><br><span class="line"> <span class="string">'Any'</span>,......]</span><br><span class="line"><span class="built_in">dir</span>(torch.cuda.is_available)</span><br><span class="line">Out[<span class="number">6</span>]: </span><br><span class="line">[<span class="string">'__annotations__'</span>,</span><br><span class="line">......</span><br><span class="line"> <span class="string">'__subclasshook__'</span>]</span><br><span class="line"> <span class="comment"># 下划线就是不可修改的说明这个is_available不再是一个分隔区，而是一个函数，即可使用help查看使用方法</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="help"><a href="#help" class="headerlink" title="help()"></a>help()</h3><p>知道每个工具是如何使用的，工具的使用方法</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">help</span>(torch.cuda.is_available)</span><br><span class="line">Help on function is_available <span class="keyword">in</span> module torch.cuda:</span><br><span class="line">is_available() -&gt; <span class="built_in">bool</span></span><br><span class="line">    Return a <span class="built_in">bool</span> indicating <span class="keyword">if</span> CUDA <span class="keyword">is</span> currently available.</span><br><span class="line"><span class="comment"># 官方解释的函数用法</span></span><br><span class="line">或者</span><br><span class="line">Dataset??</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="pytorch加载数据"><a href="#pytorch加载数据" class="headerlink" title="pytorch加载数据"></a>pytorch加载数据</h2><p>PyTorch数据读入是通过Dataset+DataLoader的方式完成的，Dataset定义好数据的格式和数据变换形式，DataLoader用iterative的方式不断读入批次数据。</p>
+<h3 id="Dateset"><a href="#Dateset" class="headerlink" title="Dateset"></a>Dateset</h3><p>提供一种方式去获取数据及其label，还能进行编号</p>
+<ul>
+<li>如何获取每一个数据及其label</li>
+<li>告诉我们总共有多少个数据</li>
+</ul>
+<p>可以定义自己的Dataset类来实现灵活的数据读取，定义的类需要继承PyTorch自身的Dataset类。主要包含三个函数：</p>
+<ul>
+<li><code>__init__</code>: 用于向类中传入外部参数，同时定义样本集</li>
+<li><code>__getitem__</code>: 用于逐个读取样本集合中的元素，可以进行一定的变换，并将返回训练/验证所需的数据</li>
+<li><code>__len__</code>: 用于返回数据集的样本数</li>
+</ul>
+<h3 id="Dateloader"><a href="#Dateloader" class="headerlink" title="Dateloader"></a>Dateloader</h3><p>对数据进行打包，为后面的网络提供不同的数据形式</p>
+<p>构建好Dataset后，就可以使用DataLoader来按批次读入数据了，实现代码如下：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, num_workers=<span class="number">4</span>, shuffle=<span class="literal">True</span>, drop_last=<span class="literal">True</span>)</span><br><span class="line">val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, num_workers=<span class="number">4</span>, shuffle=<span class="literal">False</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>其中:</p>
+<ul>
+<li>batch_size：样本是按“批”读入的，batch_size就是每次读入的样本数</li>
+<li>num_workers：有多少个进程用于读取数据，Windows下该参数设置为0，Linux下常见的为4或者8，根据自己的电脑配置来设置</li>
+<li>shuffle：是否将读入的数据打乱，一般在训练集中设置为True，验证集中设置为False</li>
+<li>drop_last：对于样本最后一部分没有达到批次数的样本，使其不再参与训练</li>
+</ul>
+<p>这里可以看一下我们的加载的数据。PyTorch中的DataLoader的读取可以使用next和iter来完成</p>
+<h2 id="torchvision"><a href="#torchvision" class="headerlink" title="torchvision"></a>torchvision</h2><p>target有时候就是label的编号</p>
+<blockquote>
+<p>The <a target="_blank" rel="noopener" href="https://pytorch.org/vision/stable/index.html#module-torchvision"><code>torchvision</code></a> package consists of popular datasets, model architectures, and common image transformations for computer vision.</p>
+</blockquote>
+<h2 id="opencv"><a href="#opencv" class="headerlink" title="opencv"></a>opencv</h2><p>OpenCV可以用于处理数字图像和视频数据，其功能包括图像和视频的读取、写入、显示、变换、滤波、特征提取、目标检测、人脸识别、物体跟踪、相机标定、三维重建、机器学习等。</p>
+<p>当今，计算机视觉在各种应用领域中都扮演着重要的角色，如自动驾驶、智能家居、医学影像、机器人视觉等，而OpenCV则作为计算机视觉领域的重要工具之一，为这些应用领域提供了丰富的功能和算法支持。</p>
+<p>OpenCV最初由Intel开发，现在已经成为了一个开源项目，其源代码可以免费获取和使用。OpenCV提供了许多计算机视觉中常用的算法和工具，例如：</p>
+<ul>
+<li><p>读取和保存图像和视频数据</p>
+</li>
+<li><p>图像和视频的显示、缩放、剪切和旋转等操作</p>
+</li>
+<li><p>直方图均衡化、图像滤波和形态学操作等图像处理技术</p>
+</li>
+<li><p>特征提取和描述符匹配算法，如SIFT和SURF等</p>
+</li>
+<li><p>目标检测和跟踪算法，如Haar Cascade和MeanShift等</p>
+</li>
+<li><p>人脸检测和识别算法，如LBPH和FisherFace等</p>
+</li>
+<li><p>相机标定和三维重建算法，如SfM和PnP等</p>
+</li>
+<li><p>机器学习算法，如SVM、KNN和随机森林等</p>
+</li>
+</ul>
+<p>除了以上的功能，OpenCV还有一个重要的特点就是跨平台性，可以在Windows、Linux、macOS等操作系统上运行，并且支持多种编程语言，如C++、Python和Java等。</p>
+<p>总之，OpenCV作为一个强大的计算机视觉库，在实现计算机视觉应用的过程中，可以节省开发者大量的时间和精力，提高开发效率和准确性，因此受到了广大开发者的欢迎和使用。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="windows中的转译"><a href="#windows中的转译" class="headerlink" title="windows中的转译"></a>windows中的转译</h2><blockquote>
+<p>hymenoptera_data/train/ants/0013035.jpg</p>
+</blockquote>
+<blockquote>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img_path = "hymenoptera_data\\trainants\\0013035.jpg"</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<h2 id="tensorboard的使用-未成功"><a href="#tensorboard的使用-未成功" class="headerlink" title="tensorboard的使用(未成功)"></a>tensorboard的使用(未成功)</h2><p>它提供机器学习实验所需的可视化功能和工具</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br></pre></td></tr></tbody></table></figure>
+
+<p>查看log</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=logs --port=<span class="number">6007</span></span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade tensorboard</span><br><span class="line"><span class="comment"># 有时候版本不兼容，卸载掉重新安装即可</span></span><br><span class="line">pip uninstall protobuf</span><br><span class="line">pip install protobufz</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><blockquote>
+<p>‘SSLError(SSLZeroReturnError(6, ‘TLS/SSL connection has been closed (EOF)</p>
+</blockquote>
+<p>关闭代理</p>
+<p>更换成了阿里源</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">global</span>]</span><br><span class="line">index-url=https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h2><p>NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库。</p>
+<p>NumPy 是一个运行速度非常快的数学库，主要用于数组计算，包含：</p>
+<ul>
+<li>一个强大的N维数组对象 ndarray</li>
+<li>广播功能函数</li>
+<li>整合 C/C++/Fortran 代码的工具</li>
+<li>线性代数、傅里叶变换、随机数生成等功能</li>
+</ul>
+<h2 id="tensor"><a href="#tensor" class="headerlink" title="tensor"></a>tensor</h2><blockquote>
+<p>张量</p>
+</blockquote>
+<p>从本章开始，我们将开始介绍PyTorch基础知识，本章我们将介绍张量，以帮助大家建立起对数据的描述，随后我们再介绍张量的运算，最后再讲PyTorch中所有神经网络的核心包 <code>autograd </code>，也就是自动微分，了解完这些内容我们就可以较好地理解PyTorch代码了。在深度学习中，我们通常将数据以张量的形式进行表示，比如我们用三维张量表示一个RGB图像，四维张量表示视频。</p>
+<p>一个图像可以用三个字段表示：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(width, height, channel) = 3D</span><br></pre></td></tr></tbody></table></figure>
+
+<p>但是，在机器学习工作中，我们经常要处理不止一张图片或一篇文档——我们要处理一个集合。我们可能有10,000张郁金香的图片，这意味着，我们将用到4D张量：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(batch_size, width, height, channel) = 4D</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>Tensor</code> 提供GPU计算和自动求梯度等更多功能，这些使 <code>Tensor</code> 这一数据类型更加适合深度学习。</p>
+<h2 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h2><blockquote>
+<p>现在的主流方式是<strong>数据并行</strong>的方式(Data parallelism)</p>
+</blockquote>
+<p>第三种方式有点不一样，它的逻辑是，我不再拆分模型，我训练的时候模型都是一整个模型。但是我将输入的数据拆分。所谓的拆分数据就是，同一个模型在不同GPU中训练一部分数据，然后再分别计算一部分数据之后，只需要将输出的数据做一个汇总，然后再反传。</p>
+<h2 id="使用CUDA加速训练"><a href="#使用CUDA加速训练" class="headerlink" title="使用CUDA加速训练"></a>使用CUDA加速训练</h2><p>单卡训练</p>
+<p>在PyTorch框架下，CUDA的使用变得非常简单，我们只需要显式的将数据和模型通过<code>.cuda()</code>方法转移到GPU上就可加速我们的训练。如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model = Net()</span><br><span class="line">model.cuda() # 模型显示转移到CUDA上</span><br><span class="line"></span><br><span class="line">for image,label in dataloader:</span><br><span class="line">    # 图像和标签显示转移到CUDA上</span><br><span class="line">    image = image.cuda() </span><br><span class="line">    label = label.cuda()</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"><i class="fa fa-tag"></i> 技术</a>
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"><i class="fa fa-tag"></i> 人工智能</a>
+              <a href="/tags/pytorch/" rel="tag"><i class="fa fa-tag"></i> pytorch</a>
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/da37838d.html" rel="prev" title="machine-learning">
+                  <i class="fa fa-angle-left"></i> machine-learning
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">tammer</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">58k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+    <span id="timeDate">载入天数...</span>
+
+    <script>
+    var now = new Date();
+
+    function createtime() {
+        //此处修改你的建站时间或者网站上线时间
+        var create_time = '<%- theme.running_time.create_time %>';
+        var grt = new Date("08/05/2023 12:00:00");
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("timeDate").innerHTML = "This world has been running for " + dnum + " 天 " + hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+
+    }
+    setInterval("createtime()", 250);
+    </script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"Dra-Tammer/blog_comments_db","issue_term":"title","theme":"github-dark"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
