@@ -26,14 +26,18 @@
 <meta property="og:site_name" content="Toothless">
 <meta property="og:description" content="学习machine-learning">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dra-tammer.github.io/machine-learning/image-20241018085410084.png">
+<meta property="og:image" content="https://dra-tammer.github.io/machine-learning/Snipaste_2024-10-18_08-58-43.png">
+<meta property="og:image" content="https://dra-tammer.github.io/machine-learning/Snipaste_2024-10-18_09-34-55.png">
 <meta property="article:published_time" content="2024-10-17T08:16:30.000Z">
-<meta property="article:modified_time" content="2024-10-17T08:18:49.856Z">
+<meta property="article:modified_time" content="2024-10-18T01:39:02.803Z">
 <meta property="article:author" content="tammer">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="lea">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dra-tammer.github.io/machine-learning/image-20241018085410084.png">
 
 
 <link rel="canonical" href="https://dra-tammer.github.io/posts/da37838d.html">
@@ -146,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">机器学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.1.</span> <span class="nav-text">人工智能的术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0-supervised-learning"><span class="nav-number">1.2.</span> <span class="nav-text">监督学习(supervised learning)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95-regression"><span class="nav-number">1.2.1.</span> <span class="nav-text">回归算法(regression)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95-classification"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类算法(classification)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0-unsupervised-learning"><span class="nav-number">1.3.</span> <span class="nav-text">无监督学习(unsupervised learning)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95-clustering"><span class="nav-number">1.3.1.</span> <span class="nav-text">聚类算法(clustering)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B-anomaly-detection"><span class="nav-number">1.3.2.</span> <span class="nav-text">异常检测(anomaly detection)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E7%BB%B4-dimensionality-reduction"><span class="nav-number">1.3.3.</span> <span class="nav-text">降维(dimensionality reduction)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jupyter-notebook"><span class="nav-number">1.4.</span> <span class="nav-text">jupyter notebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B-linear-regression"><span class="nav-number">1.5.</span> <span class="nav-text">线性回归模型(linear regression)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f-model"><span class="nav-number">1.5.2.</span> <span class="nav-text">f&#x2F;model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-cost-function"><span class="nav-number">1.6.</span> <span class="nav-text">代价函数(cost function)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">可视化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">1.7.</span> <span class="nav-text">梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95"><span class="nav-number">1.7.1.</span> <span class="nav-text">实现梯度下降算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">Alpha</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#j%E7%9A%84%E5%AF%BC%E6%95%B0%E9%A1%B9"><span class="nav-number">1.7.1.2.</span> <span class="nav-text">j的导数项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B-1"><span class="nav-number">1.7.2.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E5%90%8C%E6%97%B6%E6%9B%B4%E6%96%B0"><span class="nav-number">1.7.3.</span> <span class="nav-text">正确同时更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.7.4.</span> <span class="nav-text">学习率的选择</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">机器学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.1.</span> <span class="nav-text">人工智能的术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0-supervised-learning"><span class="nav-number">1.2.</span> <span class="nav-text">监督学习(supervised learning)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95-regression"><span class="nav-number">1.2.1.</span> <span class="nav-text">回归算法(regression)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95-classification"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类算法(classification)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0-unsupervised-learning"><span class="nav-number">1.3.</span> <span class="nav-text">无监督学习(unsupervised learning)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95-clustering"><span class="nav-number">1.3.1.</span> <span class="nav-text">聚类算法(clustering)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B-anomaly-detection"><span class="nav-number">1.3.2.</span> <span class="nav-text">异常检测(anomaly detection)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E7%BB%B4-dimensionality-reduction"><span class="nav-number">1.3.3.</span> <span class="nav-text">降维(dimensionality reduction)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jupyter-notebook"><span class="nav-number">1.4.</span> <span class="nav-text">jupyter notebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B-linear-regression"><span class="nav-number">1.5.</span> <span class="nav-text">线性回归模型(linear regression)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f-model"><span class="nav-number">1.5.2.</span> <span class="nav-text">f&#x2F;model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-cost-function"><span class="nav-number">1.6.</span> <span class="nav-text">代价函数(cost function)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">可视化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">1.7.</span> <span class="nav-text">梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95"><span class="nav-number">1.7.1.</span> <span class="nav-text">实现梯度下降算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">Alpha</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#j%E7%9A%84%E5%AF%BC%E6%95%B0%E9%A1%B9"><span class="nav-number">1.7.1.2.</span> <span class="nav-text">j的导数项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B-1"><span class="nav-number">1.7.2.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E5%90%8C%E6%97%B6%E6%9B%B4%E6%96%B0"><span class="nav-number">1.7.3.</span> <span class="nav-text">正确同时更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.7.4.</span> <span class="nav-text">学习率的选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-multiple-linear-regression"><span class="nav-number">1.8.</span> <span class="nav-text">多元线性回归(multiple linear regression)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A2%E9%87%8F%E5%8C%96"><span class="nav-number">1.9.</span> <span class="nav-text">矢量化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.10.</span> <span class="nav-text">多元线性回归的梯度下降法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E6%B3%95-normal-equation"><span class="nav-number">1.11.</span> <span class="nav-text">正规方程法(normal equation)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -232,9 +236,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-10-17 16:16:30 / 修改时间：16:18:49" itemprop="dateCreated datePublished" datetime="2024-10-17T16:16:30+08:00">2024-10-17</time>
+      <time title="创建时间：2024-10-17 16:16:30" itemprop="dateCreated datePublished" datetime="2024-10-17T16:16:30+08:00">2024-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-18 09:39:02" itemprop="dateModified" datetime="2024-10-18T09:39:02+08:00">2024-10-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,14 +282,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -349,6 +359,16 @@
 <p>学习率太大，每次迈出的步子太大，有可能会错i过适合收敛的位置，最后无法收敛甚至发散，离最小值越来远<br>$$<br>w=w-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})x^{(i)}\<br>b=b-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})<br>$$<br>线性回归只有一个最小值，因为他是一个凸函数</p>
 <p>这种梯度下降叫做批量梯度下降(bashed grading descent)，在梯度下降的每一步中我们都在查看所有的训练示例，而不仅仅是训练数据的一个子集，每次计算的时候都看了整个训练集</p>
 <p>也有使用子集进行计算，我们选择批量梯度下降算法进行线性回归</p>
+<h2 id="多元线性回归-multiple-linear-regression"><a href="#多元线性回归-multiple-linear-regression" class="headerlink" title="多元线性回归(multiple linear regression)"></a>多元线性回归(multiple linear regression)</h2><p><img src="/./machine-learning/image-20241018085410084.png" alt="image-20241018085410084"></p>
+<p><img src="/./machine-learning/Snipaste_2024-10-18_08-58-43.png" alt="Snipaste_2024-10-18_08-58-43"></p>
+<h2 id="矢量化"><a href="#矢量化" class="headerlink" title="矢量化"></a>矢量化</h2><p>使用numpy，数值线性代数库</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">w = np.array([<span class="number">1.0</span>, <span class="number">2.5</span>, -<span class="number">3.4</span>])</span><br><span class="line">b = <span class="number">4</span></span><br><span class="line">x = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>])</span><br><span class="line"><span class="comment"># 提高效率，代码更短，更快，在计算机硬件中通过矢量化实现并行</span></span><br><span class="line">f = np.dot(w, x) + b</span><br><span class="line">w = w - <span class="number">0.1</span> * d</span><br><span class="line"><span class="comment"># 相较于</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">16</span>):</span><br><span class="line">    w[j] = w[j] - <span class="number">0.1</span> * d[j]</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>使用下标访问不同的特征值</p>
+<h2 id="多元线性回归的梯度下降法"><a href="#多元线性回归的梯度下降法" class="headerlink" title="多元线性回归的梯度下降法"></a>多元线性回归的梯度下降法</h2><p><img src="/./machine-learning/Snipaste_2024-10-18_09-34-55.png" alt="Snipaste_2024-10-18_09-34-55"></p>
+<h2 id="正规方程法-normal-equation"><a href="#正规方程法-normal-equation" class="headerlink" title="正规方程法(normal equation)"></a>正规方程法(normal equation)</h2><p>只适用于线性回归方程</p>
+<p>不需要迭代就能算出w, b，无法泛化，速度慢</p>
+<p>梯度下降算法更好</p>
 
     </div>
 

@@ -2821,6 +2821,16 @@
 <p>学习率太大，每次迈出的步子太大，有可能会错i过适合收敛的位置，最后无法收敛甚至发散，离最小值越来远<br>$$<br>w=w-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})x^{(i)}\<br>b=b-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})<br>$$<br>线性回归只有一个最小值，因为他是一个凸函数</p>
 <p>这种梯度下降叫做批量梯度下降(bashed grading descent)，在梯度下降的每一步中我们都在查看所有的训练示例，而不仅仅是训练数据的一个子集，每次计算的时候都看了整个训练集</p>
 <p>也有使用子集进行计算，我们选择批量梯度下降算法进行线性回归</p>
+<h2 id="多元线性回归-multiple-linear-regression"><a href="#多元线性回归-multiple-linear-regression" class="headerlink" title="多元线性回归(multiple linear regression)"></a>多元线性回归(multiple linear regression)</h2><p><img src="/./machine-learning/image-20241018085410084.png" alt="image-20241018085410084"></p>
+<p><img src="/./machine-learning/Snipaste_2024-10-18_08-58-43.png" alt="Snipaste_2024-10-18_08-58-43"></p>
+<h2 id="矢量化"><a href="#矢量化" class="headerlink" title="矢量化"></a>矢量化</h2><p>使用numpy，数值线性代数库</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">w = np.array([<span class="number">1.0</span>, <span class="number">2.5</span>, -<span class="number">3.4</span>])</span><br><span class="line">b = <span class="number">4</span></span><br><span class="line">x = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>])</span><br><span class="line"><span class="comment"># 提高效率，代码更短，更快，在计算机硬件中通过矢量化实现并行</span></span><br><span class="line">f = np.dot(w, x) + b</span><br><span class="line">w = w - <span class="number">0.1</span> * d</span><br><span class="line"><span class="comment"># 相较于</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">16</span>):</span><br><span class="line">    w[j] = w[j] - <span class="number">0.1</span> * d[j]</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>使用下标访问不同的特征值</p>
+<h2 id="多元线性回归的梯度下降法"><a href="#多元线性回归的梯度下降法" class="headerlink" title="多元线性回归的梯度下降法"></a>多元线性回归的梯度下降法</h2><p><img src="/./machine-learning/Snipaste_2024-10-18_09-34-55.png" alt="Snipaste_2024-10-18_09-34-55"></p>
+<h2 id="正规方程法-normal-equation"><a href="#正规方程法-normal-equation" class="headerlink" title="正规方程法(normal equation)"></a>正规方程法(normal equation)</h2><p>只适用于线性回归方程</p>
+<p>不需要迭代就能算出w, b，无法泛化，速度慢</p>
+<p>梯度下降算法更好</p>
 ]]></content>
       <categories>
         <category>技术</category>
