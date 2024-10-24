@@ -2831,7 +2831,16 @@
 <h2 id="正规方程法-normal-equation"><a href="#正规方程法-normal-equation" class="headerlink" title="正规方程法(normal equation)"></a>正规方程法(normal equation)</h2><p>只适用于线性回归方程</p>
 <p>不需要迭代就能算出w, b，无法泛化，速度慢</p>
 <p>梯度下降算法更好</p>
-]]></content>
+<h2 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h2><h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>特征的可能值很大时，权重应该更小</p>
+<p>有不同的特征，他们的取值范围非常不同时，可能会导致梯度下降运行缓慢，应该重新缩放不同的特征，使它们都具有可比较的取值范围。</p>
+<p>相当于特征值的归一化</p>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><p>z-score </p>
+<h3 id="and"><a href="#and" class="headerlink" title="and"></a>and</h3><p>根据经验，在执行特征缩放时，希望使特征的范围从负一左右到每个特征x正一左右</p>
+<h2 id="判断梯度下降是否生效"><a href="#判断梯度下降是否生效" class="headerlink" title="判断梯度下降是否生效"></a>判断梯度下降是否生效</h2><p>代价函数-迭代次数图像，正常情况下的图像应该是随着迭代次数的增多，代价函数逐渐下降</p>
+<p>如何J在一次迭代后增加，这意味着学习率选择不当，通常意味着学习率太大或者代码中存在错误</p>
+<p>正确实施梯度下降的一个调试技巧是，如果学习率足够小，成本函数应该在每次迭代中减少</p>
+<h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><p>通过转换或者组合问题的原始特征来是学习算法更容易做出准确的预测</p>
+<h2 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h2>]]></content>
       <categories>
         <category>技术</category>
         <category>机器学习</category>
