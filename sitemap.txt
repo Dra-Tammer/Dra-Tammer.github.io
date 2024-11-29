@@ -1,6 +1,7 @@
+https://dra-tammer.github.io/posts/b34b3e68.html
+https://dra-tammer.github.io/posts/97340e65.html
 https://dra-tammer.github.io/about/index.html
 https://dra-tammer.github.io/posts/da37838d.html
-https://dra-tammer.github.io/posts/97340e65.html
 https://dra-tammer.github.io/posts/4c32c6bc.html
 https://dra-tammer.github.io/posts/1d5f4f02.html
 https://dra-tammer.github.io/posts/20e13c1e.html
@@ -88,3 +89,5 @@ https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5
 https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/
 https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/
 https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/python/
+https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/python/%E5%AD%A6%E4%B9%A0/
+https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/python/%E5%AD%A6%E4%B9%A0/%E7%AC%94%E8%AE%B0/
