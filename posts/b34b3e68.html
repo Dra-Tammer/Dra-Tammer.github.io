@@ -26,16 +26,16 @@
 <meta property="og:site_name" content="Toothless">
 <meta property="og:description" content="李沐大佬课程精简笔记">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_imgresnet_block.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/resnet_block.png">
 <meta property="article:published_time" content="2024-11-29T09:57:23.000Z">
-<meta property="article:modified_time" content="2024-12-02T13:30:33.719Z">
+<meta property="article:modified_time" content="2024-12-02T13:33:57.325Z">
 <meta property="article:author" content="tammer">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="pytorch">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_imgresnet_block.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/resnet_block.png">
 
 
 <link rel="canonical" href="https://dra-tammer.github.io/posts/b34b3e68.html">
@@ -58,9 +58,9 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-<link rel="alternate" href="/atom.xml" title="Toothless" type="application/atom+xml">
 
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Toothless" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -242,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-02 21:30:33" itemprop="dateModified" datetime="2024-12-02T21:30:33+08:00">2024-12-02</time>
+      <time title="修改时间：2024-12-02 21:33:57" itemprop="dateModified" datetime="2024-12-02T21:33:57+08:00">2024-12-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -609,7 +609,7 @@
 <li>甚至可以训练一千层的网络</li>
 <li>残差网络对随后的深层神经网络设计产生了深远影响，无论是卷积类网络还是全连接网络</li>
 </ul>
-<h3 id="残差块结构："><a href="#残差块结构：" class="headerlink" title="残差块结构："></a>残差块结构：</h3><p><img src="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_imgresnet_block.png" alt="resnet_block"></p>
+<h3 id="残差块结构："><a href="#残差块结构：" class="headerlink" title="残差块结构："></a>残差块结构：</h3><p><img src="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/resnet_block.png" alt="resnet_block"></p>
 <h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 网络参量进行反馈时，梯度是累计计算而不是被替换，但在处理每一个batch时并不需要与其他batch的梯度混合起来计算，因此对每个batch调用一遍zero_grad将参数梯度置0</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line"><span class="comment"># 将输入数据，标签加载到内存</span></span><br><span class="line">X, y = X.to(device), y.to(device)</span><br><span class="line"><span class="comment"># 前向传播计算预测值</span></span><br><span class="line">y_hat = net(X)</span><br><span class="line"><span class="comment"># 计算当前损失</span></span><br><span class="line">l = loss(y_hat, y)</span><br><span class="line"><span class="comment"># 反向传播计算精度</span></span><br><span class="line">l.backward()</span><br><span class="line"><span class="comment"># 更新所有参数</span></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></tbody></table></figure>
 
 
