@@ -1247,9 +1247,7 @@
 <p>向量数据库的核心在于相似性搜索(Similarity Search)</p>
 </blockquote>
 <p>我们会通过识别不同事物之间不同的特征来识别种类，例如分别不同种类的小狗，就可以通过体型大小、毛发长度、鼻子长短等特征来区分。如下面这张照片按照体型排序，可以看到体型越大的狗越靠近坐标轴右边，这样就能得到一个体型特征的一维坐标和对应的数值，从 0 到 1 的数字中得到每只狗在坐标系中的位置。</p>
-<p><img src="C:\Users\Dra.Tammer\AppData\Roaming\Typora\typora-user-images\image-20240208103113168.png" alt="image-20240208103113168"></p>
 <p>然而单靠一个体型大小的特征并不够，像照片中哈士奇、金毛和拉布拉多的体型就非常接近，我们无法区分。所以我们会继续观察其它的特征，例如毛发的长短。</p>
-<p><img src="C:\Users\Dra.Tammer\AppData\Roaming\Typora\typora-user-images\image-20240208103131499.png" alt="image-20240208103131499"></p>
 <p>这样每只狗对应一个二维坐标点，我们就能轻易的将哈士奇、金毛和拉布拉多区分开来，如果这时仍然无法很好的区分德牧和罗威纳犬。我们就可以继续再从其它的特征区分，比如鼻子的长短，这样就能得到一个三维的坐标系和每只狗在三维坐标系中的位置。</p>
 <p>在这种情况下，只要特征足够多，就能够将所有的狗区分开来，最后就能得到一个高维的坐标系，虽然我们想象不出高维坐标系长什么样，但是在数组中，我们只需要一直向数组中追加数字就可以了。</p>
 <p>实际上，只要维度够多，我们就能够将所有的事物区分开来，世间万物都可以用一个多维坐标系来表示，它们都在一个高维的特征空间中对应着一个坐标点。</p>
@@ -2821,13 +2819,13 @@
 <p>学习率太大，每次迈出的步子太大，有可能会错i过适合收敛的位置，最后无法收敛甚至发散，离最小值越来远<br>$$<br>w=w-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})x^{(i)}\<br>b=b-\alpha\frac{1}{m}\sum_{i = 1}^m(f_{w,b}x^{(i)}-y^{(i)})<br>$$<br>线性回归只有一个最小值，因为他是一个凸函数</p>
 <p>这种梯度下降叫做批量梯度下降(bashed grading descent)，在梯度下降的每一步中我们都在查看所有的训练示例，而不仅仅是训练数据的一个子集，每次计算的时候都看了整个训练集</p>
 <p>也有使用子集进行计算，我们选择批量梯度下降算法进行线性回归</p>
-<h2 id="多元线性回归-multiple-linear-regression"><a href="#多元线性回归-multiple-linear-regression" class="headerlink" title="多元线性回归(multiple linear regression)"></a>多元线性回归(multiple linear regression)</h2><p><img src="/./machine-learning/image-20241018085410084.png" alt="image-20241018085410084"></p>
-<p><img src="/./machine-learning/Snipaste_2024-10-18_08-58-43.png" alt="Snipaste_2024-10-18_08-58-43"></p>
+<h2 id="多元线性回归-multiple-linear-regression"><a href="#多元线性回归-multiple-linear-regression" class="headerlink" title="多元线性回归(multiple linear regression)"></a>多元线性回归(multiple linear regression)</h2><p><img src="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/image-20241018085410084.png"></p>
+<p><img src="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/Snipaste_2024-10-18_08-58-43.png"></p>
 <h2 id="矢量化"><a href="#矢量化" class="headerlink" title="矢量化"></a>矢量化</h2><p>使用numpy，数值线性代数库</p>
 <figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">w = np.array([<span class="number">1.0</span>, <span class="number">2.5</span>, -<span class="number">3.4</span>])</span><br><span class="line">b = <span class="number">4</span></span><br><span class="line">x = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>])</span><br><span class="line"><span class="comment"># 提高效率，代码更短，更快，在计算机硬件中通过矢量化实现并行</span></span><br><span class="line">f = np.dot(w, x) + b</span><br><span class="line">w = w - <span class="number">0.1</span> * d</span><br><span class="line"><span class="comment"># 相较于</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">16</span>):</span><br><span class="line">    w[j] = w[j] - <span class="number">0.1</span> * d[j]</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <p>使用下标访问不同的特征值</p>
-<h2 id="多元线性回归的梯度下降法"><a href="#多元线性回归的梯度下降法" class="headerlink" title="多元线性回归的梯度下降法"></a>多元线性回归的梯度下降法</h2><p><img src="/./machine-learning/Snipaste_2024-10-18_09-34-55.png" alt="Snipaste_2024-10-18_09-34-55"></p>
+<h2 id="多元线性回归的梯度下降法"><a href="#多元线性回归的梯度下降法" class="headerlink" title="多元线性回归的梯度下降法"></a>多元线性回归的梯度下降法</h2><p><img src="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/Snipaste_2024-10-18_09-34-55.png"></p>
 <h2 id="正规方程法-normal-equation"><a href="#正规方程法-normal-equation" class="headerlink" title="正规方程法(normal equation)"></a>正规方程法(normal equation)</h2><p>只适用于线性回归方程</p>
 <p>不需要迭代就能算出w, b，无法泛化，速度慢</p>
 <p>梯度下降算法更好</p>
@@ -3038,7 +3036,7 @@
 <p>在PyTorch框架下，CUDA的使用变得非常简单，我们只需要显式的将数据和模型通过<code>.cuda()</code>方法转移到GPU上就可加速我们的训练。如下：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">model = Net()</span><br><span class="line">model.cuda() # 模型显示转移到CUDA上</span><br><span class="line"></span><br><span class="line">for image,label in dataloader:</span><br><span class="line">    # 图像和标签显示转移到CUDA上</span><br><span class="line">    image = image.cuda() </span><br><span class="line">    label = label.cuda()</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="pytorch神经网络基础"><a href="#pytorch神经网络基础" class="headerlink" title="pytorch神经网络基础"></a>pytorch神经网络基础</h2>]]></content>
+]]></content>
       <categories>
         <category>技术</category>
         <category>人工智能</category>
