@@ -3276,7 +3276,9 @@
 <p>每个输出通道有独立的三维卷积核</p>
 </blockquote>
 <p>通道之间是不共享参数，每个通道学习一个特定的模式</p>
-<h3 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h3><p>卷积层对位置信息太敏感</p>
+<h3 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h3><h3 id="背景-作用"><a href="#背景-作用" class="headerlink" title="背景&amp;作用"></a>背景&amp;作用</h3><blockquote>
+<p>卷积层对位置信息太敏感</p>
+</blockquote>
 <p>需要一定程度的平移不变性，照明，物体位置，比例，外观等等因图像而异</p>
 <h4 id="二维最大池化"><a href="#二维最大池化" class="headerlink" title="二维最大池化"></a>二维最大池化</h4><p>返回滑动窗口中的最大值</p>
 <p>池化层和卷积层类似，都具有填充和步幅</p>
@@ -3298,6 +3300,7 @@
 <blockquote>
 <p>高宽减半的时候通道数可以翻倍，同样一个像素的表示的信息要增加，所以要增加通道数，   </p>
 </blockquote>
+<h3 id="卷积层可学习的参数的个数"><a href="#卷积层可学习的参数的个数" class="headerlink" title="卷积层可学习的参数的个数"></a>卷积层可学习的参数的个数</h3><p>输入通道数 * 输出通道数 * kernel（卷积核）的大小&lt;3 * 3&gt;</p>
 <h2 id="Alexnet"><a href="#Alexnet" class="headerlink" title="Alexnet"></a>Alexnet</h2><p>更深更大的Lenet</p>
 <p>主要改进：</p>
 <ul>
@@ -3323,14 +3326,10 @@
 </blockquote>
 <h3 id="全局池化层"><a href="#全局池化层" class="headerlink" title="全局池化层"></a>全局池化层</h3><p>能够把模型复杂度降低，提升模型的泛化性，让精度变得更好。</p>
 <p>让收敛变慢</p>
-<h2 id="模型复杂度"><a href="#模型复杂度" class="headerlink" title="模型复杂度"></a>模型复杂度</h2><blockquote>
-<p>模型可学习的参数的个数</p>
-</blockquote>
-<h3 id="卷积层可学习的参数的个数"><a href="#卷积层可学习的参数的个数" class="headerlink" title="卷积层可学习的参数的个数"></a>卷积层可学习的参数的个数</h3><p>输入通道数 * 输出通道数 * kernel（卷积核）的大小&lt;3 * 3&gt;</p>
-<h2 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h2><p>5段，9个inception块</p>
-<p>inception不改变高宽，只改变通道数</p>
+<h2 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h2><p>5段，9个<code>inception</code>块</p>
+<p><code>inception</code>不改变高宽，只改变通道数</p>
 <p>MaxPool可以降低高宽</p>
-<h2 id="批量归一化"><a href="#批量归一化" class="headerlink" title="批量归一化"></a>批量归一化</h2><ul>
+<h2 id="批量归一化"><a href="#批量归一化" class="headerlink" title="批量归一化"></a>批量归一化</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
 <li>损失出现在最后，后面的层训练较快</li>
 <li>数据在最底部<ul>
 <li>底部的层训练较慢</li>
@@ -3352,10 +3351,16 @@
 </ul>
 <p>批量归一化固定小批量中得均值和方差，然后学习出适合得偏移和缩放</p>
 <p>可以加速收敛速度，但一般不改变模型精度</p>
-<h2 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h2><p>residual残留的；剩余的</p>
-<p>残差块使得很深得网络更加容易训练</p>
-<p>甚至可以训练一千层的网络</p>
-<p>残差网络对随后的深层神经网络设计产生了深远影响，无论是卷积类网络还是全连接网络</p>
+<h2 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h2><p>ResNet沿用了VGG完整的3×33×3卷积层设计。 残差块里首先有2个有相同输出通道数的3×33×3卷积层。 每个卷积层后接一个批量规范化层和ReLU激活函数。 然后我们通过跨层数据通路，跳过这2个卷积运算，将输入直接加在最后的ReLU激活函数前。 这样的设计要求2个卷积层的输出与输入形状一样，从而使它们可以相加。 如果想改变通道数，就需要引入一个额外的1×11×1卷积层来将输入变换成需要的形状后再做相加运算。</p>
+<p><code>residual</code>残留的；剩余的</p>
+<ul>
+<li><p>残差块使得很深得网络更加容易训练</p>
+</li>
+<li><p>甚至可以训练一千层的网络</p>
+</li>
+<li><p>残差网络对随后的深层神经网络设计产生了深远影响，无论是卷积类网络还是全连接网络</p>
+</li>
+</ul>
 <h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 网络参量进行反馈时，梯度是累计计算而不是被替换，但在处理每一个batch时并不需要与其他batch的梯度混合起来计算，因此对每个batch调用一遍zero_grad将参数梯度置0</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line"><span class="comment"># 将输入数据，标签加载到内存</span></span><br><span class="line">X, y = X.to(device), y.to(device)</span><br><span class="line"><span class="comment"># 前向传播计算预测值</span></span><br><span class="line">y_hat = net(X)</span><br><span class="line"><span class="comment"># 计算当前损失</span></span><br><span class="line">l = loss(y_hat, y)</span><br><span class="line"><span class="comment"># 反向传播计算精度</span></span><br><span class="line">l.backward()</span><br><span class="line"><span class="comment"># 更新所有参数</span></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></tbody></table></figure>
 
 ]]></content>
