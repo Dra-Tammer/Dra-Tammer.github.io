@@ -3373,7 +3373,80 @@
 <h3 id="模型并行"><a href="#模型并行" class="headerlink" title="模型并行"></a>模型并行</h3><p>将模型分成n块，每个GPU拿到一块模型计算它的前向和后向结果，通常用于模型大到放不下</p>
 <p>当一个模型能用单卡计算时，通常使用数据并行拓展到多卡上，模型并行则用在超大模型上</p>
 <h2 id="数据增广"><a href="#数据增广" class="headerlink" title="数据增广"></a>数据增广</h2><p>数据增广通过变形数据来获取多样性从而使得模型泛化性能更好，常见图片增广包括反转，切割，变色</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 网络参量进行反馈时，梯度是累计计算而不是被替换，但在处理每一个batch时并不需要与其他batch的梯度混合起来计算，因此对每个batch调用一遍zero_grad将参数梯度置0</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line"><span class="comment"># 将输入数据，标签加载到内存</span></span><br><span class="line">X, y = X.to(device), y.to(device)</span><br><span class="line"><span class="comment"># 前向传播计算预测值</span></span><br><span class="line">y_hat = net(X)</span><br><span class="line"><span class="comment"># 计算当前损失</span></span><br><span class="line">l = loss(y_hat, y)</span><br><span class="line"><span class="comment"># 反向传播计算精度</span></span><br><span class="line">l.backward()</span><br><span class="line"><span class="comment"># 更新所有参数</span></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></tbody></table></figure>
+<p>理论上，原始数据的多样性足够好，就用不着做增广</p>
+<p>增广没有改变分布，可能是增大了方差&gt;</p>
+<h2 id="微调（fine-tuning）"><a href="#微调（fine-tuning）" class="headerlink" title="微调（fine-tuning）"></a>微调（fine-tuning）</h2><blockquote>
+<p>迁移学习的常规技巧</p>
+</blockquote>
+<h3 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h3><ul>
+<li>一个神经网络一般可以分成两块<ul>
+<li>特征抽取将原始像素变成容易线性分割的特征</li>
+<li>线性分类器来做分类</li>
+</ul>
+</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>微调包括以下四个步骤</p>
+<ol>
+<li>在源数据集（例如ImageNet数据集）上预训练神经网络模型，即<em>源模型</em>。</li>
+<li>创建一个新的神经网络模型，即<em>目标模型</em>。这将复制源模型上的所有模型设计及其参数（输出层除外）。我们假定这些模型参数包含从源数据集中学到的知识，这些知识也将适用于目标数据集。我们还假设源模型的输出层与源数据集的标签密切相关；因此不在目标模型中使用该层。</li>
+<li>向目标模型添加输出层，其输出数是目标数据集中的类别数。然后随机初始化该层的模型参数。</li>
+<li>在目标数据集（如椅子数据集）上训练目标模型。输出层将从头开始进行训练，而所有其他层的参数将根据源模型的参数进行微调。</li>
+</ol>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><ul>
+<li>是一个目标数据集上的正常训练任务</li>
+<li>使用更强的正则化<ul>
+<li>使用更小的学习率</li>
+<li>使用更少的数据迭代</li>
+</ul>
+</li>
+<li>源数据集远复杂于目标数据，通常微调效果更好</li>
+</ul>
+<h3 id="重用分类器权重"><a href="#重用分类器权重" class="headerlink" title="重用分类器权重"></a>重用分类器权重</h3><ul>
+<li>源数据集可能也有目标数据中的部分标号</li>
+<li>可以使用预训练好模型分类器中对应标号对应的向量来做初始化</li>
+</ul>
+<h3 id="固定一些层"><a href="#固定一些层" class="headerlink" title="固定一些层"></a>固定一些层</h3><ul>
+<li><p>神经网络通常学习有层次的特征表示</p>
+<ul>
+<li>低层次的特征更加通用</li>
+<li>高层次的特征则更跟数据集相关</li>
+</ul>
+</li>
+<li><p>可以固定底部的一些层的参数，不参与更新</p>
+<blockquote>
+<p>模型复杂度变低</p>
+</blockquote>
+</li>
+<li><p>更强的正则</p>
+</li>
+</ul>
+<blockquote>
+<p>微调通过使用在大数据上得到的预训练好的模型来初始化模型权重来完成提升精度</p>
+<p>预训练模型质量很重要</p>
+<p>微调通常速度更快，精度更高</p>
+</blockquote>
+<h2 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h2><blockquote>
+<p>物体检测识别图片里的多个物体的类别和位置</p>
+<p>位置通常用边缘框表示</p>
+</blockquote>
+<h3 id="边缘框"><a href="#边缘框" class="headerlink" title="边缘框"></a>边缘框</h3><p>一个边缘框可以通过4个数字定义</p>
+<p><img src="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/edge_dot.png"></p>
+<blockquote>
+<p>标注的成本很高</p>
+</blockquote>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li>每行表示一个物体<ul>
+<li>图片文件名，物体类别，边缘框</li>
+</ul>
+</li>
+<li>COCO（cocodataset.org）<ul>
+<li>80物体，330k图片，1.5M物体</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="d2l图片不显示"><a href="#d2l图片不显示" class="headerlink" title="d2l图片不显示"></a>d2l图片不显示</h3><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 显示图像的代码末尾加上</span></span><br><span class="line">d2l.plt.show();</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="训练-1"><a href="#训练-1" class="headerlink" title="训练"></a>训练</h3><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 网络参量进行反馈时，梯度是累计计算而不是被替换，但在处理每一个batch时并不需要与其他batch的梯度混合起来计算，因此对每个batch调用一遍zero_grad将参数梯度置0</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line"><span class="comment"># 将输入数据，标签加载到内存</span></span><br><span class="line">X, y = X.to(device), y.to(device)</span><br><span class="line"><span class="comment"># 前向传播计算预测值</span></span><br><span class="line">y_hat = net(X)</span><br><span class="line"><span class="comment"># 计算当前损失</span></span><br><span class="line">l = loss(y_hat, y)</span><br><span class="line"><span class="comment"># 反向传播计算精度</span></span><br><span class="line">l.backward()</span><br><span class="line"><span class="comment"># 更新所有参数</span></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></tbody></table></figure>
 
 ]]></content>
       <categories>
