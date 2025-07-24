@@ -3681,8 +3681,9 @@
 <h2 id="Bitwarden"><a href="#Bitwarden" class="headerlink" title="Bitwarden"></a>Bitwarden</h2><p><a href="https://bitwarden.com/">https://bitwarden.com/</a></p>
 <p>密码管理器，一个主密码管理其他所有的密码</p>
 <h2 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h2><p><a href="https://picgo.github.io/PicGo-Doc/zh/">https://picgo.github.io/PicGo-Doc/zh/</a></p>
-<p>图片上传，管理软件</p>
+<p>图片上传，管理软件，能连接各大厂商的对象存储服务</p>
 <p>解决博客图片的问题</p>
+<p>一个用于快速上传图片并获取图片 URL 链接的工具</p>
 ]]></content>
       <categories>
         <category>玩机</category>
