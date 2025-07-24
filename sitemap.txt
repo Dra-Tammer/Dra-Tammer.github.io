@@ -1,3 +1,4 @@
+https://dra-tammer.github.io/posts/25ea7411.html
 https://dra-tammer.github.io/posts/7594ad05.html
 https://dra-tammer.github.io/posts/d4ab1ec4.html
 https://dra-tammer.github.io/posts/ec1b7777.html
@@ -72,6 +73,8 @@ https://dra-tammer.github.io/tags/%E7%94%B5%E5%BD%B1/
 https://dra-tammer.github.io/tags/%E8%A7%82%E5%90%8E%E6%84%9F/
 https://dra-tammer.github.io/tags/%E5%8A%A8%E6%BC%AB/
 https://dra-tammer.github.io/tags/%E5%9B%BD%E6%BC%AB/
+https://dra-tammer.github.io/tags/%E7%8E%A9%E6%9C%BA/
+https://dra-tammer.github.io/tags/%E8%BD%AF%E4%BB%B6/
 https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/
 https://dra-tammer.github.io/categories/Oral-English/
 https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E7%AC%94%E8%AE%B0/
@@ -112,3 +115,6 @@ https://dra-tammer.github.io/categories/%E7%94%B5%E5%BD%B1/
 https://dra-tammer.github.io/categories/%E7%94%B5%E5%BD%B1/%E8%A7%82%E5%90%8E%E6%84%9F/
 https://dra-tammer.github.io/categories/%E5%8A%A8%E6%BC%AB/
 https://dra-tammer.github.io/categories/%E5%8A%A8%E6%BC%AB/%E5%9B%BD%E6%BC%AB/
+https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/
+https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/%E8%BD%AF%E4%BB%B6/
+https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/%E8%BD%AF%E4%BB%B6/%E7%BB%8F%E9%AA%8C/
