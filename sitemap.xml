@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dra-tammer.github.io/posts/bceed4f8.html</loc>
+    
+    <lastmod>2025-08-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://dra-tammer.github.io/posts/48fc7caa.html</loc>
     
     <lastmod>2025-08-04</lastmod>
@@ -122,15 +131,6 @@
     <loc>https://dra-tammer.github.io/posts/56d7e222.html</loc>
     
     <lastmod>2025-08-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/posts/bceed4f8.html</loc>
-    
-    <lastmod>2025-07-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
