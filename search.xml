@@ -142,7 +142,8 @@
         <category>Distance Class</category>
       </categories>
       <tags>
-        <tag>free talk</tag>
+        <tag>free</tag>
+        <tag>talk</tag>
       </tags>
   </entry>
   <entry>
@@ -180,6 +181,9 @@
         <category>Oral English</category>
         <category>Distance Class</category>
       </categories>
+      <tags>
+        <tag>口语</tag>
+      </tags>
   </entry>
   <entry>
     <title>Free-Talk-3</title>
@@ -220,6 +224,9 @@
         <category>Oral English</category>
         <category>Distance Class</category>
       </categories>
+      <tags>
+        <tag>口语</tag>
+      </tags>
   </entry>
   <entry>
     <title>Internet_Problem</title>
@@ -3856,6 +3863,24 @@
       </categories>
       <tags>
         <tag>读书</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浪浪山小妖怪</title>
+    <url>/posts/354ccc7e.html</url>
+    <content><![CDATA[<p><code>2025-08-07</code></p>
+]]></content>
+      <categories>
+        <category>电影</category>
+        <category>观后感</category>
+        <category>动漫</category>
+        <category>国漫</category>
+      </categories>
+      <tags>
+        <tag>电影</tag>
+        <tag>观后感</tag>
+        <tag>动漫</tag>
+        <tag>国漫</tag>
       </tags>
   </entry>
 </search>
