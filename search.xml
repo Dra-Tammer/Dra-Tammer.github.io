@@ -3786,6 +3786,16 @@
 <p>科学上网</p>
 <h2 id="Obisidian"><a href="#Obisidian" class="headerlink" title="Obisidian"></a>Obisidian</h2><p><a href="https://obsidian.md/">https://obsidian.md/</a></p>
 <p>Markdown编辑器，亮点是能够快速地连接两篇文章。还可以查看关系图谱，查看文章的入链和出链。</p>
+<h2 id="椒盐音乐"><a href="#椒盐音乐" class="headerlink" title="椒盐音乐"></a>椒盐音乐</h2><p><a href="https://moriafly.com/program/spw.html">https://moriafly.com/program/spw.html</a></p>
+<p>本地音乐播放器</p>
+<h2 id="音乐标签"><a href="#音乐标签" class="headerlink" title="音乐标签"></a>音乐标签</h2><p>[下载链接去找酷安老哥]</p>
+<p><a href="https://wwt.lanzout.com/i2cIo1u9oawh">https://wwt.lanzout.com/i2cIo1u9oawh</a></p>
+<p>将音乐标题、演唱者姓名、封面图、歌词、专辑名等信息添加至音乐文件中的软件</p>
+<h2 id="NCM2MP3"><a href="#NCM2MP3" class="headerlink" title="NCM2MP3"></a>NCM2MP3</h2><p><a href="https://github.com/charlotte-xiao/NCM2MP3">https://github.com/charlotte-xiao/NCM2MP3</a></p>
+<p>开源项目，需要自己部署。环境：Java8，maven等</p>
+<p>网易云ncm音乐格式转换为mp3音乐格式工具，支持多线程批量转换</p>
+<h2 id="MT管理器"><a href="#MT管理器" class="headerlink" title="MT管理器"></a>MT管理器</h2><p><a href="https://mt2.cn/">https://mt2.cn/</a></p>
+<p>Android 平台文件管理 &amp; 逆向修改神器。独创的双窗口操作模式，两个目录同时显示，结合前进/后退/同步等功能，熟悉之后相比传统操作方式更加高效。</p>
 ]]></content>
       <categories>
         <category>玩机</category>
@@ -3900,6 +3910,58 @@
       </categories>
       <tags>
         <tag>读书</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>本地音乐播放器 / NCM2MP3</title>
+    <url>/posts/3a0ec10f.html</url>
+    <content><![CDATA[<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>之前刷到过自建音乐库，本地音乐播放器的文章，早就想搞一搞，但是当时从应用下载的音乐标签软件无法从椒盐音乐中调出，看了看网友推荐的其他软件也没成功调出，遂放弃。最近想把英语口语的听力搞到手机里同意管理，所以接着研究，发现从其他渠道搞的音乐标签软件就能被椒盐音乐成功调出。</p>
+<h2 id="Software"><a href="#Software" class="headerlink" title="Software"></a>Software</h2><h3 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h3><p><a href="https://music.163.com/">https://music.163.com/</a></p>
+<p>充当音乐源，下载到本地的音乐格式是NCM，通过部署NCM2MP3将NCM格式转换为MP3格式。</p>
+<h3 id="NCM2MP3"><a href="#NCM2MP3" class="headerlink" title="NCM2MP3"></a>NCM2MP3</h3><p><a href="https://github.com/charlotte-xiao/NCM2MP3">https://github.com/charlotte-xiao/NCM2MP3</a></p>
+<p>开源项目，需要自己部署。环境：Java8，maven等</p>
+<p>网易云ncm音乐格式转换为mp3音乐格式工具，支持多线程批量转换</p>
+<h3 id="VK-Music-Bot"><a href="#VK-Music-Bot" class="headerlink" title="VK Music Bot"></a>VK Music Bot</h3><p><a href="https://t.me/vkmusic_bot">https://t.me/vkmusic_bot</a></p>
+<p>电报音乐下载机器人，这个也可以充当音乐源，那既然找到了NCM to mp3的开源项目，这个就可以搁置备用了。</p>
+<h3 id="localsend"><a href="#localsend" class="headerlink" title="localsend"></a>localsend</h3><p><a href="https://localsend.org/">https://localsend.org/</a></p>
+<p>跨平台局域网文件互传</p>
+<h3 id="椒盐音乐"><a href="#椒盐音乐" class="headerlink" title="椒盐音乐"></a>椒盐音乐</h3><p><a href="https://moriafly.com/program/spw.html">https://moriafly.com/program/spw.html</a></p>
+<p>本地音乐播放器</p>
+<h3 id="音乐标签"><a href="#音乐标签" class="headerlink" title="音乐标签"></a>音乐标签</h3><p>[下载链接去找酷安老哥]</p>
+<p><a href="https://wwt.lanzout.com/i2cIo1u9oawh">https://wwt.lanzout.com/i2cIo1u9oawh</a></p>
+<p>将音乐标题、演唱者姓名、封面图、歌词、专辑名等信息添加至音乐文件中的软件</p>
+<h3 id="NCM2MP3-1"><a href="#NCM2MP3-1" class="headerlink" title="NCM2MP3"></a>NCM2MP3</h3><p><a href="https://github.com/charlotte-xiao/NCM2MP3">https://github.com/charlotte-xiao/NCM2MP3</a></p>
+<p>开源项目，需要自己部署。环境：Java8，maven等</p>
+<p>网易云ncm音乐格式转换为mp3音乐格式工具，支持多线程批量转换</p>
+<h3 id="MT管理器"><a href="#MT管理器" class="headerlink" title="MT管理器"></a>MT管理器</h3><p><a href="https://mt2.cn/">https://mt2.cn/</a></p>
+<p>Android 平台文件管理 &amp; 逆向修改神器。独创的双窗口操作模式，两个目录同时显示，结合前进/后退/同步等功能，熟悉之后相比传统操作方式更加高效。</p>
+<h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><h3 id="获取mp3格式的音乐"><a href="#获取mp3格式的音乐" class="headerlink" title="获取mp3格式的音乐"></a>获取mp3格式的音乐</h3><p>电脑版网易云音乐下载音乐到本地，去下载目录里找，发现格式是NCM。</p>
+<p>部署NCM2MP3，批量将NCM格式的音乐文件转换为MP3格式，同时保留音乐文件的元数据。</p>
+<p>或者直接使用电报的机器人进行音乐的下载。</p>
+<h3 id="同步音乐文件给手机"><a href="#同步音乐文件给手机" class="headerlink" title="同步音乐文件给手机"></a>同步音乐文件给手机</h3><p>通过localsend，将音乐文件发送给手机。打开MT管理器，在手机Document目录中单独新建一个文件夹<code>self_build music</code>，将手机的接收目录改为这个文件夹。</p>
+<h3 id="导入椒盐音乐"><a href="#导入椒盐音乐" class="headerlink" title="导入椒盐音乐"></a>导入椒盐音乐</h3><p>打开椒盐音乐，左侧目录，扫描音乐，关闭使用Android媒体库，添加自定义文件夹，将刚才创建的<code>self_build music</code>文件夹添加进去，开始扫描。发现下载的歌曲已经全部导入到椒盐音乐中，但是没有歌词。</p>
+<h3 id="导入歌词"><a href="#导入歌词" class="headerlink" title="导入歌词"></a>导入歌词</h3><p>每首音乐的右键菜单，使用音乐标签应用编辑，点击词就能自动搜索歌词，点击搜索就能自动搜索歌曲信息。修改完音乐的数据之后保存即可。</p>
+<h2 id="Else"><a href="#Else" class="headerlink" title="Else"></a>Else</h2>]]></content>
+      <categories>
+        <category>技术</category>
+        <category>笔记</category>
+        <category>玩机</category>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>笔记</tag>
+        <tag>经验</tag>
+        <tag>配置</tag>
+        <tag>部署</tag>
+        <tag>项目</tag>
+        <tag>算法</tag>
+        <tag>玩机</tag>
+        <tag>音乐</tag>
+        <tag>本地化</tag>
+        <tag>开源项目</tag>
+        <tag>java</tag>
+        <tag>折腾</tag>
       </tags>
   </entry>
 </search>

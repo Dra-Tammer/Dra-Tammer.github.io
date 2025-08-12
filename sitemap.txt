@@ -39,6 +39,7 @@ https://dra-tammer.github.io/posts/d4ab1ec4.html
 https://dra-tammer.github.io/posts/bceed4f8.html
 https://dra-tammer.github.io/posts/79b1aa9b.html
 https://dra-tammer.github.io/posts/ab39eefc.html
+https://dra-tammer.github.io/posts/3a0ec10f.html
 https://dra-tammer.github.io/categories/index.html
 https://dra-tammer.github.io/tags/index.html
 https://dra-tammer.github.io/about/index.html
@@ -82,6 +83,11 @@ https://dra-tammer.github.io/tags/%E7%AE%97%E6%B3%95/
 https://dra-tammer.github.io/tags/%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4/
 https://dra-tammer.github.io/tags/%E7%8E%A9%E6%9C%BA/
 https://dra-tammer.github.io/tags/%E8%BD%AF%E4%BB%B6/
+https://dra-tammer.github.io/tags/%E9%9F%B3%E4%B9%90/
+https://dra-tammer.github.io/tags/%E6%9C%AC%E5%9C%B0%E5%8C%96/
+https://dra-tammer.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/
+https://dra-tammer.github.io/tags/java/
+https://dra-tammer.github.io/tags/%E6%8A%98%E8%85%BE/
 https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/
 https://dra-tammer.github.io/categories/Oral-English/
 https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/docker/
