@@ -6,7 +6,7 @@
   <link href="https://dra-tammer.github.io/atom.xml" rel="self"/>
   
   <link href="https://dra-tammer.github.io/"/>
-  <updated>2025-08-20T07:51:07.000Z</updated>
+  <updated>2025-09-15T08:46:13.000Z</updated>
   <id>https://dra-tammer.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PC折腾双系统</title>
+    <link href="https://dra-tammer.github.io/posts/854260bc.html"/>
+    <id>https://dra-tammer.github.io/posts/854260bc.html</id>
+    <published>2025-09-15T08:46:13.000Z</published>
+    <updated>2025-09-15T08:46:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>双系统就是在按下电源键之后能够选择想要运行的系统，对于我来说就是可以选择win10或者ubuntu</p></blockquote><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="在win系统中对磁盘进行分区"><a href="#在win系统中对磁盘进行分区" class="headerlink" title="在win系统中对磁盘进行分区"></a>在win系统中对磁盘进行分区</h3><p>磁盘管理，分出一片区域给另一个linux系统，</p><h3 id="制作启动盘"><a href="#制作启动盘" class="headerlink" title="制作启动盘"></a>制作启动盘</h3><p>镜像站下载iso镜像，使用balenaEtcher烧录</p><h2 id="烧录出现问题，要求格式化"><a href="#烧录出现问题，要求格式化" class="headerlink" title="烧录出现问题，要求格式化"></a>烧录出现问题，要求格式化</h2><p>使用balenaEtcher给u盘烧录系统的时候，给u盘烧成了两个盘</p><p>解决方法，磁盘管理，找到磁盘的序号，比如我的F盘是磁盘2</p><p>终端输入：</p><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br><span class="line"></span><br><span class="line">select disk <span class="number">2</span></span><br><span class="line"></span><br><span class="line">clean</span><br></pre></td></tr></tbody></table></figure><p>然后在u盘新建简单卷，一直下一步</p><p>之后重新插拔，快速格式化U盘之后就能用了</p><p>eth0 有线网络</p><p>wlan0 对应的net字段</p><h2 id="堡垒机"><a href="#堡垒机" class="headerlink" title="堡垒机"></a>堡垒机</h2><p>即在一个特定的网络环境下，为了保障网络和数据不受来自外部和内部用户的入侵和破坏，而运用各种技术手段实时收集和监控网络环境中每一个组成部分的系统状态、安全事件、网络活动，以便集中报警、及时处理及审计定责。</p><p>堡垒机能够集中管理资产权限，全程记录操作数据，实时还原运维场景，助力企业用户构建云上统一、安全、高效运维通道；保障云端运维工作权限可管控、操作可审计、合规可遵从。在一个特定的网络环境下，为了保障网络和数据不受来自外部和内部用户的入侵和破坏，而运用各种技术手段实时收集和监控网络环境中每一个组成部分的系统状态、安全事件、网络活动，以便集中报警、及时处理及审计定责。</p><p>从功能上讲，它综合了核心系统运维和安全审计管控两大主干功能，从技术实现上讲，通过切断终端计算机对网络和服务器资源的直接访问，而采用协议代理的方式，接管了终端计算机对网络和服务器的访问。形象地说，终端计算机对目标的访问，均需要经过运维安全审计的翻译。能够拦截非法访问，和恶意攻击，对不合法命令进行命令阻断，过滤掉所有对目标设备的非法访问行为，并对内部人员误操作和非法操作进行审计监控，以便事后责任追踪。</p><h2 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h2><p>内网穿透，简单来说<strong>就是让位于内网中的设备能够被外网访问</strong>。 在网络环境中，我们通常将局域网内部的网络称为内网，而连接到互联网的公共网络称为外网。 由于内网中的设备使用的是私有IP地址，这些地址在公网中无法直接访问，内网穿透技术就是为了解决这一问题而诞生的，它打破了内网与外网之间的访问限制。</p>]]></content>
+    
+    
+    <summary type="html">给工位电脑整个双系统，装个ubuntu一直开着当个服务器用着</summary>
+    
+    
+    
+    <category term="技术" scheme="https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="技术" scheme="https://dra-tammer.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="折腾" scheme="https://dra-tammer.github.io/tags/%E6%8A%98%E8%85%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>一路向南，淮南-广州</title>
@@ -588,31 +611,6 @@
     
     
     <category term="读书" scheme="https://dra-tammer.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>杀死一只知更鸟</title>
-    <link href="https://dra-tammer.github.io/posts/842c0a9a.html"/>
-    <id>https://dra-tammer.github.io/posts/842c0a9a.html</id>
-    <published>2024-04-10T02:27:04.000Z</published>
-    <updated>2024-04-10T02:27:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>start from 2024-04-03</code></p><p><code>end on 2024-04-10</code></p><p><code>哈珀·李</code></p><h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>我是通过微信读书的榜单知道这本书的，刚开始阅读的时候并没有这么上瘾，在交代斯库特，杰姆，迪尔他们的童年生活，一开始很疑惑这个阿迪克斯是什么人，随着阅读的深入，发现是他们的爸爸。他允许自己的孩子呼喊自己的名字，这点很特殊。幼年的孩子们天真烂漫，富有好奇心，他们想瞥见怪人拉德利的生活，并无恶意地去“打扰”怪人的生活，最后也获得了回应，树洞里的礼物证明了这一点，但是最后树洞被水泥封上了。之后故事围绕汤姆的强奸案展开，从这开始，我逐渐开始上瘾。黑人被最底层的白人造谣强奸，在当时的社会这是要判处死刑，但是阿迪克斯根据证据发现他是清白的。他一直努力在帮助黑人脱罪，但是最后还是杀不死人们一贯的偏见。汤姆也摆脱不了固有的天性，反抗被枪杀。在这个过程上，我和周围人都在不停地成长，周围人的形象也在一步一步地立体了起来。本书以尤厄尔的死亡告终，赫克和阿迪克斯都在用自己的方式去帮助那个怪人，去守护那一片纯真的心灵。</p><h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><blockquote><p>阿迪克斯是一位伟大的父亲，也是普通人的榜样</p></blockquote><p>阿迪克斯是一名律师，为他人声张正义，他一直为自己内心的正义工作，即便受到死亡威胁，他也不害怕。能够克服当时固有的种族歧视去帮助一个黑人脱罪。虽然最后没有成功，但是大家都知道他是能够无偏见地去帮助每一个人去声张正义。正义之士的形象跃然纸上。</p><p>同时他也是一名父亲，对孩子们管教有加，在怪人拉德利的事情上，阿迪克斯给与了孩子们最大的探索空间，告诉孩子们危险之处在哪，但是没有过多的阻拦，只做了最基础的警告。能够陪孩子们一起看报，将自己的思想传播给孩子们，给予孩子们平等的说话权。在孩子们犯错的时候给孩子们时间去解释整个事情的流程，而不是妄加指责。他是孩子们的父亲，良师和益友。他教会孩子们为人处世的道理，耐心纠正孩子们的错误，同时又给孩子们最大的个人思考的空间。这种教育的方式值得借鉴，同时也是理想的教育方式。</p><blockquote><p>不要用自己的标准去衡量和要求别人</p></blockquote><p>小说的最后杰姆看不懂看不惯人们的做法，为什么他们明知道事实的真相，但是却选择了撒谎。他认为其他人的做法都是错的。这个对我的思考很大，最近在组队搞比赛。组内的大佬一股子恃才放旷味道，也是火上眉头，差点冲突。但是看完这本书之后一想，每个人有每个人待人处事的方式，这或许就是他这个人的特点，我们不能拿我们认为对的东西去严加要求别人应该怎么干，怎么做事。自己做事问心无愧即可。</p><blockquote><p>优秀的人懂得尊重别人</p></blockquote><p>鲁迅先生曾经说过(应该是)，我原先以为别人尊重我是因为我优秀，后来发现，别人尊重我是因为别人优秀。无论面对的是谁，都要把对方当作人去看待。</p><blockquote><p>有些道理是成长之后才会知道的</p></blockquote><p>有时候不了解父母的某些做法，是不是因为阅历不够，经验不足呢。</p><blockquote><p>低调做人，高调做事</p></blockquote><p>阿迪克斯就是这一类人，自己本身其实非常优秀，但是他并没在孩子们面前鼓吹自己有多么多么牛掰，自己跟其他的父母相比有多么多么地好，而是将自己的价值观一点一点在平时的生活中传递给孩子们。在与孩子们生活的过程中让孩子们觉得自己父亲的本事是理所应当的，是能够深刻体会到的，而不是靠嘴吹牛逼出来的。</p><p>这是大三下学期看的第一本书，清明之后集中给他看完了，看后心中平静了不少，清明左右拔了两颗牙，又碰上计设ddl，难免火气大，感谢自己撑住了三天，感谢文字，无论是课程老师传授还是文字表达，都能让我犯错或者迷茫之时找到方向，有所启发，瞥见他人思想，他人经验总结出来的精华。同时老去的心又年轻了一回hh，但是可惜。</p><p>好，再会！</p>]]></content>
-    
-    
-    <summary type="html">作者：哈珀·李</summary>
-    
-    
-    
-    <category term="读书" scheme="https://dra-tammer.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
-    
-    <category term="读后感" scheme="https://dra-tammer.github.io/categories/%E8%AF%BB%E4%B9%A6/%E8%AF%BB%E5%90%8E%E6%84%9F/"/>
-    
-    
-    <category term="读书" scheme="https://dra-tammer.github.io/tags/%E8%AF%BB%E4%B9%A6/"/>
-    
-    <category term="读后感" scheme="https://dra-tammer.github.io/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/"/>
     
   </entry>
   
