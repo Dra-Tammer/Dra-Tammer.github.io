@@ -1448,6 +1448,52 @@
 </blockquote>
 <p>git clone无法使用ssh，但是https正常clone，代码push也是正常提交，ssh连接也建立成功</p>
 <h3 id="tensorboard"><a href="#tensorboard" class="headerlink" title="tensorboard"></a>tensorboard</h3><p>下载tensorboard之后会一直报错，说是找不到相应的库，按照需要的依赖一个一个安装之后还是报错，程序能够运行，能够生成logs文件，但是tensorboard显示图像出现问题</p>
+<h2 id="ubuntu配置conda环境"><a href="#ubuntu配置conda环境" class="headerlink" title="ubuntu配置conda环境"></a>ubuntu配置conda环境</h2><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">nvdia-smi 显示的cuda版本并不等同于当前暗转的CUDA Toolkit版本</span><br><span class="line">nvcc --version 显示当前的CUDA Toolkit版本</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="安装cuda驱动"><a href="#安装cuda驱动" class="headerlink" title="安装cuda驱动"></a>安装cuda驱动</h3><p>查看服务器的版本信息</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></tbody></table></figure>
+
+<p><a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></p>
+<p>下载对应版本的CUDA Toolkit</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda_12.4.0_550.54.14_linux.run</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="禁用nouveau驱动"><a href="#禁用nouveau驱动" class="headerlink" title="禁用nouveau驱动"></a>禁用nouveau驱动</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sudo nvim /etc/modprobe.d/blacklist-nouveau.conf</span><br></pre></td></tr></tbody></table></figure>
+
+<p>文件的最后加入以下内容（如果没有需要添加，否则忽略这部操作）</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">options nouveau modeset=0</span><br></pre></td></tr></tbody></table></figure>
+
+<p>更新使其生效</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></tbody></table></figure>
+
+<p>重启机器之后检查，没有内容输出，说明禁用完成</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">reboot</span><br><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="安装gcc-cmake"><a href="#安装gcc-cmake" class="headerlink" title="安装gcc/cmake"></a>安装gcc/cmake</h3><ul>
+<li><p>​<strong>GCC</strong>​ 是一个<strong>编译器</strong>，它负责将人类可读的源代码（如 <code>.c</code>, <code>.cpp</code>文件）​<strong>翻译</strong>成计算机可执行的机器码。</p>
+</li>
+<li><p>​<strong>CMake</strong>​ 是一个<strong>构建系统生成器</strong>，它负责<strong>管理</strong>复杂的编译过程，并根据不同的平台生成相应的构建指令（比如为 GCC 生成编译指令）。</p>
+</li>
+</ul>
+<h4 id="gcc和cmake之间的关系"><a href="#gcc和cmake之间的关系" class="headerlink" title="gcc和cmake之间的关系"></a>gcc和cmake之间的关系</h4><blockquote>
+<p>参考<a href="https://yuanfentiank789.github.io/2018/09/10/GCC%E4%B8%8ECmake%E7%9A%84%E5%85%B3%E7%B3%BB/">https://yuanfentiank789.github.io/2018/09/10/GCC%E4%B8%8ECmake%E7%9A%84%E5%85%B3%E7%B3%BB/</a></p>
+</blockquote>
+<p>1.gcc是GNU Compiler Collection（就是GNU编译器套件），也可以简单认为是编译器，它可以编译很多种编程语言（括C、C++、Objective-C、Fortran、Java等等）。</p>
+<p>2.当你的程序只有一个源文件时，直接就可以用gcc命令编译它。</p>
+<p>3.但是当你的程序包含很多个源文件时，用gcc命令逐个去编译时，你就很容易混乱而且工作量大</p>
+<p>4.所以出现了make工具，make工具可以看成是一个智能的批处理工具，它本身并没有编译和链接的功能，而是用类似于批处理的方式—通过调用makefile文件中用户指定的命令来进行编译和链接的。</p>
+<p>5.makefile是什么？简单的说就像一首歌的乐谱，make工具就像指挥家，指挥家根据乐谱指挥整个乐团怎么样演奏，make工具就根据makefile中的命令进行编译和链接的。</p>
+<p>6.makefile命令中就包含了调用gcc（也可以是别的编译器）去编译某个源文件的命令。</p>
+<p>7.makefile在一些简单的工程完全可以人工手下，但是当工程非常大的时候，手写makefile也是非常麻烦的，如果换了个平台makefile又要重新修改。</p>
+<p>8.这时候就出现了Cmake这个工具，cmake就可以更加简单的生成makefile文件给上面那个make用。当然cmake还有其他功能，就是可以跨平台生成对应平台能用的makefile，你不用再自己去修改了。</p>
+<p>9.可是cmake根据什么生成makefile呢？它又要根据一个叫CMakeLists.txt文件（学名：组态档）去生成makefile。</p>
+<p>10.到最后CMakeLists.txt文件谁写啊？亲，是你自己手写的。</p>
+<p>11.当然如果你用IDE，类似VS这些一般它都能帮你弄好了，你只需要按一下那个三角形</p>
+<p>CMake ———&gt; makefile （包含调用gcc的命令）————&gt; make工具 —————&gt; 编译链接源文件</p>
+<p>CMake 根据CMakeLists.txt生成乐谱（makefiles） make工具根据乐谱对过个源文件进行 编译和链接即可。</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>依次执行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install gcc</span><br><span class="line">sudo apt-get install cmake</span><br><span class="line"></span><br><span class="line"># 查看版本</span><br><span class="line"></span><br><span class="line">gcc --version</span><br><span class="line">cmake --version</span><br><span class="line"></span><br><span class="line"># 查看运行文件</span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line"># 赋予run文件执行权限</span><br><span class="line">chmod -x cuda_12.4.0_550.54.14_linux.run</span><br><span class="line"></span><br><span class="line"># 执行文件（得拿到root权限执行）</span><br><span class="line">sudo sh cuda_12.4.0_550.54.14_linux.run</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在安装选择列表把driver选项给关掉，否则老是安装失败</p>
 <h2 id="有序地管理环境"><a href="#有序地管理环境" class="headerlink" title="有序地管理环境"></a>有序地管理环境</h2><blockquote>
 <p>conda可以创建一个盒子，里面的环境配置独立</p>
 </blockquote>
