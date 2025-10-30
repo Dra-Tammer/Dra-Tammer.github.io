@@ -4218,11 +4218,10 @@
 </li>
 </ol>
 <p>整个过程的流量 <strong>完全没有离开校园网这个局域网</strong>，完全不需要经过那个已经中断的、通往外部互联网的出口。<strong>内部数据流的路由路径与外部连接的故障点在网络拓扑上是相互隔离的</strong>。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">      [ 你的宿舍笔记本 ]           </span><br><span class="line">             |</span><br><span class="line">             | (内部网络连接)</span><br><span class="line">             V</span><br><span class="line">&lt;---- [ 校园网交换机/路由器 ] ----&gt; [ 工位的电脑 ]</span><br><span class="line">             ^</span><br><span class="line">             |</span><br><span class="line">             |</span><br><span class="line">            / \</span><br><span class="line">           / ! \  &lt;--- 这个连接断了 (Connection to the Internet is broken)</span><br><span class="line">          /_____\</span><br><span class="line">             |</span><br><span class="line">             V</span><br><span class="line">        [ 互 联 网 ]</span><br><span class="line">        (Google, Bilibili, etc.)</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h2 id="配置显卡驱动，cuda，cuDNN"><a href="#配置显卡驱动，cuda，cuDNN" class="headerlink" title="配置显卡驱动，cuda，cuDNN"></a>配置显卡驱动，cuda，cuDNN</h2><p>真是折腾啊，重装了好几次系统，每次的流程的都差不多，结果出的问题都是千奇百怪的。重装系统是最迅速的解决一些莫名其妙配置问题的最省时间的方法，对于小白来说。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">      [ 宿舍笔记本 ]           </span><br><span class="line">             |</span><br><span class="line">             | (内部网络连接)</span><br><span class="line">             V</span><br><span class="line">&lt;---- [ 校园网交换机/路由器 ] ----&gt; [ 工位的电脑 ]</span><br><span class="line">             ^</span><br><span class="line">             |</span><br><span class="line">             |</span><br><span class="line">            / \</span><br><span class="line">           / ! \  &lt;--- 这个连接断了 (Connection to the Internet is broken)</span><br><span class="line">          /_____\</span><br><span class="line">             |</span><br><span class="line">             V</span><br><span class="line">        [ 互 联 网 ]</span><br><span class="line">        (Google, Bilibili, etc.)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置显卡驱动，cuda，cuDNN"><a href="#配置显卡驱动，cuda，cuDNN" class="headerlink" title="配置显卡驱动，cuda，cuDNN"></a>配置显卡驱动，cuda，cuDNN</h2><p>真是折腾啊，重装了好几次系统，每次的流程的都差不多，结果出的问题都是千奇百怪的。重装系统是最迅速的解决一些莫名其妙配置问题的最省时间的方法，对于小白来说。</p>
 <blockquote>
-<p>发现一个好玩的，清华源下载的ubuntu系统下载依赖的时候会走清华源的镜像</p>
+<p><span class="github-emoji"><span>😃</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>发现一个好玩的，清华源下载的ubuntu系统下载依赖的时候会走清华源的镜像有点意思 <span class="github-emoji"><span>😃</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
 </blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">nvdia-smi 显示的cuda版本并不等同于当前暗转的CUDA Toolkit版本</span><br><span class="line">nvcc --version 显示当前的CUDA Toolkit版本</span><br></pre></td></tr></tbody></table></figure>
 
@@ -4252,7 +4251,8 @@
 </li>
 </ul>
 <h4 id="gcc和cmake之间的关系"><a href="#gcc和cmake之间的关系" class="headerlink" title="gcc和cmake之间的关系"></a>gcc和cmake之间的关系</h4><blockquote>
-<p>参考<a href="https://yuanfentiank789.github.io/2018/09/10/GCC%E4%B8%8ECmake%E7%9A%84%E5%85%B3%E7%B3%BB/">https://yuanfentiank789.github.io/2018/09/10/GCC%E4%B8%8ECmake%E7%9A%84%E5%85%B3%E7%B3%BB/</a></p>
+<p>参考</p>
+<p><a href="https://yuanfentiank789.github.io/2018/09/10/GCC%E4%B8%8ECmake%E7%9A%84%E5%85%B3%E7%B3%BB/">https://yuanfentiank789.github.io/2018/09/10/GCC%E4%B8%8ECmake%E7%9A%84%E5%85%B3%E7%B3%BB/</a></p>
 </blockquote>
 <p>1.gcc是GNU Compiler Collection（就是GNU编译器套件），也可以简单认为是编译器，它可以编译很多种编程语言（括C、C++、Objective-C、Fortran、Java等等）。</p>
 <p>2.当你的程序只有一个源文件时，直接就可以用gcc命令编译它。</p>
@@ -4342,17 +4342,14 @@
 <p>更新环境配置</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
 
+<h2 id="Conda环境迁移"><a href="#Conda环境迁移" class="headerlink" title="Conda环境迁移"></a>Conda环境迁移</h2><p>以<code>ai_application</code>为例</p>
+<p>导出win conda环境中的配置文件</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">conda activate ai_application</span><br><span class="line">conda env export --from-history &gt; environment.yml</span><br></pre></td></tr></tbody></table></figure>
 
+<p>传输环境配置文件，进入保存配置文件的目录</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">conda env create -f environment.yml</span><br></pre></td></tr></tbody></table></figure>
 
-
-
-
-
-
-
-
-
-
+<p>按照这个流程会遇到一些问题，遇到问题解决问题。</p>
 ]]></content>
       <categories>
         <category>技术</category>
