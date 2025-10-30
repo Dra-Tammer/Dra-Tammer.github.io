@@ -1484,7 +1484,8 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br></pre></td></tr></tbody></table></figure>
 
 <p>这一步完成后，我们需要打开<code>Anaconda Prompt</code> 运行 <code>conda clean -i</code> 清除索引缓存，保证用的是镜像站提供的索引。</p>
-<h2 id="环境内安装pytoch"><a href="#环境内安装pytoch" class="headerlink" title="环境内安装pytoch"></a>环境内安装pytoch</h2><blockquote>
+<h2 id="环境内安装pytoch"><a href="#环境内安装pytoch" class="headerlink" title="环境内安装pytoch"></a>环境内安装pytoch</h2><p><code>windows</code></p>
+<blockquote>
 <p><strong>NOTE:</strong> Latest PyTorch requires Python 3.8 or later.</p>
 </blockquote>
 <figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio pytorch-cuda=<span class="number">12.4</span> -c pytorch -c nvidia</span><br></pre></td></tr></tbody></table></figure>
@@ -4056,6 +4057,10 @@
 <p>网易云ncm音乐格式转换为mp3音乐格式工具，支持多线程批量转换</p>
 <h2 id="MT管理器"><a href="#MT管理器" class="headerlink" title="MT管理器"></a>MT管理器</h2><p><a href="https://mt2.cn/">https://mt2.cn/</a></p>
 <p>Android 平台文件管理 &amp; 逆向修改神器。独创的双窗口操作模式，两个目录同时显示，结合前进/后退/同步等功能，熟悉之后相比传统操作方式更加高效。</p>
+<h2 id="Termius"><a href="#Termius" class="headerlink" title="Termius"></a>Termius</h2><p><a href="https://termius.com/index.html">https://termius.com/index.html</a></p>
+<p>modern SSH client</p>
+<p>基础的功能都有，而且界面设计的十分好看，还可以自定义主题</p>
+<p>界面逻辑简洁直观</p>
 ]]></content>
       <categories>
         <category>玩机</category>
@@ -4322,7 +4327,33 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ii  libcudnn9-cuda-13                          9.14.0.64-1                             amd64        cuDNN runtime libraries for CUDA 13.0</span><br><span class="line">ii  libcudnn9-dev-cuda-13                      9.14.0.64-1                             amd64        cuDNN development libraries for CUDA 13.0</span><br><span class="line">ii  libcudnn9-headers-cuda-13                  9.14.0.64-1                             amd64        cuDNN header files for CUDA 13.0</span><br><span class="line">ii  libcudnn9-samples                          9.14.0.64-1                             all          cuDNN samples</span><br><span class="line">ii  libcudnn9-static-cuda-13                   9.14.0.64-1                             amd64        cuDNN static libraries for CUDA 13.0</span><br></pre></td></tr></tbody></table></figure>
 
 <p>安装成功</p>
-<h2 id="安装conda"><a href="#安装conda" class="headerlink" title="安装conda"></a>安装conda</h2>]]></content>
+<h2 id="安装conda环境"><a href="#安装conda环境" class="headerlink" title="安装conda环境"></a>安装conda环境</h2><p><a href="https://www.anaconda.com/download/success">https://www.anaconda.com/download/success</a></p>
+<p>下载可执行文件</p>
+<p>运行可执行文件</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sh Anaconda3-2025.06-0-Linux-x86_64.sh</span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果使用</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sudo sh Anaconda3-2025.06-0-Linux-x86_64.sh </span><br></pre></td></tr></tbody></table></figure>
+
+<p>就会只为根目录安装，之后要修改</p>
+<h3 id="配置环境变量-1"><a href="#配置环境变量-1" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>切换成root账户出问题：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">su</span><br><span class="line"></span><br><span class="line">su: Authentication failure</span><br><span class="line"></span><br><span class="line">sudo -i</span><br></pre></td></tr></tbody></table></figure>
+
+<p>更新环境配置</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
