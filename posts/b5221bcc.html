@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -16,7 +17,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="学习zinx的工程中的笔记">
 <meta property="og:type" content="article">
@@ -317,7 +318,7 @@
 <p>bit 是比特</p>
 </blockquote>
 <h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>就是假如有一个都要调用的函数<code>func_pro</code>，很多人都要用，每个人在一个固定的点上加上自己的业务，当然不能用<code>if else</code>，这时候使用者在调用这个函数的时候传入一个封装有自己业务逻辑的函数变量。</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">func_pro</span><span class="params">(<span class="keyword">func</span> f)</span></span> {</span><br><span class="line">    ...</span><br><span class="line">    f()</span><br><span class="line">    ...</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight go"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">func_pro</span><span class="params">(<span class="keyword">func</span> f)</span></span> {</span><br><span class="line">    ...</span><br><span class="line">    f()</span><br><span class="line">    ...</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <blockquote>
 <p>这个函数变量就是回调函数</p>
@@ -329,7 +330,7 @@
 <p>提供一个指令，指令对应的一个处理方式，指令和处理方式放在一起叫路由，不同消息不同路由</p>
 </blockquote>
 <h3 id="为什么在Connection中实现接口"><a href="#为什么在Connection中实现接口" class="headerlink" title="为什么在Connection中实现接口"></a>为什么在Connection中实现接口</h3><p>在Go语言中，接口（interface）是一种抽象类型，它定义了一组方法的集合，但并不实现这些方法的具体行为。接口的实现是通过类型为该接口的值来完成的，这些值可以是任何具有相应方法集的具体类型（通常是结构体）。这种设计允许多种不同的类型实现同一个接口，从而提供了一种灵活的方式来实现多态性。</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> IRouter <span class="keyword">interface</span> {</span><br><span class="line">    PreHandle(request IRequest)</span><br><span class="line">    Handle(request IRequest)</span><br><span class="line">    PostHandle(request IRequest)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Connection <span class="keyword">struct</span> {</span><br><span class="line">    Router ziface.IRouter</span><br><span class="line">    <span class="comment">// ... 其他字段 ...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight go"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> IRouter <span class="keyword">interface</span> {</span><br><span class="line">    PreHandle(request IRequest)</span><br><span class="line">    Handle(request IRequest)</span><br><span class="line">    PostHandle(request IRequest)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Connection <span class="keyword">struct</span> {</span><br><span class="line">    Router ziface.IRouter</span><br><span class="line">    <span class="comment">// ... 其他字段 ...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>Router</code> 字段的类型是 <code>ziface.IRouter</code> 接口。这里有几个关键点：</p>
 <ol>
@@ -455,13 +456,13 @@
 <h2 id="Q-S"><a href="#Q-S" class="headerlink" title="Q&amp;S"></a>Q&amp;S</h2><blockquote>
 <p>在这个包去import其他包的东西的时候会爆红，取消勾选</p>
 </blockquote>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enable <span class="keyword">go</span> modules integration</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight go"><table><tbody><tr><td class="code"><pre><span class="line">enable <span class="keyword">go</span> modules integration</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server.<span class="keyword">go</span>:<span class="number">3</span>:<span class="number">8</span>: <span class="keyword">package</span> zinx-<span class="keyword">go</span>/znet is not in GOROOT (D:\Environment\Go\src\zinx-<span class="keyword">go</span>\znet)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight go"><table><tbody><tr><td class="code"><pre><span class="line">Server.<span class="keyword">go</span>:<span class="number">3</span>:<span class="number">8</span>: <span class="keyword">package</span> zinx-<span class="keyword">go</span>/znet is not in GOROOT (D:\Environment\Go\src\zinx-<span class="keyword">go</span>\znet)</span><br></pre></td></tr></tbody></table></figure>
 
 <p>需要引入本地包的话，需要在go.mod中进行修改，两个项目都在src目录下，如下即可解决问题。</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require <span class="string">"zinx-go"</span> v0<span class="number">.0</span><span class="number">.0</span></span><br><span class="line">replace <span class="string">"zinx-go"</span> =&gt; <span class="string">"../zinx-go"</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight go"><table><tbody><tr><td class="code"><pre><span class="line">require <span class="string">"zinx-go"</span> v0<span class="number">.0</span><span class="number">.0</span></span><br><span class="line">replace <span class="string">"zinx-go"</span> =&gt; <span class="string">"../zinx-go"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 

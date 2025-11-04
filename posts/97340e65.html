@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -16,7 +17,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="学习pytorch">
 <meta property="og:type" content="article">
@@ -301,20 +302,20 @@
 <p>conda可以创建一个盒子，里面的环境配置独立</p>
 </blockquote>
 <p>创建环境</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pytorch python=<span class="number">3.8</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">conda create -n pytorch python=<span class="number">3.8</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>n是name的意思，后面输入环境的名称</p>
 <p>激活环境</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate pytorch</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">conda activate pytorch</span><br></pre></td></tr></tbody></table></figure>
 
 <p>查看工具包</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="built_in">list</span> | conda <span class="built_in">list</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">pip <span class="built_in">list</span> | conda <span class="built_in">list</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>删除环境及其依赖</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove -n <span class="string">"envname"</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">conda env remove -n <span class="string">"envname"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>清理环境，释放磁盘空间</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">conda clean --all</span><br></pre></td></tr></tbody></table></figure>
 
 <p>conda clean –all操作不会直接影响已经创建的虚拟环境。该命令主要用于清理conda缓存目录中的下载的包文件、索引文件和不必要的缓存文件，以释放磁盘空间。</p>
 <p>已经创建的虚拟环境包含在磁盘上的特定目录中，而conda clean –all操作不会直接删除这些虚拟环境目录或其中的包。这意味着你的虚拟环境和其中已安装的包将保持不变。</p>
@@ -322,34 +323,34 @@
 <p>总之，conda clean –all操作主要针对conda缓存目录中的文件，不会直接影响已经创建的虚拟环境和其中的包。如果你只关注已经创建的虚拟环境，可以放心使用该命令来释放磁盘空间。</p>
 <h2 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h2><p>Windows：</p>
 <p>文件管理器文件路径地址栏敲：<code>%APPDATA%</code> 回车，快速进入 <code>C:\Users\电脑用户\AppData\Roaming</code> 文件夹中 2、新建 pip 文件夹并在文件夹中新建 <code>pip.ini</code> 配置文件 3、我们需要在<code>pip.ini</code> 配置文件内容，我们可以选择使用记事本打开，输入以下内容，并按下ctrl+s保存，在这里我们使用的是豆瓣源为例子。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">[install]</span><br><span class="line">use-mirrors =true</span><br><span class="line">trusted-host = https://pypi.tuna.tsinghua.edu.cn</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">[install]</span><br><span class="line">use-mirrors =true</span><br><span class="line">trusted-host = https://pypi.tuna.tsinghua.edu.cn</span><br></pre></td></tr></tbody></table></figure>
 
 <p>查看 镜像地址：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 config list   </span><br><span class="line">global.index-url='https://pypi.tuna.tsinghua.edu.cn/simple'</span><br><span class="line">install.trusted-host='https://pypi.tuna.tsinghua.edu.cn'</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ pip3 config list   </span><br><span class="line">global.index-url='https://pypi.tuna.tsinghua.edu.cn/simple'</span><br><span class="line">install.trusted-host='https://pypi.tuna.tsinghua.edu.cn'</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="conda换源"><a href="#conda换源" class="headerlink" title="conda换源"></a>conda换源</h2><p>Windows系统：</p>
 <p>TUNA 提供了 Anaconda 仓库与第三方源的镜像，各系统都可以通过修改用户目录下的 <code>.condarc</code> 文件。Windows 用户无法直接创建名为 <code>.condarc</code> 的文件，可先执行<code>conda config --set show_channel_urls yes</code>生成该文件之后再修改。</p>
 <p>完成这一步后，我们需要修改<code>C:\Users\User_name\.condarc</code>这个文件，打开后将文件里原始内容删除，将下面的内容复制进去并保存。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br></pre></td></tr></tbody></table></figure>
 
 <p>这一步完成后，我们需要打开<code>Anaconda Prompt</code> 运行 <code>conda clean -i</code> 清除索引缓存，保证用的是镜像站提供的索引。</p>
 <h2 id="环境内安装pytoch"><a href="#环境内安装pytoch" class="headerlink" title="环境内安装pytoch"></a>环境内安装pytoch</h2><p><code>windows</code></p>
 <blockquote>
 <p><strong>NOTE:</strong> Latest PyTorch requires Python 3.8 or later.</p>
 </blockquote>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio pytorch-cuda=<span class="number">12.4</span> -c pytorch -c nvidia</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio pytorch-cuda=<span class="number">12.4</span> -c pytorch -c nvidia</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="查看显卡支持的cuda版本"><a href="#查看显卡支持的cuda版本" class="headerlink" title="查看显卡支持的cuda版本"></a>查看显卡支持的cuda版本</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="查看显卡支持的cuda版本"><a href="#查看显卡支持的cuda版本" class="headerlink" title="查看显卡支持的cuda版本"></a>查看显卡支持的cuda版本</h2><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="jupyter"><a href="#jupyter" class="headerlink" title="jupyter"></a>jupyter</h2><p>安装的时候安装在了base环境下</p>
 <p>在pytorch环境中安装jupyter</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">conda install jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
 
 <p>命令行下启动jupyter</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
 
 <p>打开D盘下的工作目录，先切换，再打开jupyter</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(pytorch) C:\Users\tammer&gt;D:</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">(pytorch) C:\Users\tammer&gt;D:</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="三种编写代码的环境"><a href="#三种编写代码的环境" class="headerlink" title="三种编写代码的环境"></a>三种编写代码的环境</h2><h3 id="py文件"><a href="#py文件" class="headerlink" title="py文件"></a>py文件</h3><p>代码是以块为一个整体的话，py中代码出现问题就要从头开始执行</p>
 <blockquote>
@@ -368,10 +369,10 @@
 </blockquote>
 <h2 id="两大法宝函数"><a href="#两大法宝函数" class="headerlink" title="两大法宝函数"></a>两大法宝函数</h2><h3 id="dir"><a href="#dir" class="headerlink" title="dir()"></a>dir()</h3><p>工具箱以及工具箱中的分隔区有什么东西</p>
 <p>也就是看方法里面有什么可以调用的函数，或者理解说查看这个对象里面的内容，查看这个分隔区中还有没有其他的分隔区</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">torch.cuda.is_available()</span><br><span class="line">Out[<span class="number">4</span>]: <span class="literal">True</span></span><br><span class="line"><span class="built_in">dir</span>(torch)</span><br><span class="line">Out[<span class="number">5</span>]: </span><br><span class="line">[<span class="string">'AVG'</span>,</span><br><span class="line"> <span class="string">'AggregationType'</span>,</span><br><span class="line"> <span class="string">'AliasDb'</span>,</span><br><span class="line"> <span class="string">'Any'</span>,......]</span><br><span class="line"><span class="built_in">dir</span>(torch.cuda.is_available)</span><br><span class="line">Out[<span class="number">6</span>]: </span><br><span class="line">[<span class="string">'__annotations__'</span>,</span><br><span class="line">......</span><br><span class="line"> <span class="string">'__subclasshook__'</span>]</span><br><span class="line"> <span class="comment"># 下划线就是不可修改的说明这个is_available不再是一个分隔区，而是一个函数，即可使用help查看使用方法</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">torch.cuda.is_available()</span><br><span class="line">Out[<span class="number">4</span>]: <span class="literal">True</span></span><br><span class="line"><span class="built_in">dir</span>(torch)</span><br><span class="line">Out[<span class="number">5</span>]: </span><br><span class="line">[<span class="string">'AVG'</span>,</span><br><span class="line"> <span class="string">'AggregationType'</span>,</span><br><span class="line"> <span class="string">'AliasDb'</span>,</span><br><span class="line"> <span class="string">'Any'</span>,......]</span><br><span class="line"><span class="built_in">dir</span>(torch.cuda.is_available)</span><br><span class="line">Out[<span class="number">6</span>]: </span><br><span class="line">[<span class="string">'__annotations__'</span>,</span><br><span class="line">......</span><br><span class="line"> <span class="string">'__subclasshook__'</span>]</span><br><span class="line"> <span class="comment"># 下划线就是不可修改的说明这个is_available不再是一个分隔区，而是一个函数，即可使用help查看使用方法</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="help"><a href="#help" class="headerlink" title="help()"></a>help()</h3><p>知道每个工具是如何使用的，工具的使用方法</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">help</span>(torch.cuda.is_available)</span><br><span class="line">Help on function is_available <span class="keyword">in</span> module torch.cuda:</span><br><span class="line">is_available() -&gt; <span class="built_in">bool</span></span><br><span class="line">    Return a <span class="built_in">bool</span> indicating <span class="keyword">if</span> CUDA <span class="keyword">is</span> currently available.</span><br><span class="line"><span class="comment"># 官方解释的函数用法</span></span><br><span class="line">或者</span><br><span class="line">Dataset??</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">help</span>(torch.cuda.is_available)</span><br><span class="line">Help on function is_available <span class="keyword">in</span> module torch.cuda:</span><br><span class="line">is_available() -&gt; <span class="built_in">bool</span></span><br><span class="line">    Return a <span class="built_in">bool</span> indicating <span class="keyword">if</span> CUDA <span class="keyword">is</span> currently available.</span><br><span class="line"><span class="comment"># 官方解释的函数用法</span></span><br><span class="line">或者</span><br><span class="line">Dataset??</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="pytorch加载数据"><a href="#pytorch加载数据" class="headerlink" title="pytorch加载数据"></a>pytorch加载数据</h2><p>PyTorch数据读入是通过Dataset+DataLoader的方式完成的，Dataset定义好数据的格式和数据变换形式，DataLoader用iterative的方式不断读入批次数据。</p>
 <h3 id="Dateset"><a href="#Dateset" class="headerlink" title="Dateset"></a>Dateset</h3><p>提供一种方式去获取数据及其label，还能进行编号</p>
@@ -387,7 +388,7 @@
 </ul>
 <h3 id="Dateloader"><a href="#Dateloader" class="headerlink" title="Dateloader"></a>Dateloader</h3><p>对数据进行打包，为后面的网络提供不同的数据形式</p>
 <p>构建好Dataset后，就可以使用DataLoader来按批次读入数据了，实现代码如下：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, num_workers=<span class="number">4</span>, shuffle=<span class="literal">True</span>, drop_last=<span class="literal">True</span>)</span><br><span class="line">val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, num_workers=<span class="number">4</span>, shuffle=<span class="literal">False</span>)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, num_workers=<span class="number">4</span>, shuffle=<span class="literal">True</span>, drop_last=<span class="literal">True</span>)</span><br><span class="line">val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, num_workers=<span class="number">4</span>, shuffle=<span class="literal">False</span>)</span><br></pre></td></tr></tbody></table></figure>
 
 <p>其中:</p>
 <ul>
@@ -424,28 +425,28 @@
 </ul>
 <p>除了以上的功能，OpenCV还有一个重要的特点就是跨平台性，可以在Windows、Linux、macOS等操作系统上运行，并且支持多种编程语言，如C++、Python和Java等。</p>
 <p>总之，OpenCV作为一个强大的计算机视觉库，在实现计算机视觉应用的过程中，可以节省开发者大量的时间和精力，提高开发效率和准确性，因此受到了广大开发者的欢迎和使用。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="windows中的转译"><a href="#windows中的转译" class="headerlink" title="windows中的转译"></a>windows中的转译</h2><blockquote>
 <p>hymenoptera_data/train/ants/0013035.jpg</p>
 </blockquote>
 <blockquote>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img_path = "hymenoptera_data\\trainants\\0013035.jpg"</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">img_path = "hymenoptera_data\\trainants\\0013035.jpg"</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
 <h2 id="tensorboard的使用-未成功"><a href="#tensorboard的使用-未成功" class="headerlink" title="tensorboard的使用(未成功)"></a>tensorboard的使用(未成功)</h2><p>它提供机器学习实验所需的可视化功能和工具</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br></pre></td></tr></tbody></table></figure>
 
 <p>查看log</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=logs --port=<span class="number">6007</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">tensorboard --logdir=logs --port=<span class="number">6007</span></span><br></pre></td></tr></tbody></table></figure>
 
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade tensorboard</span><br><span class="line"><span class="comment"># 有时候版本不兼容，卸载掉重新安装即可</span></span><br><span class="line">pip uninstall protobuf</span><br><span class="line">pip install protobufz</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">pip install --upgrade tensorboard</span><br><span class="line"><span class="comment"># 有时候版本不兼容，卸载掉重新安装即可</span></span><br><span class="line">pip uninstall protobuf</span><br><span class="line">pip install protobufz</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><blockquote>
 <p>‘SSLError(SSLZeroReturnError(6, ‘TLS/SSL connection has been closed (EOF)</p>
 </blockquote>
 <p>关闭代理</p>
 <p>更换成了阿里源</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">global</span>]</span><br><span class="line">index-url=https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">[<span class="keyword">global</span>]</span><br><span class="line">index-url=https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h2><p>NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库。</p>
 <p>NumPy 是一个运行速度非常快的数学库，主要用于数组计算，包含：</p>
@@ -460,10 +461,10 @@
 </blockquote>
 <p>从本章开始，我们将开始介绍PyTorch基础知识，本章我们将介绍张量，以帮助大家建立起对数据的描述，随后我们再介绍张量的运算，最后再讲PyTorch中所有神经网络的核心包 <code>autograd </code>，也就是自动微分，了解完这些内容我们就可以较好地理解PyTorch代码了。在深度学习中，我们通常将数据以张量的形式进行表示，比如我们用三维张量表示一个RGB图像，四维张量表示视频。</p>
 <p>一个图像可以用三个字段表示：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(width, height, channel) = 3D</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">(width, height, channel) = 3D</span><br></pre></td></tr></tbody></table></figure>
 
 <p>但是，在机器学习工作中，我们经常要处理不止一张图片或一篇文档——我们要处理一个集合。我们可能有10,000张郁金香的图片，这意味着，我们将用到4D张量：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(batch_size, width, height, channel) = 4D</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">(batch_size, width, height, channel) = 4D</span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>Tensor</code> 提供GPU计算和自动求梯度等更多功能，这些使 <code>Tensor</code> 这一数据类型更加适合深度学习。</p>
 <h2 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h2><blockquote>
@@ -472,7 +473,7 @@
 <p>第三种方式有点不一样，它的逻辑是，我不再拆分模型，我训练的时候模型都是一整个模型。但是我将输入的数据拆分。所谓的拆分数据就是，同一个模型在不同GPU中训练一部分数据，然后再分别计算一部分数据之后，只需要将输出的数据做一个汇总，然后再反传。</p>
 <h2 id="使用CUDA加速训练"><a href="#使用CUDA加速训练" class="headerlink" title="使用CUDA加速训练"></a>使用CUDA加速训练</h2><p>单卡训练</p>
 <p>在PyTorch框架下，CUDA的使用变得非常简单，我们只需要显式的将数据和模型通过<code>.cuda()</code>方法转移到GPU上就可加速我们的训练。如下：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model = Net()</span><br><span class="line">model.cuda() # 模型显示转移到CUDA上</span><br><span class="line"></span><br><span class="line">for image,label in dataloader:</span><br><span class="line">    # 图像和标签显示转移到CUDA上</span><br><span class="line">    image = image.cuda() </span><br><span class="line">    label = label.cuda()</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">model = Net()</span><br><span class="line">model.cuda() # 模型显示转移到CUDA上</span><br><span class="line"></span><br><span class="line">for image,label in dataloader:</span><br><span class="line">    # 图像和标签显示转移到CUDA上</span><br><span class="line">    image = image.cuda() </span><br><span class="line">    label = label.cuda()</span><br></pre></td></tr></tbody></table></figure>
 
 
     </div>
