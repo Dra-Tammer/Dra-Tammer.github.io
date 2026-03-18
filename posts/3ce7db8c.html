@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dra-tammer.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":40,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Further simplification of the basic mathematical principles of reinforcement learning during the learning process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deep_reinforcement_learning">
+<meta property="og:url" content="https://dra-tammer.github.io/posts/3ce7db8c.html">
+<meta property="og:site_name" content="AxelConflux">
+<meta property="og:description" content="Further simplification of the basic mathematical principles of reinforcement learning during the learning process">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-16T02:38:37.000Z">
+<meta property="article:author" content="tammer">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="经验">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dra-tammer.github.io/posts/3ce7db8c.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dra-tammer.github.io/posts/3ce7db8c.html","path":"posts/3ce7db8c.html","title":"deep_reinforcement_learning"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>deep_reinforcement_learning | AxelConflux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="AxelConflux" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">AxelConflux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">world for tammer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">44</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">44</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Concepts"><span class="nav-text">Basic Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-text">state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action"><span class="nav-text">action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state-transition"><span class="nav-text">state transition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy"><span class="nav-text">policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reward"><span class="nav-text">reward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trajectories-returns-and-episodes"><span class="nav-text">trajectories, returns and episodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Markov-decision-processes-MDP"><span class="nav-text">Markov decision processes (MDP)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E8%BF%87%E7%A8%8B"><span class="nav-text">什么是马尔可夫过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#State-Values-and-Bellman-Equation"><span class="nav-text">State Values and Bellman Equation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-calculate-returns"><span class="nav-text">How to calculate returns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state-value"><span class="nav-text">state value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bellman-Equation"><span class="nav-text">Bellman Equation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action-value"><span class="nav-text">action value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action-value%E5%92%8Creward%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%E5%92%8C%E8%81%94%E7%B3%BB"><span class="nav-text">action value和reward的异同点和联系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimal-State-Values-and-Bellman-Optimality-Equation"><span class="nav-text">Optimal State Values and Bellman Optimality Equation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-action-value-to-get-a-better-policy"><span class="nav-text">Use action value to get a better policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#optimal-policy-and-optimal-state-value"><span class="nav-text">optimal policy and optimal state value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bellman-optimality-equation"><span class="nav-text">bellman optimality equation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E5%AD%90"><span class="nav-text">最优策略的影响因子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Value-Iteration-and-Policy-Iteration"><span class="nav-text">Value Iteration and Policy Iteration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#value-iteration"><span class="nav-text">value iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy-iteration"><span class="nav-text">policy iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#summary"><span class="nav-text">summary</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tammer"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">tammer</p>
+  <div class="site-description" itemprop="description">我忘记一切悲剧，所见皆是奇迹</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Dra-Tammer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Dra-Tammer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dra-tammer.github.io/posts/3ce7db8c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="tammer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AxelConflux">
+      <meta itemprop="description" content="我忘记一切悲剧，所见皆是奇迹">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="deep_reinforcement_learning | AxelConflux">
+      <meta itemprop="description" content="Further simplification of the basic mathematical principles of reinforcement learning during the learning process">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          deep_reinforcement_learning
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-16 10:38:37" itemprop="dateCreated datePublished" datetime="2026-03-16T10:38:37+08:00">2026-03-16</time>
+    </span>
+
+  
+
+
+  
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">强化学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">Further simplification of the basic mathematical principles of reinforcement learning during the learning process</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Basic-Concepts"><a href="#Basic-Concepts" class="headerlink" title="Basic Concepts"></a>Basic Concepts</h2><h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><p>agent相对于环境的状态</p>
+<p>state space就是一个集合</p>
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p>For each state, the agent can take several possible actions.</p>
+<p>action space也是一个集合</p>
+<blockquote>
+<p>action space和状态是依赖的，其是S的函数；不同状态的action space不一样</p>
+</blockquote>
+<h3 id="state-transition"><a href="#state-transition" class="headerlink" title="state transition"></a>state transition</h3><p>表格表示状态转移只能表示确定性的情况</p>
+<p>可以通过conditional probability（条件概率）去表示状态转移</p>
+<h3 id="policy"><a href="#policy" class="headerlink" title="policy"></a>policy</h3><p>A policy tells the agent which actions to take at every state.</p>
+<p>policy采取一系列的action</p>
+<p>用矩阵表示一个策略就是tabular的方法</p>
+<h3 id="reward"><a href="#reward" class="headerlink" title="reward"></a>reward</h3><blockquote>
+<p>数，一个标量</p>
+</blockquote>
+<p>A reward can be interpreted as a human-machine interface.</p>
+<h3 id="trajectories-returns-and-episodes"><a href="#trajectories-returns-and-episodes" class="headerlink" title="trajectories, returns and episodes"></a>trajectories, returns and episodes</h3><p>A trajectory is a state-action-reward chain. The return of this trajectory is defined as the sum of all the rewards collected along the trajectory.</p>
+<p>return能够评价一个策略是好是坏。引入discount rate（折扣因子），得到discounted return，通过控制折扣因子γ，控制agent所学到的策略，γ越小越近视，γ越大越远视。</p>
+<p>An episode is usually assumed to be a finite trajectory. It is a trial.</p>
+<p>episode是有限步的，永远持续的是continuing tasks.</p>
+<h3 id="Markov-decision-processes-MDP"><a href="#Markov-decision-processes-MDP" class="headerlink" title="Markov decision processes (MDP)"></a>Markov decision processes (MDP)</h3><p>The key ingredients of an MDP are listed below.</p>
+<ul>
+<li>Sets:<ul>
+<li>state space</li>
+<li>action space</li>
+<li>reward set</li>
+</ul>
+</li>
+<li>Model:<ul>
+<li>state transition probability</li>
+<li>reward probability</li>
+</ul>
+</li>
+<li>Policy</li>
+<li>Markov property: 和历史无关</li>
+</ul>
+<h4 id="什么是马尔可夫过程"><a href="#什么是马尔可夫过程" class="headerlink" title="什么是马尔可夫过程"></a>什么是马尔可夫过程</h4><p>Markov: Markov property (meaningless property)</p>
+<p>decision: policy</p>
+<p>processes: sets+model</p>
+<h2 id="State-Values-and-Bellman-Equation"><a href="#State-Values-and-Bellman-Equation" class="headerlink" title="State Values and Bellman Equation"></a>State Values and Bellman Equation</h2><p>return能够评估一个策略的好坏</p>
+<h3 id="How-to-calculate-returns"><a href="#How-to-calculate-returns" class="headerlink" title="How to calculate returns"></a>How to calculate returns</h3><ul>
+<li>by definition</li>
+<li>bootstrapping</li>
+</ul>
+<p>bootstrapping: 从不同状态出发得到的return依赖于从其他状态出发得到的return</p>
+<h3 id="state-value"><a href="#state-value" class="headerlink" title="state value"></a>state value</h3><p>可反映一个状态的价值，也能反映一个策略的好坏</p>
+<p>state value就是在某个固定策略下的状态价值</p>
+<p>$$<br>vπ(s) = E[Gt |St = s].<br>$$<br>多步平均值：state value，单步平均值：return</p>
+<p>The relationship between state values and returns is further clarified as follows. When both the policy and the system model are deterministic, starting from a state always leads to the same trajectory. In this case, the return obtained starting from a state is equal to the value of that state. By contrast, when either the policy or the system model is stochastic, starting from the same state may generate different trajectories. In this case, the returns of different trajectories are different, and the state value is the mean of these returns.</p>
+<h3 id="Bellman-Equation"><a href="#Bellman-Equation" class="headerlink" title="Bellman Equation"></a>Bellman Equation</h3><p>$$<br>v = r + γPv.<br>$$</p>
+<p>描述了不同状态的state-value之间的关系，可以使用iteration solution进行计算。</p>
+<h3 id="action-value"><a href="#action-value" class="headerlink" title="action value"></a>action value</h3><blockquote>
+<p>state value: the average return the agent can get starting from a state</p>
+</blockquote>
+<blockquote>
+<p>action value: the average return the agent can get starting from a state and take an action</p>
+</blockquote>
+<p>state value是按策略对action value的加权平均，对于一个状态所有的action value求一个加权平均就是state value。</p>
+<h3 id="action-value和reward的异同点和联系"><a href="#action-value和reward的异同点和联系" class="headerlink" title="action value和reward的异同点和联系"></a>action value和reward的异同点和联系</h3><p>reward是执行动作后，环境立即给予agent的反馈。而action value是agent在状态s执行a，然后按照策略π行动，未来总回报的期望。</p>
+<blockquote>
+<p>action value = reward + future reward</p>
+</blockquote>
+<h2 id="Optimal-State-Values-and-Bellman-Optimality-Equation"><a href="#Optimal-State-Values-and-Bellman-Optimality-Equation" class="headerlink" title="Optimal State Values and Bellman Optimality Equation"></a>Optimal State Values and Bellman Optimality Equation</h2><p>强化学习的最终目的：寻找最优策略</p>
+<h3 id="Use-action-value-to-get-a-better-policy"><a href="#Use-action-value-to-get-a-better-policy" class="headerlink" title="Use action value to get a better policy"></a>Use action value to get a better policy</h3><p>We can obtain a better policy if we update the policy to select the action with the greatest action value.</p>
+<p>对每一个状态都选择action value最大的那个action，不断迭代，最后的策略趋向于一个最优策略。</p>
+<h3 id="optimal-policy-and-optimal-state-value"><a href="#optimal-policy-and-optimal-state-value" class="headerlink" title="optimal policy and optimal state value"></a>optimal policy and optimal state value</h3><p>A policy π ∗ is optimal if vπ∗ (s) ≥ vπ(s) for all s ∈ S and for any other policy π. The state values of π ∗ are the optimal state values.</p>
+<h3 id="bellman-optimality-equation"><a href="#bellman-optimality-equation" class="headerlink" title="bellman optimality equation"></a>bellman optimality equation</h3><p>贝尔曼最优公式（BOE）是分析最优策略和最优state value的工具。</p>
+<p>贝尔曼公式一定是对应一个π∗，v∗是π∗所对应的state value</p>
+<h3 id="最优策略的影响因子"><a href="#最优策略的影响因子" class="headerlink" title="最优策略的影响因子"></a>最优策略的影响因子</h3><p>reward, model, discount rate</p>
+<blockquote>
+<p>What matters most is not the absolute reward values! It’s their relative value.</p>
+</blockquote>
+<p>有discount rate的存在能够防止agent绕远路。</p>
+<p>对于BOE，其optimal state value是唯一的，但是对应optimal state value的最优策略不一定唯一。</p>
+<h2 id="Value-Iteration-and-Policy-Iteration"><a href="#Value-Iteration-and-Policy-Iteration" class="headerlink" title="Value Iteration and Policy Iteration"></a>Value Iteration and Policy Iteration</h2><p>model-based: 已知MDP，也是已知环境，find optimal policy.</p>
+<h3 id="value-iteration"><a href="#value-iteration" class="headerlink" title="value iteration"></a>value iteration</h3><ol>
+<li>policy update </li>
+<li>value update</li>
+</ol>
+<blockquote>
+<p>matrix vector form一般用于做理论分析，而elementwise form一般用于代码实现</p>
+</blockquote>
+<h3 id="policy-iteration"><a href="#policy-iteration" class="headerlink" title="policy iteration"></a>policy iteration</h3><ol>
+<li>policy evaluation: 任意给一个policy，求出state value</li>
+<li>policy improvement</li>
+</ol>
+<p>在证明策略迭代收敛的时候用到了值迭代算法是收敛的这样一个结果。</p>
+<p>策略迭代和值迭代是truncated policy iteration的两个极端。策略迭代理论上来说要计算无穷多步，truncated policy iteration计算有限步。</p>
+<p>接近目标的状态策略会先变好。</p>
+<h3 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h3><p>值迭代是直接求解BOE，策略迭代是通过交替使用Bellman方程和策略改进，简介求解BOE。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"><i class="fa fa-tag"></i> 技术</a>
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"><i class="fa fa-tag"></i> 人工智能</a>
+              <a href="/tags/pytorch/" rel="tag"><i class="fa fa-tag"></i> pytorch</a>
+              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 强化学习</a>
+              <a href="/tags/%E7%BB%8F%E9%AA%8C/" rel="tag"><i class="fa fa-tag"></i> 经验</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/854260bc.html" rel="prev" title="双系统 & ubuntu配置DL环境">
+                  <i class="fa fa-angle-left"></i> 双系统 & ubuntu配置DL环境
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">tammer</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:13</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+    <span id="timeDate">载入天数...</span>
+
+    <script>
+    var now = new Date();
+
+    function createtime() {
+        //此处修改你的建站时间或者网站上线时间
+        var create_time = '<%- theme.running_time.create_time %>';
+        var grt = new Date("08/05/2023 12:00:00");
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("timeDate").innerHTML = "This world has been running for " + dnum + " 天 " + hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+
+    }
+    setInterval("createtime()", 250);
+    </script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"Dra-Tammer/blog_comments_db","issue_term":"title","theme":"github-dark"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

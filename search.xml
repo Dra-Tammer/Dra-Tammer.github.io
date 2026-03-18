@@ -3569,9 +3569,6 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">conda env create -f environment.yml</span><br></pre></td></tr></tbody></table></figure>
 
 <p>按照这个流程会遇到一些问题，遇到问题解决问题。</p>
-<p>source coding </p>
-<p>第一个论文汇报，深度学习和无损数据压缩结合，大模型，基于深度学习的压缩</p>
-<p>第二个技术报告，综述论文，三千字左右，中英文都可以，需要有技术报告，无损，有损都可以，好好使用AI * GPT*</p>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -4360,6 +4357,111 @@
       </categories>
       <tags>
         <tag>读书</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>deep_reinforcement_learning</title>
+    <url>/posts/3ce7db8c.html</url>
+    <content><![CDATA[<h2 id="Basic-Concepts"><a href="#Basic-Concepts" class="headerlink" title="Basic Concepts"></a>Basic Concepts</h2><h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><p>agent相对于环境的状态</p>
+<p>state space就是一个集合</p>
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p>For each state, the agent can take several possible actions.</p>
+<p>action space也是一个集合</p>
+<blockquote>
+<p>action space和状态是依赖的，其是S的函数；不同状态的action space不一样</p>
+</blockquote>
+<h3 id="state-transition"><a href="#state-transition" class="headerlink" title="state transition"></a>state transition</h3><p>表格表示状态转移只能表示确定性的情况</p>
+<p>可以通过conditional probability（条件概率）去表示状态转移</p>
+<h3 id="policy"><a href="#policy" class="headerlink" title="policy"></a>policy</h3><p>A policy tells the agent which actions to take at every state.</p>
+<p>policy采取一系列的action</p>
+<p>用矩阵表示一个策略就是tabular的方法</p>
+<h3 id="reward"><a href="#reward" class="headerlink" title="reward"></a>reward</h3><blockquote>
+<p>数，一个标量</p>
+</blockquote>
+<p>A reward can be interpreted as a human-machine interface.</p>
+<h3 id="trajectories-returns-and-episodes"><a href="#trajectories-returns-and-episodes" class="headerlink" title="trajectories, returns and episodes"></a>trajectories, returns and episodes</h3><p>A trajectory is a state-action-reward chain. The return of this trajectory is defined as the sum of all the rewards collected along the trajectory.</p>
+<p>return能够评价一个策略是好是坏。引入discount rate（折扣因子），得到discounted return，通过控制折扣因子γ，控制agent所学到的策略，γ越小越近视，γ越大越远视。</p>
+<p>An episode is usually assumed to be a finite trajectory. It is a trial.</p>
+<p>episode是有限步的，永远持续的是continuing tasks.</p>
+<h3 id="Markov-decision-processes-MDP"><a href="#Markov-decision-processes-MDP" class="headerlink" title="Markov decision processes (MDP)"></a>Markov decision processes (MDP)</h3><p>The key ingredients of an MDP are listed below.</p>
+<ul>
+<li>Sets:<ul>
+<li>state space</li>
+<li>action space</li>
+<li>reward set</li>
+</ul>
+</li>
+<li>Model:<ul>
+<li>state transition probability</li>
+<li>reward probability</li>
+</ul>
+</li>
+<li>Policy</li>
+<li>Markov property: 和历史无关</li>
+</ul>
+<h4 id="什么是马尔可夫过程"><a href="#什么是马尔可夫过程" class="headerlink" title="什么是马尔可夫过程"></a>什么是马尔可夫过程</h4><p>Markov: Markov property (meaningless property)</p>
+<p>decision: policy</p>
+<p>processes: sets+model</p>
+<h2 id="State-Values-and-Bellman-Equation"><a href="#State-Values-and-Bellman-Equation" class="headerlink" title="State Values and Bellman Equation"></a>State Values and Bellman Equation</h2><p>return能够评估一个策略的好坏</p>
+<h3 id="How-to-calculate-returns"><a href="#How-to-calculate-returns" class="headerlink" title="How to calculate returns"></a>How to calculate returns</h3><ul>
+<li>by definition</li>
+<li>bootstrapping</li>
+</ul>
+<p>bootstrapping: 从不同状态出发得到的return依赖于从其他状态出发得到的return</p>
+<h3 id="state-value"><a href="#state-value" class="headerlink" title="state value"></a>state value</h3><p>可反映一个状态的价值，也能反映一个策略的好坏</p>
+<p>state value就是在某个固定策略下的状态价值</p>
+<p>$$<br>vπ(s) = E[Gt |St = s].<br>$$<br>多步平均值：state value，单步平均值：return</p>
+<p>The relationship between state values and returns is further clarified as follows. When both the policy and the system model are deterministic, starting from a state always leads to the same trajectory. In this case, the return obtained starting from a state is equal to the value of that state. By contrast, when either the policy or the system model is stochastic, starting from the same state may generate different trajectories. In this case, the returns of different trajectories are different, and the state value is the mean of these returns.</p>
+<h3 id="Bellman-Equation"><a href="#Bellman-Equation" class="headerlink" title="Bellman Equation"></a>Bellman Equation</h3><p>$$<br>v = r + γPv.<br>$$</p>
+<p>描述了不同状态的state-value之间的关系，可以使用iteration solution进行计算。</p>
+<h3 id="action-value"><a href="#action-value" class="headerlink" title="action value"></a>action value</h3><blockquote>
+<p>state value: the average return the agent can get starting from a state</p>
+</blockquote>
+<blockquote>
+<p>action value: the average return the agent can get starting from a state and take an action</p>
+</blockquote>
+<p>state value是按策略对action value的加权平均，对于一个状态所有的action value求一个加权平均就是state value。</p>
+<h3 id="action-value和reward的异同点和联系"><a href="#action-value和reward的异同点和联系" class="headerlink" title="action value和reward的异同点和联系"></a>action value和reward的异同点和联系</h3><p>reward是执行动作后，环境立即给予agent的反馈。而action value是agent在状态s执行a，然后按照策略π行动，未来总回报的期望。</p>
+<blockquote>
+<p>action value = reward + future reward</p>
+</blockquote>
+<h2 id="Optimal-State-Values-and-Bellman-Optimality-Equation"><a href="#Optimal-State-Values-and-Bellman-Optimality-Equation" class="headerlink" title="Optimal State Values and Bellman Optimality Equation"></a>Optimal State Values and Bellman Optimality Equation</h2><p>强化学习的最终目的：寻找最优策略</p>
+<h3 id="Use-action-value-to-get-a-better-policy"><a href="#Use-action-value-to-get-a-better-policy" class="headerlink" title="Use action value to get a better policy"></a>Use action value to get a better policy</h3><p>We can obtain a better policy if we update the policy to select the action with the greatest action value.</p>
+<p>对每一个状态都选择action value最大的那个action，不断迭代，最后的策略趋向于一个最优策略。</p>
+<h3 id="optimal-policy-and-optimal-state-value"><a href="#optimal-policy-and-optimal-state-value" class="headerlink" title="optimal policy and optimal state value"></a>optimal policy and optimal state value</h3><p>A policy π ∗ is optimal if vπ∗ (s) ≥ vπ(s) for all s ∈ S and for any other policy π. The state values of π ∗ are the optimal state values.</p>
+<h3 id="bellman-optimality-equation"><a href="#bellman-optimality-equation" class="headerlink" title="bellman optimality equation"></a>bellman optimality equation</h3><p>贝尔曼最优公式（BOE）是分析最优策略和最优state value的工具。</p>
+<p>贝尔曼公式一定是对应一个π∗，v∗是π∗所对应的state value</p>
+<h3 id="最优策略的影响因子"><a href="#最优策略的影响因子" class="headerlink" title="最优策略的影响因子"></a>最优策略的影响因子</h3><p>reward, model, discount rate</p>
+<blockquote>
+<p>What matters most is not the absolute reward values! It’s their relative value.</p>
+</blockquote>
+<p>有discount rate的存在能够防止agent绕远路。</p>
+<p>对于BOE，其optimal state value是唯一的，但是对应optimal state value的最优策略不一定唯一。</p>
+<h2 id="Value-Iteration-and-Policy-Iteration"><a href="#Value-Iteration-and-Policy-Iteration" class="headerlink" title="Value Iteration and Policy Iteration"></a>Value Iteration and Policy Iteration</h2><p>model-based: 已知MDP，也是已知环境，find optimal policy.</p>
+<h3 id="value-iteration"><a href="#value-iteration" class="headerlink" title="value iteration"></a>value iteration</h3><ol>
+<li>policy update </li>
+<li>value update</li>
+</ol>
+<blockquote>
+<p>matrix vector form一般用于做理论分析，而elementwise form一般用于代码实现</p>
+</blockquote>
+<h3 id="policy-iteration"><a href="#policy-iteration" class="headerlink" title="policy iteration"></a>policy iteration</h3><ol>
+<li>policy evaluation: 任意给一个policy，求出state value</li>
+<li>policy improvement</li>
+</ol>
+<p>在证明策略迭代收敛的时候用到了值迭代算法是收敛的这样一个结果。</p>
+<p>策略迭代和值迭代是truncated policy iteration的两个极端。策略迭代理论上来说要计算无穷多步，truncated policy iteration计算有限步。</p>
+<p>接近目标的状态策略会先变好。</p>
+<h3 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h3><p>值迭代是直接求解BOE，策略迭代是通过交替使用Bellman方程和策略改进，简介求解BOE。</p>
+]]></content>
+      <categories>
+        <category>强化学习</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>人工智能</tag>
+        <tag>pytorch</tag>
+        <tag>强化学习</tag>
+        <tag>经验</tag>
       </tags>
   </entry>
 </search>
