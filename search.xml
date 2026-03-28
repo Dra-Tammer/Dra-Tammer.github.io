@@ -4572,7 +4572,25 @@
 <h3 id="A2C"><a href="#A2C" class="headerlink" title="A2C"></a>A2C</h3><p>引入一个偏置量来减少估计的方差</p>
 <p>引入b不发生变化，成立（不影响梯度）</p>
 <p>降低采样方差，越接近真实E</p>
+<h2 id="Proximal-Policy-Optimiztion-PPO"><a href="#Proximal-Policy-Optimiztion-PPO" class="headerlink" title="Proximal Policy Optimiztion (PPO)"></a>Proximal Policy Optimiztion (PPO)</h2><blockquote>
+<p>近端策略优化，带安全边界的策略梯度</p>
+</blockquote>
 ]]></content>
+      <categories>
+        <category>强化学习</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>人工智能</tag>
+        <tag>pytorch</tag>
+        <tag>强化学习</tag>
+        <tag>经验</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AEOSSP</title>
+    <url>/posts/b2a528b2.html</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>强化学习</category>
       </categories>
