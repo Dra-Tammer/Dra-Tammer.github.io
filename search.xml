@@ -4590,7 +4590,400 @@
   <entry>
     <title>AEOSSP</title>
     <url>/posts/b2a528b2.html</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>带有时间依赖的多轨道敏捷卫星观测调度问题旨在从几个连续轨道中选择多个任务，并在不违反约束的情况下确定选择任务的观测序列和观测时间。轨道是指卫星绕地球旋转的时间间隔，轨道的起点可以设置为卫星飞离地球地影或经过一个特定纬度或经度的时间，卫星能够从多个轨道观测给定任务，因此每个任务具有多个可见时间窗口。</p>
+<hr>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><h2 id="假设与变量"><a href="#假设与变量" class="headerlink" title="假设与变量"></a>假设与变量</h2><ul>
+<li><p>卫星仅有一个传感器</p>
+</li>
+<li><p>所有任务均为点目标</p>
+</li>
+<li><p>不考虑存储和功率限制。</p>
+</li>
+<li><p>不考虑观测数据下传过程。</p>
+</li>
+</ul>
+<p>| 变量 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| 定义 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| ————- | —————————————————- |</p>
+<p>| $task_i$ &nbsp; &nbsp; &nbsp;| 待调度的观测任务 $i$ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| $tw_i$ &nbsp; &nbsp; &nbsp; &nbsp;| 任务 $i$ 的可见时间窗口 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| $tw_i^s$ &nbsp; &nbsp; &nbsp;| 可见时间窗口的开始时间 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| $tw_i^e$ &nbsp; &nbsp; &nbsp;| 可见时间窗口的结束时间 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| $p_i$ &nbsp; &nbsp; &nbsp; &nbsp; | 任务 $i$ 的优先级，即观测该任务获得的奖励 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| $d_i$ &nbsp; &nbsp; &nbsp; &nbsp; | 任务 $i$ 所需的持续时间 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| $ob_i$ &nbsp; &nbsp; &nbsp; &nbsp;| 任务 $i$ 的观测开始时间 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| $oe_i$ &nbsp; &nbsp; &nbsp; &nbsp;| 任务 $i$ 的观测结束时间 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| $trans_{ij}$ &nbsp;| 两个连续任务 $i$ 和 $j$ 之间的姿态转换时间 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| $x_i$ &nbsp; &nbsp; &nbsp; &nbsp; | 二元变量，表示任务 $i$ 是否被观测 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><p>AEOSSP的目标函数是最大化观测任务的优先级总和:</p>
+<p>目标函数：</p>
+<p>$$</p>
+<p>\max \sum_{i=1}^{N} p_i x_i \tag{1}</p>
+<p>$$</p>
+<p>约束条件：</p>
+<p>$$</p>
+<p>\begin{align*}</p>
+<p>ob_i - tw_i^s &amp;\geq 0, \quad \text{if } x_i = 1 \tag{2} \</p>
+<p>tw_i^e - oe_i &amp;\geq 0, \quad \text{if } x_i = 1 \tag{3} \</p>
+<p>ob_i + d_i &amp;= oe_i, \quad \text{if } x_i = 1 \tag{4} \</p>
+<p>ob_j - (oe_i + trans_{ij}) &amp;\geq 0, \quad \text{if } x_i = 1, x_j = 1 \tag{5} \</p>
+<p>x_i &amp;\in {0,1}, \quad \forall i \in {0,1,2,\dots,N} \tag{6} \</p>
+<p>tw_i^s, tw_i^e, p_i, d_i, ob_i, oe_i, trans_{ij} &amp;\geq 0 \tag{7}</p>
+<p>\end{align*}</p>
+<p>$$</p>
+<p>公式 (2) 和 (3) 表示任务的观测开始时间和结束时间应在可见时间窗口之内。公式 (4) 表示任务的开始时间、结束时间与持续时间之间的关系。公式 (5) 表示两个连续任务之间的转换时间约束。公式 (6) 和 (7) 限定了变量的取值范围。</p>
+<h2 id="姿态转换时间计算方法"><a href="#姿态转换时间计算方法" class="headerlink" title="姿态转换时间计算方法"></a>姿态转换时间计算方法</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>姿态转换时间采用<strong>分段线性函数</strong>进行计算，以模拟真实敏捷卫星的物理特性。核心计算公式为：</p>
+<p>$$t_{i,j} = \lambda + \frac{\Delta \theta_{i,j}}{\nu}$$</p>
+<p>其中：</p>
+<ul>
+<li><p>$t_{i,j}$：从观测 $i$ 到观测 $j$ 的姿态转换时间（秒）</p>
+</li>
+<li><p>$\Delta \theta_{i,j}$：姿态角总变化量（度）</p>
+</li>
+<li><p>$\lambda$：稳定时间常数（秒）</p>
+</li>
+<li><p>$\nu$：角速度（度/秒）</p>
+</li>
+</ul>
+<h3 id="姿态角变化量计算"><a href="#姿态角变化量计算" class="headerlink" title="姿态角变化量计算"></a>姿态角变化量计算</h3><p>总姿态角变化量 $\Delta \theta_{i,j}$ 由滚转角和俯仰角的变化量组成：</p>
+<p>$$\Delta \theta_{i,j} = |\Delta \theta^{roll}| + |\Delta \theta^{pitch}|$$</p>
+<p>其中：</p>
+<ul>
+<li><p>$\Delta \theta^{roll}$：滚转角变化量</p>
+</li>
+<li><p>$\Delta \theta^{pitch}$：俯仰角变化量</p>
+</li>
+</ul>
+<h3 id="分段计算规则"><a href="#分段计算规则" class="headerlink" title="分段计算规则"></a>分段计算规则</h3><p>根据总姿态角度变化 $\Delta \theta_{i,j}$ 的大小，采用不同的参数组合：</p>
+<p>| 角度范围 | 稳定时间 $\lambda$ (秒) | 角速度 $\nu$ (度/秒) | 物理含义 |</p>
+<p>| :—: | :—: | :—: | :— |</p>
+<p>| $\Delta \theta \leq 10°$ | 11.66 | $\infty$ | <strong>微小调整</strong>：转动时间可忽略，主要耗时为稳定 |</p>
+<p>| $10° &lt; \Delta \theta \leq 30°$ | 5 | 1.5 | <strong>慢速机动</strong>：稳定时间减少，转动速度较慢 |</p>
+<p>| $30° &lt; \Delta \theta \leq 60°$ | 10 | 2.0 | <strong>中速机动</strong>：稳定时间增加，转动速度加快 |</p>
+<p>| $60° &lt; \Delta \theta \leq 90°$ | 16 | 2.5 | <strong>快速机动</strong>：稳定时间更长，转动更快 |</p>
+<p>| $\Delta \theta &gt; 90°$ | 22 | 3.0 | <strong>极限机动</strong>：稳定时间最长，转动速度最快 |</p>
+<h2 id="MDP描述"><a href="#MDP描述" class="headerlink" title="MDP描述"></a>MDP描述</h2><p>AM作为任务选择的策略，用于指导解的构造过程。初始时，构造过程从一个空集合开始，通过BPM重复选择任务。在决策点 $dp_t$，BPM根据当前状态选择一个任务，将其插入观测序列。随后，根据所选任务更新状态并进行约束检查。观测序列的插入过程持续进行，直到无法再添加任何任务为止，从而完成解的构造过程。</p>
+<p>任务选择仅由前一步的决策决定，因此我们可以将AEOSSP建模为一个MDP，该MDP包含四个基本组成部分：状态集 $S$、动作集 $A$、状态转移概率函数 $T$ 和奖励函数 $R$。具体说明如下：</p>
+<ul>
+<li><p>状态集 $S$：包含决策点 $dp_t$ 时卫星的状态和待调度任务的状态。</p>
+</li>
+<li><p>动作集 $A$：表示选择任务的行动。</p>
+</li>
+<li><p>状态转移概率函数 $T$：表示在某一状态下执行某个动作后所得到的概率分布。</p>
+</li>
+<li><p>奖励函数 $R$：表示观测序列的总优先级。</p>
+</li>
+</ul>
+<h2 id="训练方法"><a href="#训练方法" class="headerlink" title="训练方法"></a>训练方法</h2><p>使用带rollout基线的REINFORCE算法来训练策略模型以获得最优策略参数，并使用adam优化器进行更新。</p>
+<hr>
+<h1 id="数据集格式描述"><a href="#数据集格式描述" class="headerlink" title="数据集格式描述"></a>数据集格式描述</h1><p>单颗敏捷卫星任务规划数据集存放在D:\WorkPlace\pytorchWorkPlace\AEOSSP\rl4co-main\aeossp\dataset下。其中每一个文件夹对应一个场景，现在一共是有10个场景。对于每一个场景。</p>
+<p><code>tasks.csv</code>文件中存放任务信息：</p>
+<ul>
+<li><p>任务id</p>
+</li>
+<li><p>纬度</p>
+</li>
+<li><p>经度</p>
+</li>
+<li><p>优先级</p>
+</li>
+<li><p>任务持续时间</p>
+</li>
+<li><p>最小成像质量</p>
+</li>
+</ul>
+<p><code>timewindows.csv</code>文件中存放可见时间窗信息，如果在运行时间内某个任务没有可见时间窗，就不显示。可以看到可见时间窗口可以是0，1，或者更多：</p>
+<ul>
+<li><p>任务id</p>
+</li>
+<li><p>时间窗口id</p>
+</li>
+<li><p>可见时间窗口开始时间</p>
+</li>
+<li><p>可见时间窗口结束时间</p>
+</li>
+<li><p>窗口持续时间</p>
+</li>
+</ul>
+<p><code>attitudes.csv</code>文件中存放着卫星的星历信息：</p>
+<ul>
+<li><p>任务id</p>
+</li>
+<li><p>时间戳</p>
+</li>
+<li><p>滚动角</p>
+</li>
+<li><p>俯仰角</p>
+</li>
+</ul>
+<p>你先把数据集的格式理解清楚。因为现在还在代码的编码阶段，所以每个场景10个任务，一共10个场景。之后要训练模型的时候会进行扩充。</p>
+<hr>
+<h1 id="动态特征和静态特征"><a href="#动态特征和静态特征" class="headerlink" title="动态特征和静态特征"></a>动态特征和静态特征</h1><p>我们使用一个元组 $\langle x_t^i \rangle = (s_i, d_t^i)$ 来表示每个任务 $i$，其中 $s_i$ 代表任务的固有属性，而 $d_t^i$ 是任务 $i$ 在时间 $t$ 的动态变量。参数 $s_i$ 包含四维特征：</p>
+<p>$tw_i^s, tw_i^e, l_i, p_i$。而参数 $d_t^i$ 包含二维参数：前一个任务的结束时间 $T_{t-1}^e$ 和任务 $i$ 在时间 $t$ 的状态值 $state_t^i$。$state_t^i$ 有三种状态：1 表示已调度，2 表示已删除，0 表示待调度。</p>
+<hr>
+<h1 id="多时间窗处理方法"><a href="#多时间窗处理方法" class="headerlink" title="多时间窗处理方法"></a>多时间窗处理方法</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>每个观测任务可能具有 0 个、1 个或多个可见时间窗口。在 MDP 建模中，每个任务对应一个节点，模型需要在每个决策步选择一个任务。多时间窗的存在使得可行性判断变得复杂。</p>
+<h2 id="设计方案：每任务单节点-环境动态选择窗口"><a href="#设计方案：每任务单节点-环境动态选择窗口" class="headerlink" title="设计方案：每任务单节点 + 环境动态选择窗口"></a>设计方案：每任务单节点 + 环境动态选择窗口</h2><h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><ul>
+<li><p><strong>模型视角</strong>：每个任务对应<strong>一个节点</strong>，模型不需要感知该任务具体有几个时间窗</p>
+</li>
+<li><p><strong>环境视角</strong>：在每个决策步，环境遍历每个待调度任务的<strong>所有时间窗</strong>，判断是否存在至少一个可行窗口</p>
+</li>
+<li><p><strong>窗口选择</strong>：当任务被选中时，环境自动选择”最早可行”的时间窗作为该任务的执行窗口</p>
+</li>
+</ul>
+<h3 id="可行性判断逻辑"><a href="#可行性判断逻辑" class="headerlink" title="可行性判断逻辑"></a>可行性判断逻辑</h3><p>在决策点 $dp_t$，当前时间为 $T_{t-1}^e$（上一个任务的结束时间），当前姿态为 $(\text{roll}, \text{pitch})$。对于待调度任务 $j$：</p>
+<p>$$</p>
+<p>\text{feasible}(j) = \exists, tw_k \in \text{windows}(j) \text{ 使得}:</p>
+<p>$$</p>
+<p>$$</p>
+<p>T_{t-1}^e + trans(\text{current_attitude}, \text{task}_j) + l_j \leq tw_k^e</p>
+<p>$$</p>
+<p>$$</p>
+<p>\text{且} \quad T_{t-1}^e + trans(\text{current_attitude}, \text{task}_j) \geq tw_k^s</p>
+<p>$$</p>
+<p>其中：</p>
+<ul>
+<li><p>$trans(\cdot, \cdot)$ 为姿态机动时间（由分段线性函数计算）</p>
+</li>
+<li><p>$l_j$ 为任务 $j$ 的持续时间</p>
+</li>
+</ul>
+<h3 id="action-mask-更新流程"><a href="#action-mask-更新流程" class="headerlink" title="action_mask 更新流程"></a>action_mask 更新流程</h3><ol>
+<li><p>在每一步 $t$，遍历所有 $state = 0$（待调度）的任务</p>
+</li>
+<li><p>对每个任务，遍历其所有时间窗</p>
+</li>
+<li><p>若存在满足条件的窗口 → task 保留在 action_mask 中（值为 True）</p>
+</li>
+<li><p>若所有窗口都不满足 → task 标记为 $state = 2$（已删除），从 action_mask 中移除</p>
+</li>
+</ol>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li><p>模型结构简单，节点数固定（N 个任务）</p>
+</li>
+<li><p>多窗逻辑完全封装在环境内部</p>
+</li>
+<li><p>未来切换至 AM 等更复杂模型时无需修改环境</p>
+</li>
+</ul>
+<h3 id="后续扩展"><a href="#后续扩展" class="headerlink" title="后续扩展"></a>后续扩展</h3><ul>
+<li><p>可改为选择”最优”窗口而非”最早”窗口（如最大化时间裕度）</p>
+</li>
+<li><p>可在模型输入中增加”可用窗口数量”作为额外特征</p>
+</li>
+</ul>
+<hr>
+<h1 id="数据集生成"><a href="#数据集生成" class="headerlink" title="数据集生成"></a>数据集生成</h1><blockquote>
+<p>选择完任务数量，卫星数量，任务分布模式之后，先生成任务，再计算星历信息，最后计算时间窗口。</p>
+</blockquote>
+<p><code>以单颗敏捷卫星，10个任务为例</code></p>
+<blockquote>
+<p>在计算的时候，考虑roll，pitch，yaw，yaw角度是0，代码还是要读一下的，角速度不用考虑。通过公式2-11计算转换时间。核心的几个参数是卫星位于时刻t的滚动，俯仰，偏航角。</p>
+</blockquote>
+<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><p><code>tasklist.txt</code></p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">0 27.6273 -45.0054 9 24 8</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">1 -3.4713 -25.4743 7 22 6</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">2 49.3938 -7.5674 1 20 5</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">3 -32.5648 -66.6170 10 23 6</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">4 12.2278 -169.6182 7 26 5</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">5 27.1665 100.0385 5 21 5</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">6 32.8308 159.0538 6 25 6</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">7 -6.0327 86.1523 2 25 8</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">8 2.1986 -37.1077 4 23 9</span><br><span class="line">2  45.0 45.0 0.00</span><br><span class="line">9 21.9274 49.4723 9 20 8</span><br><span class="line">2  45.0 45.0 0.00</span><br></pre></td></tr></tbody></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">task_id</th>
+<th align="center">lat</th>
+<th align="center">lon</th>
+<th align="center">priority</th>
+<th align="center">p</th>
+<th align="center">minQuality</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">纬度</td>
+<td align="center">经度</td>
+<td align="center">优先级</td>
+<td align="center">观测持续时间（s）</td>
+<td align="center">最低质量要求</td>
+</tr>
+</tbody></table>
+<p>北纬为正，南纬为负。东经为正，西经为负。</p>
+<h2 id="星历信息"><a href="#星历信息" class="headerlink" title="星历信息"></a>星历信息</h2><p><code>outputattitude_1</code></p>
+<blockquote>
+<p>观测时卫星的姿态是什么</p>
+</blockquote>
+<p>每个时间窗口内逐秒记录姿态，说明在这段时间里卫星必须保持这样的姿态序列才能完成对目标的观测。</p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">2013 04 20 21 46 48.203   -3.738   45.000     .000   743815.5    -.0410    -.3408     .0000   -5190.7</span><br><span class="line">2013 04 20 21 46 49.000   -3.771   44.727     .000   739690.8    -.0410    -.3450     .0000   -5165.6</span><br><span class="line">2013 04 20 21 46 50.000   -3.812   44.379     .000   734541.2    -.0410    -.3503     .0000   -5133.5</span><br><span class="line">2013 04 20 21 46 51.000   -3.853   44.026     .000   729424.0    -.0410    -.3557     .0000   -5100.7</span><br><span class="line">2013 04 20 21 46 52.000   -3.894   43.668     .000   724340.0    -.0411    -.3611     .0000   -5067.2</span><br><span class="line">2013 04 20 21 46 53.000   -3.935   43.304     .000   719289.8    -.0411    -.3666     .0000   -5033.0</span><br><span class="line">2013 04 20 21 46 54.000   -3.976   42.935     .000   714274.2    -.0411    -.3723     .0000   -4998.1</span><br><span class="line">2013 04 20 21 46 55.000   -4.017   42.559     .000   709293.8    -.0411    -.3780     .0000   -4962.4</span><br><span class="line">2013 04 20 21 46 56.000   -4.058   42.179     .000   704349.6    -.0412    -.3837     .0000   -4926.0</span><br><span class="line">2013 04 20 21 46 57.000   -4.099   41.792     .000   699442.1    -.0412    -.3896     .0000   -4888.8</span><br></pre></td></tr></tbody></table></figure>
+
+<p>前6列是时间戳，</p>
+<table>
+<thead>
+<tr>
+<th align="center">roll</th>
+<th align="center">pitch</th>
+<th align="center">yaw</th>
+<th align="center">斜距</th>
+<th align="center">三轴角速率(roll, pitch, yaw)</th>
+<th align="center">斜距变化率</th>
+</tr>
+</thead>
+</table>
+<h2 id="可见时间窗口"><a href="#可见时间窗口" class="headerlink" title="可见时间窗口"></a>可见时间窗口</h2><p><code>outputtimewindow_1</code></p>
+<blockquote>
+<p>确定“卫星什么时候能看到哪个目标</p>
+</blockquote>
+<p>任务2有两个时间窗口，意味着这颗卫星在规划周期内有两次飞越任务0上空的机会，每次飞越都是一个可执行观测的时间段。</p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">s1</span><br><span class="line">0</span><br><span class="line"> 2013 04 20 21 46 48.203     2013 04 20 21 49 23.530     155.3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line"> 2013 04 20 03 15 18.146     2013 04 20 03 18  2.217     164.1</span><br><span class="line"> 2013 04 20 20 18 13.088     2013 04 20 20 21 41.649     208.6</span><br><span class="line">3</span><br><span class="line"> 2013 04 20 11 34 14.848     2013 04 20 11 36 46.725     151.9</span><br><span class="line">4</span><br><span class="line"> 2013 04 20 05 57 29.560     2013 04 20 05 58 14.390      44.8</span><br><span class="line"> 2013 04 20 16 05 57.030     2013 04 20 16 06 17.438      20.4</span><br><span class="line">5</span><br><span class="line"> 2013 04 20 12 20  1.365     2013 04 20 12 22 49.594     168.2</span><br><span class="line">6</span><br><span class="line"> 2013 04 20 17 31 55.302     2013 04 20 17 34 27.882     152.6</span><br><span class="line">7</span><br><span class="line"> 2013 04 20 00 24 56.924     2013 04 20 00 27 30.879     154.0</span><br><span class="line">8</span><br><span class="line"> 2013 04 20 08 14 50.678     2013 04 20 08 17 29.231     158.6</span><br><span class="line"> 2013 04 20 20 04 15.834     2013 04 20 20 06 52.519     156.7</span><br><span class="line">9</span><br><span class="line"> 2013 04 20 01 51  3.329     2013 04 20 01 53 58.219     174.9</span><br><span class="line"> 2013 04 20 15 27 20.064     2013 04 20 15 30 18.522     178.5</span><br></pre></td></tr></tbody></table></figure>
+
+<p>s1就是任务编号，之后表示当前的任务，之后表示可见时间窗口，一个任务的可见时间窗口不一定是一个，可能没有，也可能是多个。</p>
+<table>
+<thead>
+<tr>
+<th align="center">开始时间戳</th>
+<th align="center">结束时间戳</th>
+<th align="center">窗口持续时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">start_year month day hour minute second</td>
+<td align="center">end_year month day hour minute second</td>
+<td align="center">duration_sec</td>
+</tr>
+<tr>
+<td align="center">一个任务可能有多行，代表该卫星在规划周期内多次飞越该目标，每次飞越是一个独立的可见时间窗口。</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><img src="https://raw.githubusercontent.com/Dra-Tammer/blog_pic/main/post_img/AEOSSP_formula.png"></p>
+<h1 id="马尔可夫模型"><a href="#马尔可夫模型" class="headerlink" title="马尔可夫模型"></a>马尔可夫模型</h1><h2 id="有限MDP"><a href="#有限MDP" class="headerlink" title="有限MDP"></a>有限MDP</h2><p>系统有有限个状态，未来只依赖当前状态，状态转移由一个固定转移概率矩阵来描述。</p>
+<h2 id="串联MDP"><a href="#串联MDP" class="headerlink" title="串联MDP"></a>串联MDP</h2><p>多个随机过程/多个马尔可夫层依次作用。</p>
+<h3 id="串联马尔科夫链（过程串联）"><a href="#串联马尔科夫链（过程串联）" class="headerlink" title="串联马尔科夫链（过程串联）"></a>串联马尔科夫链（过程串联）</h3><p>一个系统的输出状态作为下一个马尔科夫链的输入条件。</p>
+<p>例如：</p>
+<ul>
+<li><p>第一层 Markov 决定“大状态”（如环境：忙/空闲）</p>
+</li>
+<li><p>第二层 Markov 在大状态下决定“细状态”（如误码水平）</p>
+</li>
+</ul>
+<p>这往往等价于一个<strong>更大的联合状态空间马尔可夫链</strong>（状态=(层1状态, layer2状态)），但“串联”强调<strong>结构分解/层次化</strong>。</p>
+<h3 id="串联马尔可夫模型"><a href="#串联马尔可夫模型" class="headerlink" title="串联马尔可夫模型"></a>串联马尔可夫模型</h3><p>一个Markov的输出，作为下一个Markov的观测或者驱动。</p>
+<ul>
+<li><p><strong>有限马尔可夫模型</strong>：强调“状态数有限 + 马尔可夫性”，是一个基本对象。</p>
+</li>
+<li><p><strong>串联马尔可夫模型</strong>：强调“多个马尔可夫结构串起来/分层”，是一种<strong>组合/构造方式</strong>，通常仍可转化为一个更大的有限马尔可夫模型来分析。</p>
+</li>
+</ul>
+<p>Attention, learn to solve routing problems!</p>
+<p>近年来的类似的文章。</p>
+<p><a href="https://github.com/wouterkool/attention-learn-to-route">https://github.com/wouterkool/attention-learn-to-route</a></p>
+<p>AEOS调度问题可以建模为选择性旅行商问题</p>
+<h1 id="Fucking-Idea"><a href="#Fucking-Idea" class="headerlink" title="Fucking Idea"></a>Fucking Idea</h1><p>跟大模型结合</p>
+<p>比如用agent替换修复和去除算子</p>
+<p>能否结合harness enginering</p>
+<p>正向暗示</p>
+<p>在午睡后半睡半醒的状态下，梦到各种各样光怪陆离的东西，这是一种非常普遍且正常的生理现象。这背后主要涉及睡眠科学中的几个关键概念。</p>
+<p>简单来说，这是因为你的大脑和身体在睡眠与清醒之间没有完全同步“切换”，导致梦境与现实短暂地重叠了。</p>
+<p>🧠 核心原因：REM睡眠与睡眠瘫痪</p>
+<ol>
+<li><p>快速眼动睡眠（REM）是梦的“工厂”<br>梦境主要发生在快速眼动睡眠（REM）阶段。在这个阶段，你的大脑活动非常活跃，几乎和清醒时一样，但身体肌肉却处于一种暂时性的“瘫痪”状态（也叫肌张力丧失），这是为了防止你把梦里的动作做出来而伤到自己。</p>
+</li>
+<li><p>午睡容易直接进入REM睡眠<br>当你非常疲惫或睡眠不足时，大脑会“抄近道”，更快地进入REM睡眠阶段，这被称为“REM睡眠反弹”。所以，即使是短暂的午睡，也可能让你迅速进入生动梦境的“制作车间”。</p>
+</li>
+<li><p>半睡半醒是意识与身体的“不同步”<br>午睡醒来时，你的意识可能已经部分清醒，但大脑还没完全从REM睡眠中脱离。这时就可能出现两种情况：</p>
+<ul>
+<li>睡眠瘫痪（俗称“鬼压床”）： 你的意识醒了，但身体的“瘫痪”状态还没解除，导致你感觉动弹不得。</li>
+<li>醒后幻觉： 梦境的画面、声音或感觉延续到了清醒状态，让你感觉看到了人影、听到了声音，或者感觉房间里还有别人。</li>
+</ul>
+</li>
+</ol>
+<p>这种大脑清醒了但身体还在“梦中”，或者梦境内容“溢出”到现实感知的状态，就是你感觉“半睡半醒”并遇到各种奇怪东西的根本原因。</p>
+<p>✨ 为什么梦里的东西“各种各样”？</p>
+<p>除了上述核心机制，还有一些因素会让你在半梦半醒间的体验更加丰富和奇特：</p>
+<ul>
+<li>创造力爆发的N1阶段： 在刚入睡的N1阶段（入睡状态），大脑的控制力减弱，思维变得非常发散和灵活，像“思绪漫游的旋钮被调到最高”。这个状态是激发创造力的黄金时期，容易产生各种新奇、跳跃的联想和意象。</li>
+<li>大脑的“默认网络”被激活： 在半梦半醒时，大脑中负责逻辑和现实检验的区域（如前额叶皮层）还未完全上线，而负责联想和记忆整合的区域（如海马体）却很活跃。这导致各种看似不相关的记忆碎片、情绪和想象被随机组合在一起，形成了荒诞离奇的梦境内容。</li>
+<li>压力与情绪的“加工厂”： 白天的压力、焦虑或过度兴奋的神经状态，都会在睡眠中被大脑处理和释放，从而投射到梦境中，使其内容更加复杂和情绪化。</li>
+</ul>
+<p>💡 如何改善这种状态？</p>
+<p>这种现象通常是无害的，但如果频繁发生并影响你的休息质量，可以尝试以下方法：</p>
+<ul>
+<li>规律作息： 保证夜间有充足、高质量的睡眠，避免过度疲劳。</li>
+<li>管理压力： 午睡前通过深呼吸、冥想等方式放松心情，避免带着紧张情绪入睡。</li>
+<li>优化午睡： 将午睡时间控制在20-30分钟，避免进入深度睡眠后再被唤醒，这样可以减少睡眠惯性和混乱感。</li>
+<li>改善睡姿： 尽量侧卧，避免仰卧或手压胸口，这有助于减少睡眠瘫痪的发生。</li>
+</ul>
+<p>如果这种情况非常频繁，并伴有白天极度嗜睡、情绪激动时突然肌肉无力等症状，建议咨询医生，以排除潜在的睡眠障碍。</p>
+<p>shift+tap切换cc的模式</p>
+<p>！开头就是电脑的命令行了</p>
+<p>@具体的文件</p>
+<p>ctrl+回车换行</p>
+<p>本地文件写需求，再@这个文件让他实现</p>
+<p>给的指令越少的时候消耗token可能越多，因为他要思考的越多。</p>
+<p>对话框可以直接粘贴图片</p>
+<p>/simplify 三个agent进行代码审核</p>
+<p>/remind 回滚只能撤回cc执行的，无法撤回命令行</p>
+<p>使用git，</p>
+<p>/compact主动压缩上下文，上下文塞得多的时候，效果是会下降的</p>
+<p>/context展示上下文</p>
+<p>帮我配一个statusline，能显示当前目录+模型+上下文剩余百分比的功能，用进度条的形式显示，这样更简洁直观。之后不管在项目下打开claude code都能显示</p>
+<p>一般60%就可以压缩了</p>
+<p>个性化cc</p>
+<p>claude.md</p>
+<p>一般创建项目级的claude.md执行个性化</p>
+<p>在项目文件夹/init</p>
+<p>不要在空项目的时候就去建立，等项目有一定雏形了再去建立，这玩意有点耗费token</p>
+<p>auto-memory需要手动打开。</p>
+<p>自行构建</p>
+<p>mcp就是ai和外部工具，外部服务链接的那个转接头</p>
+<p>skills就是教会ai应该怎么做<br>CLI</p>
+<p>subagent</p>
+<p>hook</p>
+<p>执行claude –effort max或者/effort 切换至max</p>
+<p>AEOSSP 等价于在带附加约束的有向图中寻找最长路径问题</p>
+<table>
+<thead>
+<tr>
+<th>变量符号</th>
+<th>变量定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>taski​</td>
+<td>待调度的观测任务 i</td>
+</tr>
+<tr>
+<td>twi​</td>
+<td>任务 i 的可见时间窗口</td>
+</tr>
+<tr>
+<td>twis​</td>
+<td>可见时间窗口的开始时间</td>
+</tr>
+<tr>
+<td>twie​</td>
+<td>可见时间窗口的结束时间</td>
+</tr>
+<tr>
+<td>pi​</td>
+<td>任务 i 的优先级，即观测该任务获得的奖励</td>
+</tr>
+<tr>
+<td>di​</td>
+<td>任务 i 所需的持续时间</td>
+</tr>
+<tr>
+<td>obi​</td>
+<td>任务 i 的观测开始时间</td>
+</tr>
+<tr>
+<td>oei​</td>
+<td>任务 i 的观测结束时间</td>
+</tr>
+<tr>
+<td>transij​</td>
+<td>两个连续任务 i 和 j 之间的姿态转换时间</td>
+</tr>
+<tr>
+<td>xi​</td>
+<td>二元变量，表示任务 i 是否被观测</td>
+</tr>
+</tbody></table>
+]]></content>
       <categories>
         <category>强化学习</category>
       </categories>
