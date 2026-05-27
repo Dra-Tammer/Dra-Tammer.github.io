@@ -1,102 +1,295 @@
-<html>
-	<head>
-                <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>足迹地图</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow: hidden; background: #1a1a2e; }
+        #map { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
-		<!--引入jQuery框架-->
-		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-		<!--引入jVectorMap库-->
-		<script type="text/javascript" src="js/jquery-jvectormap-1.2.2.min.js"></script>
-		<!--引入样式表-->
-		<link href="js/jquery-jvectormap-1.2.2.css" rel="stylesheet" media="screen">
+        /* Stats chips */
+        .stats-bar {
+            position: fixed; top: 16px; left: 16px; z-index: 1000;
+            display: flex; gap: 10px;
+        }
+        .stat-chip {
+            background: rgba(20,20,40,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+            padding: 8px 16px; color: #fff; font-size: 13px;
+            display: flex; align-items: center; gap: 6px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+        .stat-chip .num {
+            font-weight: 700; font-size: 16px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .stat-chip .label { color: rgba(255,255,255,0.5); font-size: 11px; }
 
+        /* Toggle button */
+        .toggle-btn {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1001;
+            width: 48px; height: 48px; border-radius: 50%; border: none;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: #fff; font-size: 20px; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(238,90,36,0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .toggle-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(238,90,36,0.5); }
+        .toggle-btn.active { transform: rotate(45deg); }
 
-		<!--引入中国地图数据库-->
-		<script type="text/javascript" src="js/jquery-jvectormap-cn-merc-en.js"></script>
+        /* City panel */
+        .city-panel {
+            position: fixed; bottom: 80px; right: 20px; z-index: 1000;
+            width: 300px; max-height: 0; overflow: hidden;
+            background: rgba(16,16,32,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            transition: max-height 0.4s ease, padding 0.3s ease, opacity 0.3s ease;
+            opacity: 0; padding: 0 16px;
+        }
+        .city-panel.open {
+            max-height: 400px; opacity: 1; padding: 16px;
+        }
+        .panel-search {
+            margin-bottom: 12px;
+        }
+        .panel-search input {
+            width: 100%; padding: 8px 12px; background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+            color: #fff; font-size: 13px; outline: none;
+        }
+        .panel-search input::placeholder { color: rgba(255,255,255,0.3); }
+        .panel-search input:focus { border-color: rgba(255,65,108,0.5); }
+        .city-scroll {
+            max-height: 320px; overflow-y: auto;
+        }
+        .city-scroll::-webkit-scrollbar { width: 3px; }
+        .city-scroll::-webkit-scrollbar-track { background: transparent; }
+        .city-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+        .prov-group { margin-bottom: 10px; }
+        .prov-name {
+            font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.35);
+            text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04); margin-bottom: 4px;
+        }
+        .city-item {
+            padding: 6px 10px; border-radius: 6px; cursor: pointer;
+            color: rgba(255,255,255,0.7); font-size: 13px;
+            display: flex; align-items: center; gap: 8px;
+            transition: all 0.15s;
+        }
+        .city-item:hover { background: rgba(255,65,108,0.12); color: #fff; }
+        .city-item::before {
+            content: ''; width: 5px; height: 5px; border-radius: 50%;
+            background: #ff416c; opacity: 0.5; flex-shrink: 0;
+        }
+        .city-item:hover::before { opacity: 1; }
+        .city-item.hidden { display: none; }
 
-		<!--引入美国地图数据库-->
-		<!--script type="text/javascript" src="js/jquery-jvectormap-us-aea.js"></script-->
-		<!--引入世界地图数据库-->
-		<!--script type="text/javascript" src="js/jquery-jvectormap-world-mill.js"></script-->
+        /* Markers */
+        .marker-pin {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: radial-gradient(circle, #ff6b6b, #ee5a24);
+            border: 2px solid rgba(255,255,255,0.9);
+            box-shadow: 0 0 12px rgba(238,90,36,0.6);
+            position: relative;
+        }
+        .marker-pin::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 40px; height: 40px; margin: -20px 0 0 -20px;
+            border-radius: 50%; background: rgba(238,90,36,0.3);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.3); opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
 
-	</head>
+        /* Tooltip */
+        .custom-tooltip {
+            background: rgba(20,20,40,0.92) !important; backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 10px !important;
+            color: #fff !important; padding: 8px 14px !important;
+            font-size: 13px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+        }
+        .custom-tooltip .tooltip-city { font-size: 14px; font-weight: 600; }
+        .custom-tooltip .tooltip-province { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 1px; }
+        .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before,
+        .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { display: none !important; }
+
+        /* Leaflet controls */
+        .leaflet-control-zoom { border: none !important; box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important; }
+        .leaflet-control-zoom a {
+            background: rgba(20,20,40,0.9) !important; color: rgba(255,255,255,0.8) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            width: 32px !important; height: 32px !important; line-height: 32px !important; font-size: 16px !important;
+        }
+        .leaflet-control-zoom a:hover { background: rgba(40,40,60,0.95) !important; }
+        .leaflet-control-zoom-in { border-radius: 8px 8px 0 0 !important; }
+        .leaflet-control-zoom-out { border-radius: 0 0 8px 8px !important; border-top: none !important; }
+        .leaflet-bottom.leaflet-left .leaflet-control-zoom { margin-bottom: 20px; margin-left: 16px; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .stats-bar { top: 8px; left: 8px; gap: 6px; }
+            .stat-chip { padding: 5px 10px; font-size: 11px; border-radius: 14px; }
+            .stat-chip .num { font-size: 13px; }
+            .toggle-btn { bottom: 14px; right: 14px; width: 40px; height: 40px; }
+            .toggle-btn svg { width: 16px; height: 16px; }
+            .city-panel { right: 8px; left: 8px; width: auto; bottom: 64px; border-radius: 12px; }
+            .city-panel.open { max-height: 50vh; padding: 12px; }
+            .leaflet-bottom.leaflet-left .leaflet-control-zoom { margin-bottom: 14px; margin-left: 10px; }
+        }
+    </style>
+</head>
 <body>
-	<!--background-color: 地图背景颜色-->
-	<div id="map" style="background-color:#282828"> </div>
-	<script>
-		$('#map').vectorMap({
+    <div id="map"></div>
 
-			// 此处更改地图
-			map: 'cn_merc_en',   // 中国地图
-			//map: 'us_aea',     // 美国地图
-			//map: 'world_mill', // 世界地图
+    <div class="stats-bar">
+        <div class="stat-chip">
+            <span class="num" id="cityCount">0</span>
+            <span class="label">城市</span>
+        </div>
+        <div class="stat-chip">
+            <span class="num" id="provCount">0</span>
+            <span class="label">省份</span>
+        </div>
+    </div>
 
+    <button class="toggle-btn" id="toggleBtn" title="城市列表">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+    </button>
 
-			backgroundColor: 'transparent',
-			zoomMin: 0.9, // 鼠标缩放时的最小比例
-			zoomMax: 2.4, // 鼠标缩放时的最大比例
-			focusOn: {
-				x: 0.55,
-				y: 2,
-				scale: 0.9
-			},
-			regionStyle: {
-				initial: {
-					fill: '#e5e5e5',   // 地图颜色
-					"fill-opacity": 1, // 省份（州）是否隐藏,鼠标滑动时显示; 1:显示,2:隐藏。
-					stroke: 'none',
-					"stroke-width": 0,
-					"stroke-opacity": 1
-				},
-				hover: {
-					fill: '#ccc',  // 鼠标滑动至某省份的高亮颜色。
-					"fill-opacity": 0.8
-				},
-				selected: {
-					fill: 'yellow'
-				},
-				selectedHover: {}
-			},
-			markerStyle: {
-		        initial: {
-		            fill: '#f50514', // 足迹位置的填充颜色
-		            stroke: '#fff'   // 足迹位置的描边颜色
-		        },
-				hover: {
-					fill: '#fd2020', // 鼠标滑动至足迹位置后的填充颜色
-					stroke: '#fff',  // 鼠标滑动至足迹位置后的描边颜色
-					"fill-opacity": 0.8
-				},
-		    },
-			markers: [ // 足迹位置
+    <div class="city-panel" id="cityPanel">
+        <div class="panel-search">
+            <input type="text" id="searchInput" placeholder="搜索城市..." />
+        </div>
+        <div class="city-scroll" id="cityList"></div>
+    </div>
 
-				// {latLng: [经度（保留两位小数）, 纬度（保留两位小数）], name: '城市名称'},
-				// 推荐查询经纬度网站:https://lbs.amap.com/tools/picker
-		        {latLng: [39.90, 116.41], name: '北京'},
-		        {latLng: [31.24, 121.50], name: '上海'},
-		        {latLng: [34.37, 109.21], name: '陕西 - 西安 - 临潼'},
-				{latLng: [34.49, 110.07], name: '陕西 - 渭南 - 华阴'},
-		        {latLng: [32.59, 117.02], name: '安徽 - 淮南'},
-				{latLng: [30.94, 118.76], name: '安徽 - 宣城'},
-		        {latLng: [30.14, 118.16], name: '安徽 - 黄山'},
-		        {latLng: [31.82, 117.23], name: '安徽 - 合肥'},
-		        {latLng: [31.74, 116.52], name: '安徽 - 六安'},
-				{latLng: [32.81, 117.52], name: '安徽 - 凤阳'},
-				{latLng: [28.23, 112.94], name: '湖南 - 长沙'},
-		        {latLng: [30.57, 104.07], name: '四川 - 成都'},
-		        {latLng: [30.99, 103.65], name: '四川 - 都江堰'},
-		        {latLng: [30.98, 104.28], name: '四川 - 广汉'},
-		        {latLng: [23.13, 113.26], name: '广东 - 广州'},
-		        {latLng: [22.30, 114.18], name: '广东 - 香港'},
-		        {latLng: [22.23, 113.54], name: '广东 - 珠海'},
-		        {latLng: [22.52, 114.06], name: '广东 - 深圳'},
-		        {latLng: [30.25, 120.21], name: '浙江 - 杭州'},
-		        {latLng: [31.30, 120.59], name: '江苏 - 苏州'},
-				{latLng: [29.86, 121.62], name: '浙江 - 宁波'},
-				{latLng: [36.06, 120.31], name: '山东 - 青岛'},
-				{latLng: [28.68, 115.86], name: '江西 - 南昌'},
-				{latLng: [28.90, 118.07], name: '江西 - 上饶 - 三清山'},
-				{latLng: [30.49, 114.83], name: '湖北 - 武汉'},
-		    ]
-		});
-	</script>
+    <script>
+        const cities = [
+            [39.90, 116.41, '北京', '北京'],
+            [31.24, 121.50, '上海', '上海'],
+            [34.37, 109.21, '西安·临潼', '陕西'],
+            [34.49, 110.07, '渭南·华阴', '陕西'],
+            [32.59, 117.02, '淮南', '安徽'],
+            [30.94, 118.76, '宣城', '安徽'],
+            [30.14, 118.16, '黄山', '安徽'],
+            [31.82, 117.23, '合肥', '安徽'],
+            [31.74, 116.52, '六安', '安徽'],
+            [32.81, 117.52, '凤阳', '安徽'],
+            [28.23, 112.94, '长沙', '湖南'],
+            [30.57, 104.07, '成都', '四川'],
+            [30.99, 103.65, '都江堰', '四川'],
+            [30.98, 104.28, '广汉', '四川'],
+            [23.13, 113.26, '广州', '广东'],
+            [22.30, 114.18, '香港', '广东'],
+            [22.23, 113.54, '珠海', '广东'],
+            [22.52, 114.06, '深圳', '广东'],
+            [30.25, 120.21, '杭州', '浙江'],
+            [31.30, 120.59, '苏州', '江苏'],
+            [29.86, 121.62, '宁波', '浙江'],
+            [36.06, 120.31, '青岛', '山东'],
+            [28.68, 115.86, '南昌', '江西'],
+            [28.90, 118.07, '上饶·三清山', '江西'],
+            [30.49, 114.83, '武汉', '湖北'],
+        ];
+
+        const provinces = {};
+        cities.forEach(([lat, lng, city, prov]) => {
+            if (!provinces[prov]) provinces[prov] = [];
+            provinces[prov].push({ lat, lng, city });
+        });
+
+        // Animated counter
+        function animateCount(el, target) {
+            let cur = 0;
+            const step = Math.max(1, Math.floor(target / 25));
+            const t = setInterval(() => {
+                cur += step;
+                if (cur >= target) { cur = target; clearInterval(t); }
+                el.textContent = cur;
+            }, 30);
+        }
+        animateCount(document.getElementById('cityCount'), cities.length);
+        animateCount(document.getElementById('provCount'), Object.keys(provinces).length);
+
+        // Map
+        const map = L.map('map', {
+            center: [32.5, 108], zoom: 4,
+            zoomControl: false, attributionControl: false,
+            maxBounds: [[0, 70], [60, 145]], minZoom: 3, maxZoom: 10,
+        });
+        L.control.zoom({ position: 'bottomleft' }).addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OSM &copy; CARTO',
+            subdomains: 'abcd', maxZoom: 19,
+        }).addTo(map);
+
+        const markerIcon = L.divIcon({ className: '', html: '<div class="marker-pin"></div>', iconSize: [12, 12], iconAnchor: [6, 6] });
+        const markers = [];
+        cities.forEach(([lat, lng, city, prov]) => {
+            const m = L.marker([lat, lng], { icon: markerIcon })
+                .addTo(map)
+                .bindTooltip(`<div class="tooltip-city">${city}</div><div class="tooltip-province">${prov}</div>`,
+                    { direction: 'top', offset: [0, -8], className: 'custom-tooltip' });
+            m.cityData = { lat, lng, city };
+            markers.push(m);
+        });
+
+        // City list
+        const listEl = document.getElementById('cityList');
+        Object.keys(provinces).sort().forEach(prov => {
+            const g = document.createElement('div');
+            g.className = 'prov-group';
+            g.innerHTML = `<div class="prov-name">${prov}</div>`;
+            provinces[prov].forEach(({ lat, lng, city }) => {
+                const item = document.createElement('div');
+                item.className = 'city-item';
+                item.textContent = city;
+                item.dataset.city = city.toLowerCase();
+                item.addEventListener('click', () => {
+                    map.flyTo([lat, lng], 7, { duration: 0.8 });
+                    const m = markers.find(m => m.cityData.lat === lat && m.cityData.lng === lng);
+                    if (m) { m.openTooltip(); setTimeout(() => m.closeTooltip(), 2500); }
+                    document.querySelectorAll('.city-item').forEach(el => el.style.background = '');
+                    item.style.background = 'rgba(255,65,108,0.15)';
+                });
+                g.appendChild(item);
+            });
+            listEl.appendChild(g);
+        });
+
+        // Toggle panel
+        const btn = document.getElementById('toggleBtn');
+        const panel = document.getElementById('cityPanel');
+        btn.addEventListener('click', () => {
+            panel.classList.toggle('open');
+            btn.classList.toggle('active');
+        });
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('.city-item').forEach(i => i.classList.toggle('hidden', q && !i.dataset.city.includes(q)));
+            document.querySelectorAll('.prov-group').forEach(g => {
+                g.style.display = g.querySelectorAll('.city-item:not(.hidden)').length ? '' : 'none';
+            });
+        });
+
+        // Click map to deselect
+        map.on('click', () => document.querySelectorAll('.city-item').forEach(el => el.style.background = ''));
+    </script>
+</body>
 </html>
