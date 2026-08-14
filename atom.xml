@@ -6,7 +6,7 @@
   <link href="https://dra-tammer.github.io/atom.xml" rel="self"/>
   
   <link href="https://dra-tammer.github.io/"/>
-  <updated>2026-06-23T12:59:10.000Z</updated>
+  <updated>2026-08-14T08:06:06.000Z</updated>
   <id>https://dra-tammer.github.io/</id>
   
   <author>
@@ -17,22 +17,29 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>deeprew for chatgpt</title>
-    <link href="https://dra-tammer.github.io/posts/ee75fd4c.html"/>
-    <id>https://dra-tammer.github.io/posts/ee75fd4c.html</id>
-    <published>2026-06-23T12:59:10.000Z</published>
-    <updated>2026-06-23T12:59:10.000Z</updated>
+    <title>hashcat&amp;john crack zip password</title>
+    <link href="https://dra-tammer.github.io/posts/bcb8646.html"/>
+    <id>https://dra-tammer.github.io/posts/bcb8646.html</id>
+    <published>2026-08-14T08:06:06.000Z</published>
+    <updated>2026-08-14T08:06:06.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="预训练"><a href="#预训练" class="headerlink" title="预训练"></a>预训练</h1>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>仅介绍数字枚举，其他查询文档即可</p></blockquote><h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p>hashcat：<a href="https://hashcat.net/hashcat/">https://hashcat.net/hashcat/</a></p><p>john：<a href="https://github.com/openwall/john-packages/releases">https://github.com/openwall/john-packages/releases</a></p><h2 id="提取ZIP哈希"><a href="#提取ZIP哈希" class="headerlink" title="提取ZIP哈希"></a>提取ZIP哈希</h2><p>在john的<code>run</code>文件夹下命令行运行：</p><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">.\zip2john.exe "C:\Users\tammer\Desktop\test.zip" | Set-Content -Encoding ascii .\zip2john.txt</span><br></pre></td></tr></tbody></table></figure><p>将文件夹中的内容输出到命令行查看：</p><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Get-Content .\zip2john.txt | Select-Object -First 1</span><br></pre></td></tr></tbody></table></figure><p>输出必须包含<code>$zip2$</code></p><h2 id="转成hashcat输入文件"><a href="#转成hashcat输入文件" class="headerlink" title="转成hashcat输入文件"></a>转成hashcat输入文件</h2><p>在同一个目录执行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$line = Get-Content .\zip2john.txt | Where-Object { $_ -match '\$zip2\$' } | Select-Object -First 1</span><br><span class="line"></span><br><span class="line">if ($line -match '(\$zip2\$.*?\$/zip2\$)') {</span><br><span class="line">    Set-Content -Path .\test.hash -Value $Matches[1] -Encoding ascii -NoNewline</span><br><span class="line">} else {</span><br><span class="line">    Write-Error "zip2john.txt 中没有找到有效的 zip2 哈希。"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>将生成的<code>test.hash</code>文件移动到<code>hashcat.exe</code>所在目录。进入<code>hashcat</code>目录，在命令行中执行命令：</p><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">.\hashcat.exe --identify .\test.hash</span><br></pre></td></tr></tbody></table></figure><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">.\hashcat.exe -I</span><br></pre></td></tr></tbody></table></figure><p><code>--identify</code> 显示hash-mode（例如：|13600|WinZip|）</p><p><code>-I</code> 中找到 GPU 的设备编号，例如 <code>#1</code>。</p><h2 id="运行数字枚举"><a href="#运行数字枚举" class="headerlink" title="运行数字枚举"></a>运行数字枚举</h2><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">.\hashcat.exe -m 13600 -a 3 .\test.hash '?d?d?d?d?d?d?d?d' --increment --increment-min=3 --increment-max=8 -d 1 --status --status-timer=30 --session test</span><br></pre></td></tr></tbody></table></figure><p>需要破解的密码是3-8位的纯数字。</p><h2 id="中断、恢复和显示结果"><a href="#中断、恢复和显示结果" class="headerlink" title="中断、恢复和显示结果"></a>中断、恢复和显示结果</h2><p>停止之后恢复：</p><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">.\hashcat.exe --session test --restore</span><br></pre></td></tr></tbody></table></figure><p>状态显示<code>cracked</code>后，查看密码：</p><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">.\hashcat.exe -m 13600 .\test.hash --show</span><br></pre></td></tr></tbody></table></figure><p>或者直接在命令行查看输出，在hash值后面会给出结果。</p>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;h1 id=&quot;预训练&quot;&gt;&lt;a href=&quot;#预训练&quot; class=&quot;headerlink&quot; title=&quot;预训练&quot;&gt;&lt;/a&gt;预训练&lt;/h1&gt;</summary>
-      
+    <summary type="html">借助hashcat破解zip密码</summary>
     
     
     
+    <category term="技术" scheme="https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="技术" scheme="https://dra-tammer.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="玩机" scheme="https://dra-tammer.github.io/tags/%E7%8E%A9%E6%9C%BA/"/>
+    
+    <category term="软件" scheme="https://dra-tammer.github.io/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="折腾" scheme="https://dra-tammer.github.io/tags/%E6%8A%98%E8%85%BE/"/>
     
   </entry>
   
@@ -171,21 +178,21 @@
     
     <category term="笔记" scheme="https://dra-tammer.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
+    <category term="玩机" scheme="https://dra-tammer.github.io/tags/%E7%8E%A9%E6%9C%BA/"/>
+    
+    <category term="折腾" scheme="https://dra-tammer.github.io/tags/%E6%8A%98%E8%85%BE/"/>
+    
     <category term="项目" scheme="https://dra-tammer.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
     
     <category term="配置" scheme="https://dra-tammer.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
     
     <category term="部署" scheme="https://dra-tammer.github.io/tags/%E9%83%A8%E7%BD%B2/"/>
     
-    <category term="折腾" scheme="https://dra-tammer.github.io/tags/%E6%8A%98%E8%85%BE/"/>
-    
     <category term="音乐" scheme="https://dra-tammer.github.io/tags/%E9%9F%B3%E4%B9%90/"/>
     
     <category term="本地化" scheme="https://dra-tammer.github.io/tags/%E6%9C%AC%E5%9C%B0%E5%8C%96/"/>
     
     <category term="开源项目" scheme="https://dra-tammer.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    <category term="玩机" scheme="https://dra-tammer.github.io/tags/%E7%8E%A9%E6%9C%BA/"/>
     
     <category term="算法" scheme="https://dra-tammer.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
