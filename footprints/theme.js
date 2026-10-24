@@ -25,11 +25,15 @@
     preference.addEventListener('change', sync);
     try {
         if (window.parent !== window) {
-            const observer = new MutationObserver(sync);
-            const parentDocument = window.parent.document;
-            for (const element of [parentDocument.documentElement, parentDocument.body]) {
-                if (element) observer.observe(element, { attributes: true, attributeFilter: ['class', 'style', 'data-theme'] });
-            }
+            // Use the blog's theme event rather than observing another document.
+            const parentWindow = window.parent;
+            const connect = () => {
+                parentWindow.addEventListener('site:themechange', sync);
+                sync();
+            };
+            connect();
+            window.addEventListener('pageshow', connect);
+            window.addEventListener('pagehide', () => parentWindow.removeEventListener('site:themechange', sync));
         }
     } catch (_) { /* Parent access can be restricted for external embeds. */ }
     sync();

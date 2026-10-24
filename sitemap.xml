@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/b2a528b2.html</loc>
-    
-    <lastmod>2026-03-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://dra-tammer.github.io/posts/2bd5d61f.html</loc>
     
     <lastmod>2023-08-10</lastmod>
@@ -29,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/f098273e.html</loc>
+    <loc>https://dra-tammer.github.io/posts/69917684.html</loc>
     
     <lastmod>2022-08-09</lastmod>
     
@@ -38,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/69917684.html</loc>
+    <loc>https://dra-tammer.github.io/posts/f098273e.html</loc>
     
     <lastmod>2022-08-09</lastmod>
     
@@ -65,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/6926aa6c.html</loc>
+    <loc>https://dra-tammer.github.io/posts/ea3a7ea8.html</loc>
     
     <lastmod>2022-08-09</lastmod>
     
@@ -74,7 +65,16 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/ea3a7ea8.html</loc>
+    <loc>https://dra-tammer.github.io/posts/b2a528b2.html</loc>
+    
+    <lastmod>2026-03-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/posts/6926aa6c.html</loc>
     
     <lastmod>2022-08-09</lastmod>
     
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/da37838d.html</loc>
+    <loc>https://dra-tammer.github.io/posts/97340e65.html</loc>
     
     <lastmod>2024-10-17</lastmod>
     
@@ -164,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/97340e65.html</loc>
+    <loc>https://dra-tammer.github.io/posts/da37838d.html</loc>
     
     <lastmod>2024-10-17</lastmod>
     
@@ -200,6 +200,15 @@
   </url>
   
   <url>
+    <loc>https://dra-tammer.github.io/posts/48fc7caa.html</loc>
+    
+    <lastmod>2023-11-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://dra-tammer.github.io/posts/1d5f4f02.html</loc>
     
     <lastmod>2024-08-27</lastmod>
@@ -218,27 +227,9 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/48fc7caa.html</loc>
-    
-    <lastmod>2023-11-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://dra-tammer.github.io/posts/a275e0db.html</loc>
     
     <lastmod>2023-09-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/posts/b34b3e68.html</loc>
-    
-    <lastmod>2024-11-29</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -272,9 +263,9 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/43720415.html</loc>
+    <loc>https://dra-tammer.github.io/posts/8c0c5825.html</loc>
     
-    <lastmod>2023-10-21</lastmod>
+    <lastmod>2023-10-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -290,9 +281,18 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/8c0c5825.html</loc>
+    <loc>https://dra-tammer.github.io/posts/b34b3e68.html</loc>
     
-    <lastmod>2023-10-30</lastmod>
+    <lastmod>2024-11-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/posts/43720415.html</loc>
+    
+    <lastmod>2023-10-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -308,15 +308,6 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/7594ad05.html</loc>
-    
-    <lastmod>2025-06-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://dra-tammer.github.io/posts/3a0ec10f.html</loc>
     
     <lastmod>2025-08-12</lastmod>
@@ -326,9 +317,9 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/354ccc7e.html</loc>
+    <loc>https://dra-tammer.github.io/posts/7594ad05.html</loc>
     
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2025-06-22</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -338,6 +329,15 @@
     <loc>https://dra-tammer.github.io/posts/842c0a9a.html</loc>
     
     <lastmod>2024-04-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/posts/354ccc7e.html</loc>
+    
+    <lastmod>2025-08-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -362,15 +362,6 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/9e259833.html</loc>
-    
-    <lastmod>2023-08-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://dra-tammer.github.io/posts/ba52eee0.html</loc>
     
     <lastmod>2023-10-21</lastmod>
@@ -380,18 +371,27 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/bceed4f8.html</loc>
+    <loc>https://dra-tammer.github.io/posts/35c4e025.html</loc>
     
-    <lastmod>2025-07-26</lastmod>
+    <lastmod>2024-02-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/posts/35c4e025.html</loc>
+    <loc>https://dra-tammer.github.io/posts/9e259833.html</loc>
     
-    <lastmod>2024-02-04</lastmod>
+    <lastmod>2023-08-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/posts/bceed4f8.html</loc>
+    
+    <lastmod>2025-07-26</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -461,7 +461,42 @@
 
   
   <url>
+    <loc>https://dra-tammer.github.io/tags/note/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://dra-tammer.github.io/tags/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/docker/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/%E5%8F%A3%E8%AF%AD/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/free/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/talk/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -490,41 +525,6 @@
   
   <url>
     <loc>https://dra-tammer.github.io/tags/pytorch/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/note/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/docker/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/free/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/talk/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/%E5%8F%A3%E8%AF%AD/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -587,6 +587,13 @@
   </url>
   
   <url>
+    <loc>https://dra-tammer.github.io/tags/python/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://dra-tammer.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -595,13 +602,6 @@
   
   <url>
     <loc>https://dra-tammer.github.io/tags/lea/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/python/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -623,6 +623,27 @@
   
   <url>
     <loc>https://dra-tammer.github.io/tags/%E6%B8%B8%E8%AE%B0/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -657,27 +678,6 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/tags/%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/%E9%83%A8%E7%BD%B2/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://dra-tammer.github.io/tags/%E5%BF%83%E7%90%86%E5%AD%A6/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -693,20 +693,6 @@
   
   <url>
     <loc>https://dra-tammer.github.io/tags/%E7%B3%BB%E7%BB%9F%E5%BC%8F%E6%B2%BB%E7%96%97/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/tags/%E8%A7%82%E5%90%8E%E6%84%9F/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -748,6 +734,20 @@
   </url>
   
   <url>
+    <loc>https://dra-tammer.github.io/tags/%E7%94%B5%E5%BD%B1/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/tags/%E8%A7%82%E5%90%8E%E6%84%9F/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://dra-tammer.github.io/tags/%E5%8A%A8%E6%BC%AB/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -769,13 +769,6 @@
   </url>
   
 
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
   
   <url>
     <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
@@ -806,7 +799,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/Matlab/</loc>
+    <loc>https://dra-tammer.github.io/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -814,6 +807,13 @@
   
   <url>
     <loc>https://dra-tammer.github.io/categories/Oral-English/Distance-Class/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/Matlab/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -841,35 +841,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/go/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%97%85%E6%B8%B8/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -883,14 +855,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E8%AF%BB%E4%B9%A6/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E9%83%A8%E7%BD%B2/</loc>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -911,21 +876,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -939,63 +890,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/pytorch/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%97%85%E6%B8%B8/%E6%B8%B8%E8%AE%B0/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E9%9D%A2%E8%AF%95/%E7%BB%8F%E9%AA%8C/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E8%AF%BB%E4%B9%A6/%E8%AF%BB%E5%90%8E%E6%84%9F/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2/Hexo/NexT/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E7%94%B5%E5%BD%B1/%E8%A7%82%E5%90%8E%E6%84%9F/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/lea/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1009,14 +904,7 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%AD%A6%E4%B9%A0/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dra-tammer.github.io/categories/%E9%9D%A2%E8%AF%95/%E7%BB%8F%E9%AA%8C/%E6%8E%A8%E5%85%8D/</loc>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/lea/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1030,14 +918,56 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E5%8A%A8%E6%BC%AB/</loc>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/%E8%BD%AF%E4%BB%B6/%E7%BB%8F%E9%AA%8C/</loc>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/go/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E6%97%85%E6%B8%B8/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E6%8A%80%E6%9C%AF/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%AD%A6%E4%B9%A0/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E8%AF%BB%E4%B9%A6/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E6%97%85%E6%B8%B8/%E6%B8%B8%E8%AE%B0/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1058,7 +988,35 @@
   </url>
   
   <url>
-    <loc>https://dra-tammer.github.io/categories/%E5%8A%A8%E6%BC%AB/%E5%9B%BD%E6%BC%AB/</loc>
+    <loc>https://dra-tammer.github.io/categories/%E9%9D%A2%E8%AF%95/%E7%BB%8F%E9%AA%8C/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E7%94%B5%E5%BD%B1/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E8%AF%BB%E4%B9%A6/%E8%AF%BB%E5%90%8E%E6%84%9F/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1072,7 +1030,49 @@
   </url>
   
   <url>
+    <loc>https://dra-tammer.github.io/categories/%E9%9D%A2%E8%AF%95/%E7%BB%8F%E9%AA%8C/%E6%8E%A8%E5%85%8D/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E7%94%B5%E5%BD%B1/%E8%A7%82%E5%90%8E%E6%84%9F/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://dra-tammer.github.io/categories/%E7%AE%97%E6%B3%95/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E5%8A%A8%E6%BC%AB/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E7%8E%A9%E6%9C%BA/%E8%BD%AF%E4%BB%B6/%E7%BB%8F%E9%AA%8C/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dra-tammer.github.io/categories/%E5%8A%A8%E6%BC%AB/%E5%9B%BD%E6%BC%AB/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
