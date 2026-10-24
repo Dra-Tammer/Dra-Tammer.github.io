@@ -1,0 +1,619 @@
+/* Shared glass material and layout, loaded through head.njk.
+   Keep the material layer separate from NexT and preserve its interactions. */
+:root {
+  --glass-ink: #273449;
+  --glass-muted: #536176;
+  --glass-accent: #236d91;
+  --glass-surface: rgba(255, 255, 255, .64);
+  --glass-solid: #f4f7fb;
+  --glass-nav: rgba(255, 255, 255, .60);
+  --glass-edge: rgba(255, 255, 255, .88);
+  --glass-highlight: rgba(255, 255, 255, .94);
+  --glass-shadow: 0 16px 48px -28px rgba(38, 62, 98, .30),
+                  0 3px 10px -6px rgba(38, 62, 98, .14);
+  --glass-selected: rgba(255, 255, 255, .82);
+  --glass-rule: rgba(69, 94, 127, .12);
+  color-scheme: light;
+}
+
+body {
+  --text-color: var(--glass-ink);
+  --link-color: var(--glass-ink);
+  --link-hover-color: var(--glass-accent);
+  color: var(--glass-ink);
+  background-color: #edf2f8;
+  background-image:
+    radial-gradient(ellipse at 8% 12%, rgba(154, 198, 239, .48), transparent 46%),
+    radial-gradient(ellipse at 92% 35%, rgba(168, 219, 214, .38), transparent 43%),
+    radial-gradient(ellipse at 35% 95%, rgba(226, 202, 223, .40), transparent 48%);
+  background-attachment: fixed;
+}
+
+/* Blur lives on an empty layer so NexT's fixed search dialog stays viewport-sized. */
+.column {
+  background: transparent;
+  padding-top: 22px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+header.header {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  max-width: 960px;
+  min-height: 72px;
+  margin: 0 auto;
+  padding: 10px 64px 10px 14px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 36px;
+  background: transparent;
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+
+header.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--glass-solid);
+  pointer-events: none;
+}
+
+.theme-toggle {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--glass-muted);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: var(--glass-selected);
+  border-color: var(--glass-edge);
+  color: var(--glass-accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--glass-accent);
+  outline-offset: 3px;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle .theme-sun,
+:root[data-theme='dark'] .theme-toggle .theme-moon { display: none; }
+:root[data-theme='dark'] .theme-toggle .theme-sun { display: block; }
+
+.header .site-brand-container {
+  padding: 0 14px;
+}
+
+.header .brand {
+  padding: 0;
+  color: var(--glass-ink);
+}
+
+.header .brand:hover {
+  color: var(--glass-accent);
+}
+
+.header .site-title {
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -.6px;
+}
+
+.header .logo-line {
+  display: none;
+}
+
+.header .main-menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+
+.header .menu-item a {
+  box-sizing: border-box;
+  min-height: 42px;
+  padding: 6px 14px;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  color: var(--glass-muted);
+  line-height: 28px;
+  transition: background-color .18s ease, color .18s ease, box-shadow .18s ease;
+}
+
+.header .menu-item a:hover {
+  color: var(--glass-ink);
+  background: var(--glass-selected);
+}
+
+.header .menu-item a.menu-item-active {
+  color: var(--glass-accent);
+  background: var(--glass-selected);
+  border-color: var(--glass-edge);
+  box-shadow: 0 2px 8px rgba(38, 62, 98, .06), inset 0 1px 0 var(--glass-highlight);
+}
+
+.header .menu-item .badge {
+  background: transparent;
+  color: inherit;
+  opacity: .75;
+  text-shadow: none;
+  padding: 1px 2px;
+}
+
+.header a:focus-visible,
+.header [role='button']:focus-visible,
+.main-inner a:focus-visible {
+  outline: 2px solid var(--glass-accent);
+  outline-offset: 4px;
+}
+
+.main-inner {
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  max-width: 960px;
+  margin: 36px auto 0;
+  padding: 0 0 56px;
+}
+
+.main-inner > .post-block {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 34px 42px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 28px;
+  background: var(--glass-solid);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+
+.main-inner.posts-expand > .post-block:not(:first-of-type) {
+  margin-top: 24px;
+}
+
+.index .post-header {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.index .post-title {
+  font-size: 25px;
+  line-height: 1.5;
+  letter-spacing: -.4px;
+}
+
+.index .post-title-link {
+  border-bottom: 0;
+}
+
+.index .post-meta {
+  justify-content: flex-start;
+  color: var(--glass-muted);
+  font-size: 12px;
+}
+
+.index .post-body {
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.index .post-body > :last-child {
+  margin-bottom: 0;
+}
+
+.index .post-button {
+  margin-top: 22px;
+  text-align: left;
+}
+
+.index .post-button .btn {
+  border: 1px solid var(--glass-rule);
+  border-radius: 22px;
+  padding: 5px 17px;
+  background: var(--glass-selected);
+  color: var(--glass-accent);
+  font-size: 13px;
+  transition: box-shadow .18s ease, border-color .18s ease;
+}
+
+.index .post-button .btn:hover {
+  border-color: var(--glass-accent);
+  box-shadow: 0 3px 12px rgba(38, 62, 98, .08);
+}
+
+.page iframe[title='我的旅行足迹地图'] {
+  border-radius: 22px !important;
+  box-shadow: 0 0 0 1px var(--glass-rule), 0 12px 30px -20px rgba(22, 35, 57, .4);
+}
+
+.main-inner .pagination {
+  margin: 32px 0 0;
+  border: 0;
+  text-align: center;
+}
+
+.main-inner .pagination .page-number,
+.main-inner .pagination .extend {
+  min-width: 36px;
+  margin: 0 3px;
+  padding: 4px 7px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  color: var(--glass-muted);
+}
+
+.main-inner .pagination .current,
+.main-inner .pagination a:hover {
+  color: var(--glass-accent);
+  background: var(--glass-selected);
+  border-color: var(--glass-edge);
+}
+
+.footer {
+  background: transparent;
+  color: var(--glass-muted);
+}
+
+/* NexT controls the drawer width and slide positions; leave room on small screens. */
+.sidebar {
+  max-width: calc(100vw - 32px);
+  top: 16px;
+  bottom: 16px;
+  max-height: calc(100vh - 32px);
+  isolation: isolate;
+  background: transparent;
+  box-shadow: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--glass-rule) transparent;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0 12px;
+  z-index: -1;
+  pointer-events: none;
+  border: 1px solid var(--glass-edge);
+  border-radius: 28px;
+  background: var(--glass-solid);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
+}
+
+.sidebar .sidebar-inner {
+  padding: 34px 30px;
+  color: var(--glass-ink);
+}
+
+.sidebar .site-author-image {
+  box-sizing: border-box;
+  padding: 4px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 50%;
+  background: var(--glass-selected);
+  box-shadow: 0 8px 24px -12px rgba(38, 62, 98, .35),
+              inset 0 1px 0 var(--glass-highlight);
+}
+
+.sidebar .site-author-name {
+  margin: 18px 0 6px;
+  color: var(--glass-ink);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.3px;
+}
+
+.sidebar .site-description {
+  color: var(--glass-muted);
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.sidebar a {
+  color: var(--glass-ink);
+  border-bottom-color: var(--glass-rule);
+}
+
+.sidebar a:hover {
+  color: var(--glass-accent);
+  border-bottom-color: var(--glass-accent);
+}
+
+.sidebar a:focus-visible,
+.sidebar-toggle:focus-visible {
+  outline: 2px solid var(--glass-accent);
+  outline-offset: 4px;
+}
+
+.sidebar .site-state {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 6px;
+  padding: 8px 4px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 20px;
+  background: var(--glass-selected);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
+}
+
+.sidebar .site-state-item {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+}
+
+.sidebar .site-state-item + .site-state-item {
+  border-left: 1px solid var(--glass-rule);
+}
+
+.sidebar .site-state-item a {
+  padding: 6px 3px;
+  border: 0;
+  border-radius: 14px;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+.sidebar .site-state-item a:hover {
+  background: var(--glass-selected);
+}
+
+.sidebar .site-state-item-count {
+  color: inherit;
+  font-size: 20px;
+}
+
+.sidebar .site-state-item-name {
+  color: var(--glass-muted);
+  font-size: 12px;
+}
+
+.sidebar .links-of-author a {
+  margin: 4px 0;
+  padding: 6px 18px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 22px;
+  background: var(--glass-selected);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
+}
+
+.sidebar .links-of-author a:hover {
+  border-color: var(--glass-accent);
+}
+
+.sidebar .links-of-author a::before {
+  display: none;
+}
+
+.sidebar-toggle {
+  bottom: 88px;
+  padding: 12px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 50%;
+  background: var(--glass-solid);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+
+.sidebar-toggle .toggle-line {
+  background: var(--glass-ink);
+}
+
+.sidebar-toggle:hover .toggle-line {
+  background: var(--glass-accent);
+}
+
+.sidebar-active .sidebar-dimmer {
+  background: #18253b;
+  opacity: .25;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  header.header::before {
+    background: var(--glass-nav);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+  }
+
+  header.header.liquid-refraction::before {
+    backdrop-filter: blur(12px) saturate(140%) url('#liquid-nav-refraction');
+  }
+
+  .main-inner > .post-block {
+    background: var(--glass-surface);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    backdrop-filter: blur(16px) saturate(120%);
+  }
+
+  .sidebar::before {
+    background: var(--glass-nav);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    backdrop-filter: blur(22px) saturate(140%);
+  }
+
+  .sidebar-toggle {
+    background: var(--glass-nav);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+:root[data-theme='dark'] {
+    color-scheme: dark;
+    --glass-ink: #dce5f2;
+    --glass-muted: #a3b1c6;
+    --glass-accent: #99d7ed;
+    --glass-surface: rgba(27, 36, 53, .73);
+    --glass-solid: #1c2739;
+    --glass-nav: rgba(30, 41, 59, .72);
+    --glass-edge: rgba(200, 222, 255, .16);
+    --glass-highlight: rgba(224, 238, 255, .14);
+    --glass-shadow: 0 16px 48px -26px rgba(0, 0, 0, .65),
+                    0 3px 10px -6px rgba(0, 0, 0, .32);
+    --glass-selected: rgba(161, 196, 235, .12);
+    --glass-rule: rgba(190, 210, 238, .16);
+}
+
+:root[data-theme='dark'] body {
+    background-color: #111a29;
+    background-image:
+      radial-gradient(ellipse at 8% 12%, rgba(62, 102, 154, .35), transparent 46%),
+      radial-gradient(ellipse at 92% 35%, rgba(38, 113, 117, .22), transparent 43%),
+      radial-gradient(ellipse at 35% 95%, rgba(111, 74, 122, .22), transparent 48%);
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+  .header .site-brand-container {
+    padding: 0 8px;
+  }
+
+  .header .site-title {
+    font-size: 19px;
+  }
+
+  .header .menu-item a {
+    padding: 6px 7px;
+  }
+
+  .main-inner > .post-block {
+    background: var(--glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .sidebar::before {
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .column {
+    padding-top: 12px;
+  }
+
+  header.header {
+    display: block;
+    width: calc(100% - 24px);
+    min-height: 60px;
+    border-radius: 28px;
+    padding: 5px 50px 5px 6px;
+  }
+
+  .header .site-brand-container {
+    align-items: center;
+    padding: 0 2px;
+  }
+
+  .theme-toggle {
+    top: 9px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .header .site-title {
+    font-size: 19px;
+  }
+
+  .header .main-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 0;
+  }
+
+  .header .menu-item {
+    margin: 0;
+  }
+
+  .header .menu-item a {
+    padding: 5px 12px;
+    text-align: center;
+  }
+
+  .main-inner {
+    width: calc(100% - 24px);
+    margin-top: 22px;
+    padding-bottom: 32px;
+  }
+
+  .main-inner > .post-block {
+    padding: 25px 22px;
+    border-radius: 23px;
+  }
+
+  .main-inner.posts-expand > .post-block:not(:first-of-type) {
+    margin-top: 18px;
+  }
+
+  .index .post-header {
+    text-align: left;
+  }
+
+  .index .post-title {
+    font-size: 22px;
+  }
+
+  .index .post-meta {
+    justify-content: flex-start;
+  }
+
+  .page iframe[title='我的旅行足迹地图'] {
+    border-radius: 16px !important;
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    header.header::before {
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .main-inner > .post-block {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background: var(--glass-solid);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header.header *, .main-inner .post-button .btn, .sidebar, .sidebar * {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  header.header::before, header.header.liquid-refraction::before,
+  .sidebar::before, .sidebar-toggle, .main-inner > .post-block {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--glass-solid);
+  }
+}

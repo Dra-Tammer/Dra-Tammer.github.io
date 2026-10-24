@@ -10,6 +10,12 @@
     const visitedProvinces = new Set(cities.map(city => Math.floor(city.adcode / 10000) * 10000));
     // Start with province boundaries; show city boundaries after enlarging by 80%.
     const CITY_DETAIL_ZOOM = 1.8;
+    let palette;
+    function updatePalette() {
+        const style = getComputedStyle(document.documentElement);
+        palette = Object.fromEntries(['land', 'visited', 'active', 'city-line', 'city-line-strong', 'province-line', 'pin', 'pin-active', 'pin-halo', 'pin-edge'].map(name => [name, style.getPropertyValue('--map-' + name).trim()]));
+        requestDraw();
+    }
     const municipalities = new Set([110000, 120000, 310000, 500000, 810000, 820000]);
     const project = (lng, lat) => ({ x: lng, y: -Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360)) * 180 / Math.PI });
 
@@ -62,35 +68,40 @@
         ctx.translate(width / 2 + panX, height / 2 + panY);
         ctx.scale(fit * zoom, fit * zoom);
         ctx.translate(-midpoint.x, -midpoint.y);
-        for (const region of provinces) {
-            if (!visible(region)) continue;
-            const active = selectedRegion === region || hovered === region;
-            ctx.fillStyle = active ? '#466a7e' : (zoom < CITY_DETAIL_ZOOM && region.visited ? '#315d73' : '#192f43');
-            ctx.fill(region.shape, 'evenodd');
+        // The canvas/container stays transparent; region surfaces remain visible.
+        for (const province of provinces) {
+            if (!visible(province)) continue;
+            const active = selectedRegion === province || hovered === province;
+            ctx.fillStyle = active ? palette.active : (province.visited ? palette.visited : palette.land);
+            ctx.fill(province.shape, 'evenodd');
         }
         for (const region of zoom >= CITY_DETAIL_ZOOM ? regions : []) {
             if (!visible(region)) continue;
             const active = selectedRegion === region || hovered === region;
-            ctx.fillStyle = active ? '#466a7e' : (region.visited ? '#315d73' : '#192f43');
+            ctx.fillStyle = active ? palette.active : (region.visited ? palette.visited : palette.land);
             ctx.fill(region.shape, 'evenodd');
-            ctx.lineWidth = .65 / (fit * zoom);
-            ctx.strokeStyle = zoom > 2 ? 'rgba(164, 198, 218, .50)' : 'rgba(164, 198, 218, .28)';
+            ctx.lineWidth = (active ? 1.2 : .65) / (fit * zoom);
+            ctx.strokeStyle = active ? palette.active : (zoom > 2 ? palette['city-line-strong'] : palette['city-line']);
             ctx.stroke(region.shape);
         }
         // Province boundaries remain visible at both levels.
-        ctx.lineWidth = .8 / (fit * zoom);
-        ctx.strokeStyle = 'rgba(181, 211, 230, .48)';
-        for (const province of provinces) if (visible(province)) ctx.stroke(province.shape);
+        for (const province of provinces) {
+            if (!visible(province)) continue;
+            const active = selectedRegion === province || hovered === province;
+            ctx.lineWidth = (active ? 1.3 : .8) / (fit * zoom);
+            ctx.strokeStyle = active ? palette.active : palette['province-line'];
+            ctx.stroke(province.shape);
+        }
         ctx.restore();
         for (const city of cities) {
             const p = toScreen(project(city.lng, city.lat));
             if (p.x < -12 || p.x > width + 12 || p.y < -12 || p.y > height + 12) continue;
             const active = city === selected || city === hovered;
             ctx.beginPath(); ctx.arc(p.x, p.y, active ? 9 : 6, 0, Math.PI * 2);
-            ctx.fillStyle = '#ff806822'; ctx.fill();
+            ctx.fillStyle = palette['pin-halo']; ctx.fill();
             ctx.beginPath(); ctx.arc(p.x, p.y, active ? 4.5 : 3, 0, Math.PI * 2);
-            ctx.fillStyle = active ? '#ffd08b' : '#ff8068'; ctx.fill();
-            ctx.lineWidth = 1.3; ctx.strokeStyle = '#fff0da'; ctx.stroke();
+            ctx.fillStyle = active ? palette['pin-active'] : palette.pin; ctx.fill();
+            ctx.lineWidth = 1.3; ctx.strokeStyle = palette['pin-edge']; ctx.stroke();
         }
     }
     function resize() {
@@ -176,5 +187,7 @@
     canvas.addEventListener('pointercancel', event => { if (event.pointerId === pointer.id) { pointer.down = false; canvas.style.cursor = 'grab'; hideTip(); requestDraw(); } });
     canvas.addEventListener('pointerleave', () => { hideTip(); requestDraw(); });
     window.addEventListener('resize', resize);
+    window.addEventListener('footprint:themechange', updatePalette);
+    updatePalette();
     resize();
 })();

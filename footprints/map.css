@@ -1,23 +1,64 @@
 :root {
-    color-scheme: dark;
-    --ink: #e6edf7;
-    --muted: #a0b0c5;
-    --line: rgba(197, 214, 238, .16);
-    --panel: rgba(12, 22, 39, .92);
-    --accent: #ffb36c;
+    color-scheme: light dark;
+    --ink: #273449;
+    --muted: #536176;
+    --line: rgba(255, 255, 255, .88);
+    --panel: #f4f7fb;
+    --panel-glass: rgba(255, 255, 255, .68);
+    --accent: #236d91;
+    --highlight: rgba(255, 255, 255, .94);
+    --map-land: rgba(164, 191, 209, .34);
+    --map-visited: rgba(114, 176, 192, .58);
+    --map-active: #83b7ca;
+    --map-city-line: rgba(70, 108, 132, .30);
+    --map-city-line-strong: rgba(70, 108, 132, .50);
+    --map-province-line: rgba(62, 101, 127, .55);
+    --map-pin: #c95642;
+    --map-pin-active: #a43c29;
+    --map-pin-halo: #c9564222;
+    --map-pin-edge: #fff4e9;
 }
 * { box-sizing: border-box; }
 html, body { width: 100%; height: 100%; margin: 0; }
-body { overflow: hidden; color: var(--ink); background: #0b1729; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+body { overflow: hidden; color: var(--ink); background: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
 button { color: inherit; font: inherit; }
-.footprint-app { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(ellipse at 15% 0, #122c42, transparent 65%), #0b1729; }
+.footprint-app { position: relative; width: 100%; height: 100%; overflow: hidden; background: transparent; }
 #mapCanvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; }
 .map-tip { position: absolute; z-index: 2; max-width: calc(100% - 16px); padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); pointer-events: none; font-size: 12px; box-shadow: 0 6px 20px #0003; }
 .map-tools { position: absolute; right: 16px; bottom: 16px; z-index: 3; display: flex; gap: 6px; }
 .icon-btn { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--muted); cursor: pointer; font-size: 18px; }
-.icon-btn:hover { color: var(--ink); background: #21364c; }
+.icon-btn:hover { color: var(--accent); background: var(--panel-glass); }
 .icon-btn svg { width: 16px; height: 16px; }
 .icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .stats-bar { position: absolute; top: 16px; left: 16px; z-index: 2; display: flex; align-items: center; gap: 9px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--muted); font-size: 11px; pointer-events: none; }
 .stats-bar strong { color: var(--ink); font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
-.stats-divider { color: #65798f; }
+.stats-divider { color: var(--muted); }
+
+.stats-bar, .map-tip, .icon-btn { box-shadow: 0 8px 24px -14px rgba(24, 45, 72, .35), inset 0 1px 0 var(--highlight); }
+.stats-bar { padding: 9px 14px; border-radius: 22px; }
+.map-tip { border-radius: 13px; }
+.icon-btn { width: 42px; height: 42px; border-radius: 50%; transition: color .18s ease, background-color .18s ease; }
+.map-tools { gap: 8px; }
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .stats-bar, .map-tip, .icon-btn { background: var(--panel-glass); -webkit-backdrop-filter: blur(12px) saturate(140%); backdrop-filter: blur(12px) saturate(140%); }
+}
+
+:root[data-theme='dark'] {
+        --ink: #dce5f2; --muted: #a3b1c6; --line: rgba(200, 222, 255, .20);
+        --panel: #1c2739; --panel-glass: rgba(23, 33, 49, .78); --accent: #99d7ed;
+        --highlight: rgba(224, 238, 255, .10); --map-active: #71a7b9;
+        --map-land: rgba(79, 104, 129, .42); --map-visited: rgba(71, 132, 151, .62);
+        --map-city-line: rgba(164, 198, 218, .17); --map-city-line-strong: rgba(164, 198, 218, .30);
+        --map-province-line: rgba(181, 211, 230, .30);
+        --map-pin: #ff957f; --map-pin-active: #ffd08b; --map-pin-halo: #ff957f22; --map-pin-edge: #fff0da;
+}
+
+/* Keep both embedded and standalone map canvases transparent. */
+html { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) { .icon-btn { transition: none; } }
+
+@media (prefers-reduced-transparency: reduce) {
+    .stats-bar, .map-tip, .icon-btn { background: var(--panel); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

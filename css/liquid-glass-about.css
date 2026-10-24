@@ -1,0 +1,31 @@
+/* About has no title; keep this exception out of other page layouts. */
+.page > .post-block {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.page iframe[title='我的旅行足迹地图'] {
+  background: transparent;
+  color-scheme: inherit;
+  box-shadow: none;
+}
+
+.page > .post-block > .post-header {
+  display: none;
+}
+
+.page .post-body > p:first-child {
+  color: var(--glass-muted);
+  font-size: 15px;
+  letter-spacing: 2px;
+  margin: 4px 0 24px;
+}
+
+@media (max-width: 767px) {
+  .page > .post-block {
+    padding: 24px 14px 14px;
+  }
+}
