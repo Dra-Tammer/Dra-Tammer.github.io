@@ -13,6 +13,10 @@
                   0 3px 10px -6px rgba(38, 62, 98, .14);
   --glass-selected: rgba(255, 255, 255, .82);
   --glass-rule: rgba(69, 94, 127, .12);
+  --brand-spectrum: linear-gradient(110deg, #087e8b 0%, #245bca 24%, #7040c3 48%, #b32b82 70%, #245bca 86%, #087e8b 100%);
+  --brand-glow: drop-shadow(0 0 1px rgba(59, 105, 226, .32))
+                drop-shadow(0 0 5px rgba(56, 169, 216, .23))
+                drop-shadow(0 0 9px rgba(138, 84, 218, .14));
   color-scheme: light;
 }
 
@@ -77,9 +81,21 @@ header.header::before {
   background: transparent;
   color: var(--glass-muted);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
 }
 
-.theme-toggle:hover {
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    background: var(--glass-selected);
+    border-color: var(--glass-edge);
+    color: var(--glass-accent);
+  }
+}
+
+.theme-toggle:active {
   background: var(--glass-selected);
   border-color: var(--glass-edge);
   color: var(--glass-accent);
@@ -91,6 +107,7 @@ header.header::before {
 }
 
 .theme-toggle svg {
+  pointer-events: none;
   width: 20px;
   height: 20px;
   fill: none;
@@ -118,9 +135,43 @@ header.header::before {
 }
 
 .header .site-title {
-  font-size: 21px;
-  font-weight: 650;
-  letter-spacing: -.6px;
+  display: inline-block;
+  max-width: 100%;
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -.3px;
+  color: var(--glass-accent);
+  vertical-align: middle;
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .header .site-title {
+    background-image: var(--brand-spectrum);
+    background-size: 240% 100%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: var(--brand-glow);
+    animation: brand-spectrum-flow 10s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes brand-spectrum-flow {
+  to { background-position: 100% 50%; }
+}
+
+@media (forced-colors: active) {
+  .header .site-title {
+    background: none;
+    color: LinkText;
+    -webkit-text-fill-color: LinkText;
+    filter: none;
+    animation: none;
+  }
 }
 
 .header .logo-line {
@@ -283,6 +334,7 @@ header.header::before {
   top: 16px;
   bottom: 16px;
   max-height: calc(100vh - 32px);
+  overflow: hidden;
   isolation: isolate;
   background: transparent;
   box-shadow: none;
@@ -303,8 +355,62 @@ header.header::before {
 }
 
 .sidebar .sidebar-inner {
-  padding: 34px 30px;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 34px 30px 112px;
   color: var(--glass-ink);
+}
+
+.sidebar-ornament {
+  --ornament-line: linear-gradient(90deg, transparent, rgba(73, 145, 177, .38) 30%, rgba(139, 112, 186, .42) 70%, transparent);
+  --ornament-dot: #8b9dbd;
+  --ornament-glow: rgba(99, 148, 191, .2);
+  position: absolute;
+  right: 36px;
+  bottom: 48px;
+  width: 40%;
+  max-width: 160px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.sidebar-ornament::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  inset-inline: 0;
+  height: 1px;
+  background: var(--ornament-line);
+}
+
+.sidebar-ornament::after {
+  content: '';
+  position: absolute;
+  left: 62%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ornament-dot);
+  box-shadow: 0 0 8px 2px var(--ornament-glow);
+  transform: translate(-50%, -50%);
+}
+
+:root[data-theme='dark'] .sidebar-ornament {
+  --ornament-line: linear-gradient(90deg, transparent, rgba(115, 207, 222, .42) 30%, rgba(181, 151, 224, .5) 70%, transparent);
+  --ornament-dot: #b1c7e6;
+  --ornament-glow: rgba(128, 176, 238, .24);
+}
+
+.sidebar .sidebar-nav { flex-shrink: 0; }
+
+.sidebar .sidebar-panel-container {
+  min-height: 0;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--glass-rule) transparent;
 }
 
 .sidebar .site-author-image {
@@ -407,6 +513,87 @@ header.header::before {
   display: none;
 }
 
+.sidebar .links-of-author a[href^='https://github.com/'] {
+  --github-face: linear-gradient(120deg, #f4f8ff, #e9effa);
+  --github-ink: #344c78;
+  --github-glow: rgba(94, 125, 199, .18);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  box-sizing: border-box;
+  min-width: 154px;
+  min-height: 44px;
+  padding: 9px 20px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: var(--github-face) padding-box,
+              linear-gradient(120deg, #78c9de, #a894e1 55%, #749dd7) border-box;
+  color: var(--github-ink);
+  box-shadow: inset 0 1px 0 var(--glass-highlight), 0 5px 18px -7px var(--github-glow);
+  font-weight: 600;
+  letter-spacing: .2px;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.sidebar .links-of-author a[href^='https://github.com/'] .fa-github {
+  margin: 0;
+  font-size: 20px;
+}
+
+.sidebar .links-of-author a[href^='https://github.com/']::before {
+  display: block;
+  position: absolute;
+  inset: -40% auto -40% -75%;
+  width: 45%;
+  margin: 0;
+  border-radius: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .24), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.sidebar .links-of-author a[href^='https://github.com/']::after {
+  content: '↗';
+  font-size: 14px;
+  opacity: .55;
+}
+
+:root[data-theme='dark'] .sidebar .links-of-author a[href^='https://github.com/'] {
+  --github-face: linear-gradient(120deg, #233a4a, #302e4b);
+  --github-ink: #d4e5fb;
+  --github-glow: rgba(105, 164, 242, .3);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sidebar .links-of-author a[href^='https://github.com/']:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 7px 22px -5px var(--github-glow);
+  }
+
+  .sidebar .links-of-author a[href^='https://github.com/']:hover::before {
+    left: 130%;
+    transition: left .65s ease;
+  }
+}
+
+.sidebar .links-of-author a[href^='https://github.com/']:active { transform: scale(.98); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar .links-of-author a[href^='https://github.com/'],
+  .sidebar .links-of-author a[href^='https://github.com/']::before {
+    transition: none;
+  }
+
+  .sidebar .links-of-author a[href^='https://github.com/']:is(:hover, :active) { transform: none; }
+  .sidebar .links-of-author a[href^='https://github.com/']::before { display: none; }
+}
+
 .sidebar-toggle {
   bottom: 88px;
   padding: 12px;
@@ -460,6 +647,10 @@ header.header::before {
 }
 
 :root[data-theme='dark'] {
+    --brand-spectrum: linear-gradient(110deg, #76fff0 0%, #95c8ff 24%, #c6a0ff 48%, #ffa7e5 70%, #95c8ff 86%, #76fff0 100%);
+    --brand-glow: drop-shadow(0 0 1px rgba(155, 238, 255, .65))
+                  drop-shadow(0 0 4px rgba(57, 205, 255, .48))
+                  drop-shadow(0 0 10px rgba(152, 93, 255, .36));
     color-scheme: dark;
     --glass-ink: #dce5f2;
     --glass-muted: #a3b1c6;
@@ -489,7 +680,7 @@ header.header::before {
   }
 
   .header .site-title {
-    font-size: 19px;
+    font-size: 21px;
   }
 
   .header .menu-item a {
@@ -551,32 +742,44 @@ header.header::before {
   }
 
   .header .site-nav-toggle .toggle { flex-direction: column; }
-  .header .brand { display: block; overflow: hidden; }
+  .header .brand { display: block; overflow: visible; }
 
   .header .site-nav-toggle, .header .site-nav-right {
     margin: 0;
   }
 
   .header .site-title {
-    font-size: clamp(16px, 4.8vw, 19px);
+    font-size: clamp(18px, 5.4vw, 21px);
     white-space: nowrap;
   }
 
   .header .main-menu {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: clamp(2px, .8vw, 6px);
     padding: 8px 0;
   }
 
   .header .menu-item {
+    flex: 1 1 0;
+    min-width: 0;
     margin: 0;
+    container: mobile-menu-item / inline-size;
   }
 
   .header .menu-item a {
-    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2px, .6vw, 4px);
+    padding: 5px 2px;
+    font-size: clamp(12px, 3.4vw, 14px);
+    white-space: nowrap;
     text-align: center;
   }
+
+  .header .menu-item a .fa { margin: 0; }
+  .header .menu-item .badge { padding: 1px 0; font-size: .85em; }
 
   .main-inner {
     width: calc(100% - 24px);
@@ -623,8 +826,13 @@ header.header::before {
   }
 }
 
+/* Hide counts when an individual mobile menu item has too little room. */
+@container mobile-menu-item (max-width: 72px) {
+  .header .menu-item .badge { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  header.header *, .main-inner .post-button .btn, .sidebar, .sidebar * {
+  header.header *, .header .site-title, .main-inner .post-button .btn, .sidebar, .sidebar * {
     transition: none;
     animation: none;
   }

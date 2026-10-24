@@ -17,13 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
     mousedownHandler: function(event) {
       this.mouse.X = event.pageX;
       this.mouse.Y = event.pageY;
+      this.mouse.target = event.target;
+      this.mouse.button = event.button;
     },
     mouseupHandler: function(event) {
+      if (event.button !== 0 || this.mouse.button !== 0) return;
       const deltaX = event.pageX - this.mouse.X;
       const deltaY = event.pageY - this.mouse.Y;
-      const clickingBlankPart = Math.hypot(deltaX, deltaY) < 20 && event.target.matches('.main');
+      const clickingBlankPart = Math.hypot(deltaX, deltaY) < 20 && event.target === this.mouse.target &&
+        event.target.matches('.main') && window.getSelection().isCollapsed;
+      if (clickingBlankPart) {
+        this.clickHandler();
+        return;
+      }
       // Fancybox has z-index property, but medium-zoom does not, so the sidebar will overlay the zoomed image.
-      if (clickingBlankPart || event.target.matches('img.medium-zoom-image')) {
+      if (event.target.matches('img.medium-zoom-image')) {
         this.hideSidebar();
       }
     },
