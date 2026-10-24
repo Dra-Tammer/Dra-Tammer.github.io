@@ -780,7 +780,7 @@ header.header {margin: 0 auto; width: 700px;}
 .sidebar a:hover {border-bottom-color: #eee; color: #eee;}
 .links-of-author:not(:first-child) {margin-top: 15px;}
 .links-of-author a {border-bottom-color: #555; display: inline-block; margin-bottom: 10px; margin-right: 10px; vertical-align: middle;}
-.links-of-author a::before {background: #1c96ff; display: inline-block; margin-right: 3px; transform: translateY(-2px); border-radius: 50%; content: ' '; height: 4px; width: 4px;}
+.links-of-author a::before {background: #03b3ff; display: inline-block; margin-right: 3px; transform: translateY(-2px); border-radius: 50%; content: ' '; height: 4px; width: 4px;}
 .links-of-blogroll-item {padding: 2px 10px;}
 .links-of-blogroll-item a {box-sizing: border-box; display: inline-block; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .popular-posts .popular-posts-item .popular-posts-link:hover {background: none;}

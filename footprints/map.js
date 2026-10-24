@@ -1,11 +1,12 @@
 (() => {
     'use strict';
     const cities = window.FOOTPRINT_CITIES.map(([lat, lng, city, province, adcode], index) => ({ lat, lng, city, province, adcode, index }));
-    const data = window.FOOTPRINT_MAP;
     const canvas = document.getElementById('mapCanvas');
     const ctx = canvas.getContext('2d');
     const hitContext = document.createElement('canvas').getContext('2d');
     const tip = document.getElementById('mapTip');
+    const status = document.getElementById('mapStatus');
+    const app = document.getElementById('footprintApp');
     const visited = new Set(cities.map(city => city.adcode));
     const visitedProvinces = new Set(cities.map(city => Math.floor(city.adcode / 10000) * 10000));
     // Start with province boundaries; show city boundaries after enlarging by 80%.
@@ -19,27 +20,16 @@
     const municipalities = new Set([110000, 120000, 310000, 500000, 810000, 820000]);
     const project = (lng, lat) => ({ x: lng, y: -Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360)) * 180 / Math.PI });
 
-    // GeoJSON -> native Canvas paths. All rings, including islands and holes, are preserved.
+    // Projection and bounds are compiled offline. Parse paths in short batches.
     function makeRegion(region) {
-        const shape = new Path2D();
-        const bounds = { left: Infinity, right: -Infinity, top: Infinity, bottom: -Infinity };
-        const polygons = region.geometry.type === 'Polygon' ? [region.geometry.coordinates] : region.geometry.coordinates;
-        for (const polygon of polygons) {
-            for (const ring of polygon) {
-                ring.forEach(([lng, lat], index) => {
-                    const p = project(lng, lat);
-                    if (index === 0) shape.moveTo(p.x, p.y); else shape.lineTo(p.x, p.y);
-                    bounds.left = Math.min(bounds.left, p.x); bounds.right = Math.max(bounds.right, p.x);
-                    bounds.top = Math.min(bounds.top, p.y); bounds.bottom = Math.max(bounds.bottom, p.y);
-                });
-                shape.closePath();
-            }
-        }
-        return { ...region, shape, bounds, visited: visited.has(region.adcode) || (municipalities.has(region.parent) && visited.has(region.parent)) };
+        const { d, ...metadata } = region;
+        return { ...metadata, shape: new Path2D(d), visited: visited.has(region.adcode) || (municipalities.has(region.parent) && visited.has(region.parent)) };
     }
-    const provinces = data.provinces.map(makeRegion);
-    provinces.forEach(province => { province.visited = visitedProvinces.has(province.adcode); });
-    const regions = data.cities.map(makeRegion);
+    let provinces = [], regions = [];
+    const layers = {
+        provinces: { state: 'idle', pending: null },
+        cities: { state: 'idle', pending: null }
+    };
     const countryBounds = { left: 73, right: 136, top: project(0, 54.5).y, bottom: project(0, 17.5).y };
     let width = 1, height = 1, fit = 1, dpr = 1;
     let zoom = 1, panX = 0, panY = 0;
@@ -47,6 +37,50 @@
     let renderFrame = 0;
     const pointer = { id: null, down: false, moved: false, x: 0, y: 0, panX: 0, panY: 0 };
     const midpoint = { x: (countryBounds.left + countryBounds.right) / 2, y: (countryBounds.top + countryBounds.bottom) / 2 };
+
+    function updateStatus() {
+        const layer = layers.provinces.state !== 'ready' ? 'provinces' : zoom >= CITY_DETAIL_ZOOM ? 'cities' : null;
+        const state = layer && layers[layer].state;
+        status.hidden = !layer || state === 'ready';
+        status.disabled = state !== 'error';
+        status.textContent = state === 'error' ? '加载失败，点击重试' : layer === 'cities' ? '正在加载城市边界…' : '正在加载地图…';
+        app.setAttribute('aria-busy', String(state === 'loading'));
+    }
+    function loadLayer(layer) {
+        const entry = layers[layer];
+        if (entry.state === 'ready') return Promise.resolve();
+        if (entry.pending) return entry.pending;
+        entry.state = 'loading'; updateStatus();
+        entry.pending = (async () => {
+            try {
+                const response = await fetch(`boundaries/${layer}.json`, { signal: AbortSignal.timeout(30000) });
+                if (!response.ok) throw new Error(`Boundary HTTP ${response.status}`);
+                const records = await response.json();
+                const compiled = [];
+                let batchStart = performance.now();
+                for (const record of records) {
+                    const region = makeRegion(record);
+                    if (layer === 'provinces') region.visited = visitedProvinces.has(region.adcode);
+                    compiled.push(region);
+                    if (performance.now() - batchStart > 6) {
+                        await new Promise(resolve => setTimeout(resolve, 0));
+                        batchStart = performance.now();
+                    }
+                }
+                if (layer === 'provinces') provinces = compiled; else regions = compiled;
+                entry.state = 'ready';
+                hideTip(); requestDraw();
+            } catch (error) {
+                entry.state = 'error';
+                console.warn(`Could not load footprint ${layer}:`, error);
+            } finally {
+                entry.pending = null;
+                updateStatus();
+            }
+        })();
+        return entry.pending;
+    }
+    status.addEventListener('click', () => loadLayer(layers.provinces.state !== 'ready' ? 'provinces' : 'cities'));
 
     function toScreen(p) {
         return { x: width / 2 + panX + (p.x - midpoint.x) * fit * zoom, y: height / 2 + panY + (p.y - midpoint.y) * fit * zoom };
@@ -125,7 +159,9 @@
         const ratio = next / zoom;
         panX = x - width / 2 - (x - width / 2 - panX) * ratio;
         panY = y - height / 2 - (y - height / 2 - panY) * ratio;
-        zoom = next; hideTip(); requestDraw();
+        zoom = next;
+        if (zoom >= CITY_DETAIL_ZOOM) loadLayer('cities');
+        updateStatus(); hideTip(); requestDraw();
     }
     function pick(x, y) {
         let nearest = null, distance = 12;
@@ -136,7 +172,7 @@
         }
         if (nearest) return nearest;
         const p = toWorld(x, y);
-        const visibleRegions = zoom >= CITY_DETAIL_ZOOM ? regions : provinces;
+        const visibleRegions = zoom >= CITY_DETAIL_ZOOM && layers.cities.state === 'ready' ? regions : provinces;
         return visibleRegions.find(region => p.x >= region.bounds.left && p.x <= region.bounds.right && p.y >= region.bounds.top && p.y <= region.bounds.bottom && hitContext.isPointInPath(region.shape, p.x, p.y, 'evenodd')) || null;
     }
     function setSelection(item) {
@@ -190,4 +226,5 @@
     window.addEventListener('footprint:themechange', updatePalette);
     updatePalette();
     resize();
+    loadLayer('provinces');
 })();

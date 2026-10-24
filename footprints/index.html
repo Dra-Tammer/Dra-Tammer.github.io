@@ -12,17 +12,17 @@
 <main class="footprint-app" id="footprintApp">
     <canvas id="mapCanvas" aria-label="城市足迹地图，可拖动或使用滚轮缩放"></canvas>
     <div class="map-tip" id="mapTip" role="status" hidden></div>
+    <button class="map-status" id="mapStatus" type="button" aria-live="polite" disabled>正在加载地图…</button>
     <div class="stats-bar" aria-label="到访统计">
-        <span><strong id="cityCount">0</strong> 城市</span>
+        <span><strong id="cityCount">—</strong> 城市</span>
         <span class="stats-divider" aria-hidden="true">·</span>
-        <span><strong id="provinceCount">0</strong> 省区</span>
+        <span><strong id="provinceCount">—</strong> 省区</span>
     </div>
     <div class="map-tools" aria-label="地图工具">
         <button class="icon-btn" id="zoomOut" type="button" title="缩小" aria-label="缩小地图">−</button>
         <button class="icon-btn" id="zoomIn" type="button" title="放大" aria-label="放大地图">+</button>
     </div>
 </main>
-<script src="map-data.js"></script>
 <script src="cities.js"></script>
 <script src="map.js"></script>
 </body>
